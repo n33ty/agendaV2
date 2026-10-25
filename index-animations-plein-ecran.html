@@ -1,0 +1,2229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Agenda">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#08090a">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" sizes="180x180" href="icon.png">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap" rel="stylesheet">
+<title>Agenda d’Abdo</title>
+<style>
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  color-scheme: dark;
+  --bg: #08090a; --surface: #0f1011; --raised: #191a1b;
+  --text: #f7f8f8; --muted: #8a8f98; --line: rgba(255,255,255,.07);
+  --today: rgba(94,106,210,.10); --warn: #e5594d;
+  --accent: #5e6ad2; --accent-ui: #7170ff; --accent-hover: #828fff;
+  --cours: #5e6ad2; --etude: #3f9e72; --argent: #c4912c; --sport: #d0587a;
+  --g-sleep: linear-gradient(90deg, #5e6ad2, #9aa3ff);
+  --g-etude: linear-gradient(90deg, #2f9a6b, #6fd6a4);
+  --g-sport: linear-gradient(90deg, #d0587a, #ff9aa8);
+  --g-argent: linear-gradient(90deg, #c4912c, #f2cd6b);
+  --g-xp: linear-gradient(90deg, #5e6ad2, #9aa3ff);
+  --shadow: 0 0 0 1px rgba(255,255,255,.02) inset, 0 8px 24px rgba(0,0,0,.4);
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding: 16px; max-width: 1100px; margin-inline: auto; }
+button { font-family: inherit; color: inherit; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 14px; }
+h1 { font-size: 22px; margin: 0; }
+#sync { font-size: 12px; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; white-space: nowrap; }
+.card { background: var(--surface); border-radius: 18px; padding: 16px; margin-bottom: 14px; box-shadow: var(--shadow); border: 1px solid var(--line); }
+
+/* XP */
+.lvl { font-size: 16px; font-weight: 700; }
+.lvl span { font-weight: 400; color: var(--muted); font-size: 13px; }
+.tmsg { color: var(--muted); font-size: 12px; margin-top: 6px; }
+.reward { width: 100%; margin-top: 10px; padding: 10px 12px; font-size: 14px; border: 1px dashed var(--line); border-radius: 12px; background: transparent; color: var(--text); }
+
+/* Barres */
+.pbar { position: relative; height: 16px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.pbar i { display: block; height: 100%; width: 0; border-radius: 999px; transition: width .8s cubic-bezier(.22, 1, .36, 1); box-shadow: inset 0 -2px 0 rgba(0,0,0,.08), inset 0 2px 0 rgba(255,255,255,.28); }
+.g-sleep { background: var(--g-sleep); } .g-etude { background: var(--g-etude); } .g-sport { background: var(--g-sport); } .g-argent { background: var(--g-argent); } .g-xp { background: var(--g-xp); }
+.xpcard .pbar { margin-top: 10px; height: 12px; }
+
+/* Semaine */
+.weeknav { display: grid; grid-template-columns: 52px 1fr 52px; gap: 10px; align-items: center; margin-bottom: 14px; }
+.weeknav button { height: 52px; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); font-size: 26px; cursor: pointer; box-shadow: var(--shadow); }
+.weeknav button:disabled { opacity: .35; cursor: default; }
+.weeknav button:active { transform: scale(.96); }
+.weeklabel { text-align: center; }
+.weeklabel b { display: block; font-size: 20px; }
+.weeklabel span { color: var(--muted); font-size: 13px; }
+.weeknav .todaybtn { display: block; margin: 6px auto 0; width: auto; height: auto; padding: 5px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--text); font-size: 12px; font-weight: 650; box-shadow: none; cursor: pointer; }
+.weeknav .todaybtn[hidden] { display: none; }
+.wph { aspect-ratio: 3 / 2; background: linear-gradient(#061d27, #0b3640); display: flex; align-items: center; justify-content: center; color: #5d8a99; font-size: 13px; }
+.wcard.future .wt { opacity: .8; }
+
+/* Objectifs */
+.obj { margin-bottom: 16px; }
+.obj:last-of-type { margin-bottom: 0; }
+.objhead { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 7px; }
+.objname { font-weight: 650; font-size: 15px; }
+.objval { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+.objval b { color: var(--text); }
+.edit { border: none; background: transparent; color: var(--muted); font-size: 14px; cursor: pointer; padding: 2px 6px; border-radius: 8px; }
+.sub { font-size: 12px; color: var(--muted); margin-top: 5px; }
+
+/* Boutons d’ajout */
+.actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+.big { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 60px; padding: 12px 14px; border: none; border-radius: 16px; font-size: 15px; font-weight: 650; color: #fff; cursor: pointer; box-shadow: var(--shadow); text-align: left; transition: transform .1s; }
+.big:active { transform: scale(.97); }
+.big .ic { font-size: 22px; line-height: 1; }
+.big.argent { background: var(--g-argent); color: #3a2a00; }
+.big.etude { background: var(--g-etude); color: #06301c; }
+.big.sport { background: var(--g-sport); color: #4a0b19; }
+.addblock { width: 100%; min-height: 54px; margin-bottom: 12px; border-radius: 16px; border: 2px dashed var(--line); background: var(--surface); font-size: 15px; font-weight: 650; cursor: pointer; }
+.addblock:active { transform: scale(.98); }
+
+/* Agenda */
+.wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 14px; box-shadow: var(--shadow); }
+.cal { min-width: 720px; display: grid; grid-template-columns: 46px repeat(7, 1fr); }
+.head { font-weight: 600; font-size: 13px; text-align: center; padding: 8px 2px; border-bottom: 1px solid var(--line); background: var(--surface); }
+.head.today { background: var(--today); }
+.head small { display: block; color: var(--muted); font-weight: 400; }
+.times { position: relative; height: 640px; }
+.times span { position: absolute; right: 6px; font-size: 11px; color: var(--muted); transform: translateY(-6px); }
+.col { position: relative; height: 640px; border-left: 1px solid var(--line); background-image: linear-gradient(to bottom, var(--line) 1px, transparent 1px); background-size: 100% 40px; }
+.col.today { background-color: var(--today); }
+.ev { position: absolute; border-radius: 8px; padding: 3px 5px; font-size: 11px; line-height: 1.25; color: #fff; overflow: hidden; border: 1px solid rgba(0,0,0,.12); cursor: pointer; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+.ev b { display: block; font-size: 11px; padding-right: 22px; }
+.ev .room { display:block; margin-top:2px; font-size:10px; line-height:1.15; opacity:.9; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ev.cours { background: var(--cours); } .ev.etude { background: var(--etude); } .ev.argent { background: var(--argent); } .ev.sport { background: var(--sport); }
+.ev.over { outline: 2px solid var(--warn); outline-offset: -2px; }
+.ev.done { opacity: .55; }
+.chk { position: absolute; top: 2px; right: 2px; width: 24px; height: 24px; padding: 0; border: 1.5px solid rgba(255,255,255,.95); border-radius: 7px; background: rgba(255,255,255,.12); color: #222; font-size: 14px; line-height: 1; font-weight: 800; cursor: pointer; touch-action: manipulation; }
+.ev.done .chk { background: #fff; }
+.scell { padding: 4px 3px; border-left: 1px solid var(--line); background: var(--surface); }
+.scell.first { border-left: none; }
+.scell.today { background: var(--today); }
+.srow-top { border-bottom: 1px solid var(--line); }
+.srow-bottom { border-top: 1px solid var(--line); }
+.sl { display: block; width: 100%; min-height: 38px; padding: 4px 3px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--muted); font-size: 11px; font-weight: 650; line-height: 1.2; cursor: pointer; text-align: center; touch-action: manipulation; }
+.sl.on { background: linear-gradient(90deg, #5b5bd6, #a78bfa); border-color: #6a63e0; color: #fff; }
+
+/* Avatar */
+.avhead { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; }
+.avhead b { font-size: 16px; }
+.avstatus { font-size: 12px; font-weight: 650; padding: 4px 10px; border-radius: 999px; background: var(--bg); color: var(--muted); }
+.avstage { border-radius: 14px; overflow: hidden; line-height: 0; border: 1px solid #1f4a58; }
+.avbadges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.avbadge { background: var(--bg); border-radius: 999px; padding: 6px 11px; font-size: 13px; font-weight: 650; }
+.avbtns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.big.alt { background: var(--bg); color: var(--text); box-shadow: none; border: 1px solid var(--line); }
+.sheet.wide { max-width: 600px; }
+.wgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+.wcard { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--bg); cursor: pointer; padding: 0; text-align: left; }
+.wcard.sel { border-color: #3b6fd8; box-shadow: 0 0 0 2px rgba(59,111,216,.35); }
+.wcard .wt { padding: 8px 10px 10px; font-size: 12px; color: var(--muted); }
+.wcard .wt b { display: block; color: var(--text); font-size: 14px; }
+.wcard .wst { margin-top: 5px; line-height: 1.5; }
+.avprev { border-radius: 14px; overflow: hidden; line-height: 0; margin-bottom: 6px; border: 1px solid #1f4a58; }
+.seg { display: flex; gap: 6px; margin-bottom: 10px; }
+.seg button { flex: 1; height: 38px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); font-size: 13px; cursor: pointer; }
+.seg button.sel { background: #3b6fd8; border-color: #3b6fd8; color: #fff; }
+.sw-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.sw { width: 36px; height: 36px; border-radius: 50%; border: 3px solid var(--surface); box-shadow: 0 0 0 1.5px var(--line); cursor: pointer; padding: 0; }
+.sw.sel { box-shadow: 0 0 0 3px #3b6fd8; }
+.opt { height: 38px; padding: 0 14px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--bg); font-size: 14px; cursor: pointer; }
+.opt.sel { background: #3b6fd8; border-color: #3b6fd8; color: #fff; }
+.avstage canvas, .avprev canvas, .wcard canvas { display: block; width: 100%; height: auto; image-rendering: pixelated; image-rendering: crisp-edges; }
+.avstage, .avprev { background: #07141b; }
+.wcard { background: #07141b; }
+.wcard .wt { background: var(--bg); }
+
+/* Historique */
+.hrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.hrow:last-child { border-bottom: none; }
+.hrow small { color: var(--muted); display: block; font-size: 12px; }
+.hdel { border: none; background: var(--bg); width: 34px; height: 34px; border-radius: 10px; font-size: 15px; cursor: pointer; flex: none; }
+
+/* Fenêtres */
+.modal { position: fixed; inset: 0; background: rgba(10,14,22,.55); display: flex; align-items: flex-end; justify-content: center; z-index: 50; }
+.modal[hidden] { display: none; }
+.sheet { background: var(--surface); width: 100%; max-width: 480px; border-radius: 22px 22px 0 0; padding: 18px 18px calc(18px + env(safe-area-inset-bottom, 0px)); max-height: 92vh; overflow: auto; }
+@media (min-width: 600px) { .modal { align-items: center; } .sheet { border-radius: 22px; } }
+.sheet h2 { font-size: 18px; margin: 0 0 14px; display: flex; justify-content: space-between; align-items: center; }
+.x { border: none; background: var(--bg); width: 36px; height: 36px; border-radius: 12px; font-size: 18px; cursor: pointer; }
+.sheet label { display: block; font-size: 13px; color: var(--muted); margin: 12px 0 5px; }
+.sheet input, .sheet select { width: 100%; height: 48px; padding: 0 12px; font-size: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--text); }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.tbtn { height: 56px; border-radius: 14px; border: 2px solid var(--line); background: var(--bg); font-size: 14px; font-weight: 650; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+.tbtn.sel.etude { background: var(--etude); border-color: var(--etude); color: #fff; }
+.tbtn.sel.argent { background: var(--argent); border-color: var(--argent); color: #fff; }
+.tbtn.sel.sport { background: var(--sport); border-color: var(--sport); color: #fff; }
+.chips { display: flex; gap: 8px; margin-top: 8px; }
+.chip { flex: 1; height: 42px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); font-size: 14px; cursor: pointer; }
+.net { margin-top: 14px; padding: 12px 14px; border-radius: 14px; background: var(--bg); font-size: 15px; display: flex; justify-content: space-between; }
+.net b { font-size: 17px; }
+.btns { display: flex; gap: 10px; margin-top: 18px; }
+.btn { flex: 1; height: 52px; border-radius: 14px; border: none; font-size: 16px; font-weight: 650; cursor: pointer; background: var(--bg); }
+.btn.primary { background: #3b6fd8; color: #fff; }
+.btn.danger { background: #fde8e6; color: #b3261e; }
+.err { color: var(--warn); font-size: 13px; margin-top: 10px; min-height: 16px; }
+
+@media (max-width: 640px) {
+  .actions { grid-template-columns: 1fr; }
+  .big { justify-content: flex-start; }
+}
+
+/* ===== Thème Linear (d'après le DESIGN.md de Linear) ===== */
+body { font-family: Inter, "SF Pro Display", -apple-system, system-ui, "Segoe UI", Roboto, sans-serif; font-feature-settings: "cv01", "ss03"; -webkit-font-smoothing: antialiased; }
+h1 { font-size: 22px; font-weight: 590; letter-spacing: -0.5px; }
+#sync { background: transparent; font-size: 11px; font-weight: 510; }
+.card { border-radius: 12px; border: 1px solid rgba(255,255,255,.06); }
+.lvl { font-weight: 590; letter-spacing: -0.2px; }
+.pbar { height: 10px; background: rgba(255,255,255,.06); }
+.pbar i { box-shadow: none; }
+.xpcard .pbar { height: 8px; }
+.reward { border: 1px dashed rgba(255,255,255,.12); border-radius: 8px; color: var(--text); }
+.reward::placeholder { color: var(--muted); }
+.weeknav { grid-template-columns: 48px 1fr 48px; }
+.weeknav button { height: 48px; font-size: 22px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; box-shadow: none; color: var(--text); }
+.weeklabel b { font-weight: 590; letter-spacing: -0.4px; }
+.weeknav .todaybtn { height: auto; font-size: 12px; font-weight: 510; background: rgba(94,106,210,.14); border-color: rgba(113,112,255,.4); color: #c3c8ff; }
+.objname { font-weight: 510; }
+.big { min-height: 54px; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; box-shadow: none; font-weight: 510; background: rgba(255,255,255,.03); color: var(--text); }
+.big.argent { background: rgba(196,145,44,.12); border-color: rgba(196,145,44,.35); color: #f2d9a0; }
+.big.etude { background: rgba(63,158,114,.12); border-color: rgba(63,158,114,.35); color: #a8e6c8; }
+.big.sport { background: rgba(208,88,122,.12); border-color: rgba(208,88,122,.35); color: #f5b0c3; }
+.big.alt { background: rgba(255,255,255,.03); color: var(--text); }
+.addblock { border: 1px dashed rgba(255,255,255,.14); border-radius: 10px; background: transparent; color: var(--muted); font-weight: 510; }
+.wrap { border-radius: 12px; border: 1px solid rgba(255,255,255,.06); }
+.head { font-weight: 510; }
+.head.today { background: rgba(94,106,210,.16); color: #c3c8ff; }
+.col { background-image: linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px); }
+.col.today { background-color: rgba(94,106,210,.07); }
+.ev { color: #e8eaed; border: 1px solid rgba(255,255,255,.08); border-left-width: 3px; border-radius: 6px; }
+.ev b { font-weight: 510; }
+.ev.cours { background: rgba(94,106,210,.22); border-left-color: #7170ff; }
+.ev.etude { background: rgba(63,158,114,.20); border-left-color: #3f9e72; }
+.ev.argent { background: rgba(196,145,44,.20); border-left-color: #c4912c; }
+.ev.sport { background: rgba(208,88,122,.20); border-left-color: #d0587a; }
+.ev.over { outline: 1px solid var(--warn); outline-offset: -1px; }
+.chk { border: 1.5px solid rgba(255,255,255,.35); background: transparent; color: #fff; border-radius: 6px; }
+.ev.done .chk { background: var(--accent); border-color: var(--accent); }
+.scell.today { background: rgba(94,106,210,.07); }
+.sl { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 8px; font-weight: 510; }
+.sl.on { background: rgba(94,106,210,.25); border-color: rgba(113,112,255,.6); color: #dfe2ff; }
+.avstatus { background: rgba(255,255,255,.05); }
+.avbadge { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); font-weight: 510; }
+.avstage, .avprev { border-color: rgba(255,255,255,.08); }
+.modal { background: rgba(0,0,0,.62); }
+.sheet { background: var(--raised); border: 1px solid rgba(255,255,255,.08); }
+.sheet h2 { font-weight: 590; letter-spacing: -0.3px; }
+.x { background: rgba(255,255,255,.05); color: var(--text); }
+.sheet input, .sheet select { background: var(--bg); color: var(--text); border: 1px solid rgba(255,255,255,.1); border-radius: 8px; }
+.sheet input:focus, .sheet select:focus { outline: none; border-color: var(--accent-ui); box-shadow: 0 0 0 3px rgba(113,112,255,.25); }
+.tbtn, .chip, .opt, .seg button { background: rgba(255,255,255,.03); border-color: rgba(255,255,255,.1); color: var(--text); }
+.tbtn { border-width: 1px; border-radius: 10px; }
+.net { background: rgba(255,255,255,.04); border-radius: 10px; }
+.btn { background: rgba(255,255,255,.06); color: var(--text); border-radius: 10px; font-weight: 510; }
+.btn.primary { background: var(--accent); color: #fff; }
+.btn.danger { background: rgba(229,89,77,.14); color: #ff9a92; }
+.hdel { background: rgba(255,255,255,.05); color: var(--text); }
+.wcard { border-color: rgba(255,255,255,.08); border-radius: 12px; }
+.wcard.sel { border-color: var(--accent-ui); box-shadow: 0 0 0 2px rgba(113,112,255,.35); }
+.seg button.sel, .opt.sel { background: var(--accent); border-color: var(--accent); color: #fff; }
+.sw.sel { box-shadow: 0 0 0 3px var(--accent-ui); }
+
+/* ===== Refonte v3 : app moderne (glass, anneaux, onglets) ===== */
+[hidden] { display: none !important; }
+:root { padding-top: 0; padding-bottom: 0; }
+body { padding: 0 0 calc(112px + env(safe-area-inset-bottom, 0px)); max-width: 860px; }
+main { padding: 0 16px; }
+.aurora { position: fixed; z-index: -1; inset: -10% -20% auto -20%; height: 62vh; pointer-events: none;
+  background: radial-gradient(55% 55% at 22% 0%, rgba(94,106,210,.38), transparent 70%), radial-gradient(45% 45% at 88% 8%, rgba(208,88,122,.20), transparent 70%), radial-gradient(40% 40% at 60% 30%, rgba(63,158,114,.10), transparent 70%);
+  filter: blur(34px); }
+.i { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; }
+.i.s { width: 15px; height: 15px; }
+
+/* En-tête collant */
+.appbar { position: sticky; top: 0; z-index: 30; padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 12px;
+  background: linear-gradient(rgba(8,9,10,.86), rgba(8,9,10,.66)); -webkit-backdrop-filter: blur(20px) saturate(160%); backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid rgba(255,255,255,.05); }
+.ab-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; }
+.ab-date { display: block; font-size: 11px; font-weight: 590; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+.appbar h1 { font-size: 30px; font-weight: 650; letter-spacing: -1px; line-height: 1.05; margin: 0; }
+.ab-row .todaybtn { margin: 0 0 4px; padding: 7px 14px; border-radius: 999px; font-size: 12.5px; font-weight: 590; color: #d7daff;
+  background: rgba(94,106,210,.2); border: 1px solid rgba(113,112,255,.5); cursor: pointer; }
+.appbar .weeknav { display: grid; grid-template-columns: 44px 1fr 44px; gap: 8px; align-items: center; margin: 12px 0 0; }
+.appbar .weeknav button { height: 44px; border-radius: 14px; display: grid; place-items: center; font-size: 0; }
+.appbar .weeklabel { text-align: center; }
+.appbar .weeklabel b { font-size: 17px; letter-spacing: -.3px; }
+.appbar .weeklabel span { font-size: 12.5px; }
+
+/* Barre d'onglets flottante + bouton + */
+.tabbar { position: fixed; z-index: 40; left: 50%; transform: translateX(-50%); bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+  width: min(92vw, 400px); height: 64px; display: grid; grid-template-columns: 1fr 84px 1fr; align-items: center; padding: 0 6px;
+  border-radius: 32px; background: rgba(28,29,32,.72); -webkit-backdrop-filter: blur(26px) saturate(190%); backdrop-filter: blur(26px) saturate(190%);
+  border: 1px solid rgba(255,255,255,.1); box-shadow: 0 14px 40px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.06); }
+.tb { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; height: 100%; border: none; background: none; color: var(--muted); font-size: 11px; font-weight: 590; cursor: pointer; transition: color .2s, transform .15s; }
+.tb.on { color: var(--text); } .tb.on .i { color: var(--accent-ui); }
+.tb:active { transform: scale(.94); }
+.fab { width: 58px; height: 58px; margin: 0 auto; border-radius: 50%; border: none; color: #fff; display: grid; place-items: center; cursor: pointer; transform: translateY(-12px);
+  background: linear-gradient(145deg, #8685ff, #5e6ad2 60%, #4b55b8); box-shadow: 0 10px 26px rgba(94,106,210,.6), inset 0 1px 0 rgba(255,255,255,.35); transition: transform .15s; }
+.fab .i { width: 26px; height: 26px; stroke-width: 2.2; }
+.fab:active { transform: translateY(-12px) scale(.92); }
+
+/* Onglets */
+.tab { display: none; }
+.tab.on { display: block; animation: tabin .38s cubic-bezier(.2,.8,.2,1); }
+@keyframes tabin { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* Sélecteur Jour / Semaine */
+.viewbar { display: flex; justify-content: center; margin: 16px 0 12px; }
+.seg2 { position: relative; display: grid; grid-template-columns: 1fr 1fr; width: 214px; padding: 3px; border-radius: 13px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.07); }
+.seg2 button { position: relative; z-index: 1; height: 34px; border: none; background: none; color: var(--muted); font-size: 13px; font-weight: 590; cursor: pointer; transition: color .2s; }
+.seg2[data-v="day"] button[data-v="day"], .seg2[data-v="week"] button[data-v="week"] { color: var(--text); }
+.seg2 .thumb { position: absolute; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 10px; background: rgba(255,255,255,.11); box-shadow: 0 1px 6px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.08); transition: transform .28s cubic-bezier(.3,.9,.3,1); }
+.seg2[data-v="week"] .thumb { transform: translateX(100%); }
+
+/* Bandeau des jours */
+.daystrip { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 14px; }
+.dpill { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 9px 0 8px; border-radius: 18px; border: 1px solid rgba(255,255,255,.05); background: rgba(255,255,255,.03); color: var(--muted); cursor: pointer; transition: transform .15s, background .2s; }
+.dpill:active { transform: scale(.94); }
+.dpill small { font-size: 10px; font-weight: 590; letter-spacing: .06em; text-transform: uppercase; }
+.dpill b { font-size: 18px; font-weight: 650; color: var(--text); font-variant-numeric: tabular-nums; letter-spacing: -.3px; }
+.dpill.today b { color: #c3c8ff; }
+.dpill.sel { background: linear-gradient(180deg, #7473ff, #5e6ad2); border-color: rgba(255,255,255,.22); box-shadow: 0 8px 22px rgba(94,106,210,.45); }
+.dpill.sel small, .dpill.sel b { color: #fff; }
+.dots { display: flex; gap: 3px; height: 5px; }
+.dot { width: 5px; height: 5px; border-radius: 50%; background: #666; }
+.dot.etude { background: #3f9e72; } .dot.cours { background: #8b8aff; } .dot.argent { background: #d6a33a; } .dot.sport { background: #e0688a; }
+.dpill.sel .dot { box-shadow: 0 0 0 1px rgba(255,255,255,.75); }
+
+/* Agenda */
+.wrap { border-radius: 22px; background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.07); box-shadow: 0 10px 40px rgba(0,0,0,.35); }
+.times, .col { height: var(--ht, 640px); }
+.col { background-size: 100% var(--hh, 40px); }
+.times span { font-variant-numeric: tabular-nums; }
+.cal.day { min-width: 0; grid-template-columns: 52px 1fr; }
+.cal.day .ev { font-size: 13px; padding: 9px 12px; border-radius: 14px; border-left-width: 4px; }
+.cal.day .ev b { font-size: 14.5px; font-weight: 590; padding-right: 34px; }
+.cal.day .chk { width: 30px; height: 30px; top: 8px; right: 8px; border-radius: 10px; font-size: 16px; }
+.ev { transition: transform .12s; }
+.ev:active { transform: scale(.985); }
+.ev.etude { background: linear-gradient(135deg, rgba(63,158,114,.34), rgba(63,158,114,.14)); }
+.ev.cours { background: linear-gradient(135deg, rgba(113,112,255,.36), rgba(94,106,210,.14)); }
+.ev.argent { background: linear-gradient(135deg, rgba(196,145,44,.34), rgba(196,145,44,.13)); }
+.ev.sport { background: linear-gradient(135deg, rgba(208,88,122,.34), rgba(208,88,122,.14)); }
+.now { position: absolute; left: 0; right: 0; height: 0; border-top: 2px solid #ff5a6a; z-index: 6; pointer-events: none; }
+.now::before { content: ""; position: absolute; left: -5px; top: -6px; width: 10px; height: 10px; border-radius: 50%; background: #ff5a6a; box-shadow: 0 0 0 4px rgba(255,90,106,.28); }
+.sl { display: flex; align-items: center; justify-content: center; gap: 6px; }
+.sl .i { width: 15px; height: 15px; }
+.cal.day .sl { min-height: 44px; font-size: 13px; border-radius: 14px; }
+
+/* Cartes / Progrès */
+.card { border-radius: 24px; padding: 18px; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.018)); border: 1px solid rgba(255,255,255,.07); margin-top: 16px; }
+.hero { margin-top: 16px; }
+.avhead b { font-size: 17px; font-weight: 650; letter-spacing: -.3px; }
+.avstage { border-radius: 18px; }
+.avbadge { display: inline-flex; align-items: center; gap: 6px; }
+.avbadge .i { width: 15px; height: 15px; color: var(--accent-ui); }
+.avbtns .big { gap: 8px; min-height: 48px; }
+.xpcard .lvl { font-size: 18px; }
+.rewardbox { display: flex; align-items: center; gap: 10px; margin-top: 14px; padding: 0 14px; border-radius: 14px; border: 1px dashed rgba(255,255,255,.16); color: var(--muted); }
+.rewardbox .rwi { flex: 1; min-width: 0; height: 46px; border: none; background: none; color: var(--text); font: inherit; font-size: 14px; outline: none; }
+.rewardbox .rwi::placeholder { color: var(--muted); }
+.bento { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.tile { --tc: #5e6ad2; position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 8px; padding: 14px 14px 16px; border-radius: 24px; border: 1px solid rgba(255,255,255,.07);
+  background: radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--tc) 22%, transparent), transparent 62%), linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)); }
+.t-etude { --tc: #3f9e72; } .t-sport { --tc: #d0587a; } .t-sleep { --tc: #7170ff; } .t-argent { --tc: #d6a33a; }
+.tl-top { display: flex; justify-content: space-between; align-items: center; min-height: 26px; }
+.tl-name { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 590; color: var(--text); }
+.tl-name .i { width: 17px; height: 17px; color: var(--tc); }
+.tile .edit { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border-radius: 9px; background: rgba(255,255,255,.05); color: var(--muted); border: none; cursor: pointer; }
+.ring { position: relative; width: 96px; height: 96px; margin: 4px auto 2px; }
+.ring svg { width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
+.ring circle { fill: none; stroke-width: 4.4; }
+.ring .rt { stroke: rgba(255,255,255,.07); }
+.ring .rf { stroke-linecap: round; stroke-dasharray: 0 113.1; opacity: 0; transition: stroke-dasharray 1s cubic-bezier(.22,1,.36,1), opacity .3s; filter: drop-shadow(0 0 4px color-mix(in srgb, var(--tc) 70%, transparent)); }
+.rp { position: absolute; inset: 0; display: grid; place-items: center; font-size: 20px; font-weight: 650; letter-spacing: -.5px; font-variant-numeric: tabular-nums; }
+.tl-val { text-align: center; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tl-val b { color: var(--text); font-size: 15px; font-weight: 650; }
+.tl-sub { text-align: center; font-size: 11px; color: var(--muted); }
+.tl-sub:empty { display: none; }
+.foot { text-align: center; margin: 18px 0 8px; }
+#sync { display: inline-block; font-size: 11px; font-weight: 510; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; background: none; }
+
+/* Fenêtres (sheets) */
+.modal { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.sheet { border-radius: 28px 28px 0 0; background: rgba(26,27,30,.94); -webkit-backdrop-filter: blur(30px); backdrop-filter: blur(30px); animation: sheetin .32s cubic-bezier(.2,.9,.25,1); }
+.sheet::before { content: ""; display: block; width: 40px; height: 5px; border-radius: 3px; background: rgba(255,255,255,.2); margin: -6px auto 14px; }
+@media (min-width: 600px) { .sheet { border-radius: 28px; } }
+@keyframes sheetin { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+.x .i { width: 18px; height: 18px; }
+.x { display: grid; place-items: center; }
+.qlist { display: flex; flex-direction: column; gap: 8px; }
+.qrow { display: flex; align-items: center; gap: 14px; width: 100%; padding: 12px 14px 12px 12px; border-radius: 18px; border: 1px solid rgba(255,255,255,.07); background: rgba(255,255,255,.04); color: var(--text); text-align: left; cursor: pointer; transition: transform .12s; }
+.qrow:active { transform: scale(.98); }
+.qrow > .i { color: var(--muted); width: 18px; height: 18px; }
+.qi { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; }
+.q-bloc { background: rgba(94,106,210,.22); color: #b6bbff; } .q-gains { background: rgba(196,145,44,.22); color: #f0cf85; }
+.q-etude { background: rgba(63,158,114,.22); color: #9be3c0; } .q-sport { background: rgba(208,88,122,.22); color: #f5adc1; }
+.qt { flex: 1; display: flex; flex-direction: column; gap: 1px; }
+.qt b { font-size: 15.5px; font-weight: 590; } .qt small { font-size: 12.5px; color: var(--muted); }
+.tbtn .i { width: 22px; height: 22px; }
+.wst .i { width: 13px; height: 13px; vertical-align: -2px; }
+.hrow .i { width: 15px; height: 15px; vertical-align: -3px; margin-right: 4px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* Célébration plein écran à chaque ajout de progression */
+.action-celebration { position: fixed; inset: 0; z-index: 99999; pointer-events: none; overflow: hidden; animation: action-screen-glow 1.15s ease-out both; }
+.action-celebration::before { content:""; position:absolute; inset:0; background: radial-gradient(ellipse at center, var(--action-glow), transparent 72%); animation: action-screen-pulse 1.15s ease-out both; }
+.action-celebration .action-label { position:absolute; top: 17%; left:50%; transform:translate(-50%,-10px) scale(.8); padding:12px 18px; border:1px solid var(--action-border); border-radius:999px; background:rgba(10,12,16,.78); color:#fff; font-size:clamp(14px,2.5vw,20px); font-weight:750; box-shadow:0 0 36px var(--action-glow); white-space:nowrap; animation: action-label-pop 1.25s cubic-bezier(.2,.8,.25,1) both; }
+.action-particle { position:absolute; left:var(--x); top:-9vh; font-size:var(--size); line-height:1; filter:drop-shadow(0 3px 9px rgba(0,0,0,.25)); animation: action-rain var(--dur) var(--delay) linear both; }
+.action-celebration.argent { --action-glow:rgba(239,190,57,.32); --action-border:rgba(255,215,100,.6); }
+.action-celebration.sleep { --action-glow:rgba(135,147,255,.32); --action-border:rgba(166,176,255,.6); }
+.action-celebration.etude { --action-glow:rgba(63,200,127,.34); --action-border:rgba(110,239,170,.65); }
+.action-celebration.sport { --action-glow:rgba(239,89,139,.32); --action-border:rgba(255,140,176,.65); }
+@keyframes action-screen-glow { 0%{background:transparent} 18%{background:var(--action-glow)} 100%{background:transparent} }
+@keyframes action-screen-pulse { 0%{opacity:0;transform:scale(.65)} 22%{opacity:1;transform:scale(1)} 100%{opacity:0;transform:scale(1.3)} }
+@keyframes action-label-pop { 0%{opacity:0;transform:translate(-50%,-10px) scale(.8)} 18%{opacity:1;transform:translate(-50%,0) scale(1.04)} 75%{opacity:1;transform:translate(-50%,0) scale(1)} 100%{opacity:0;transform:translate(-50%,-8px) scale(.98)} }
+@keyframes action-rain { 0%{transform:translate3d(0,-5vh,0) rotate(0) scale(.7);opacity:0} 10%{opacity:1} 100%{transform:translate3d(var(--drift),115vh,0) rotate(var(--spin)) scale(1.12);opacity:0} }
+@media (prefers-reduced-motion: reduce) { .action-celebration, .action-celebration * { animation-duration:.01ms !important; } }
+
+/* Célébrations distinctes quand un objectif passe à 100 % */
+.goal-celebration {
+  position: absolute; inset: 0; z-index: 5; overflow: hidden; pointer-events: none;
+  border-radius: inherit; isolation: isolate;
+}
+.goal-celebration::before {
+  content: ""; position: absolute; inset: 0; opacity: 0;
+  animation: goal-flash .8s ease-out both;
+}
+.goal-celebration .goal-message {
+  position: absolute; z-index: 3; left: 50%; top: 47%; transform: translate(-50%,-50%) scale(.7);
+  white-space: nowrap; padding: 7px 12px; border-radius: 999px; font-size: 12px; font-weight: 800;
+  color: #fff; background: rgba(12,14,18,.82); border: 1px solid rgba(255,255,255,.24);
+  box-shadow: 0 5px 24px rgba(0,0,0,.28); opacity: 0; animation: goal-message .95s .12s cubic-bezier(.2,.9,.25,1) both;
+}
+.goal-particle { position: absolute; top: -28px; left: var(--x); font-size: var(--size); line-height: 1;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,.25)); will-change: transform, opacity; }
+.goal-celebration.money { background: radial-gradient(ellipse at 50% 15%, rgba(245,193,55,.24), transparent 68%); }
+.goal-celebration.money .goal-particle { animation: money-rain var(--dur) var(--delay) cubic-bezier(.35,.03,.7,.5) infinite; }
+.goal-celebration.money::before { background: linear-gradient(115deg, transparent 25%, rgba(255,224,118,.18), transparent 70%); }
+.goal-celebration.sleep { background: radial-gradient(ellipse at 50% 55%, rgba(135,147,255,.25), transparent 70%); }
+.goal-celebration.sleep .goal-particle { animation: sleep-drift var(--dur) var(--delay) ease-in-out infinite; }
+.goal-celebration.study { background: radial-gradient(ellipse at 50% 55%, rgba(92,224,157,.2), transparent 70%); }
+.goal-celebration.study .goal-particle { top: auto; bottom: -28px; animation: study-burst var(--dur) var(--delay) cubic-bezier(.16,.8,.3,1) infinite; }
+.goal-celebration.sport { background: radial-gradient(ellipse at 50% 60%, rgba(255,91,139,.24), transparent 70%); }
+.goal-celebration.sport .goal-particle { top: auto; bottom: -30px; animation: sport-burst var(--dur) var(--delay) cubic-bezier(.15,.75,.25,1) infinite; }
+.t-argent.goal-celebrating { animation: money-tile .8s ease-out; }
+.t-sleep.goal-celebrating { animation: sleep-tile 1.2s ease-out; }
+.t-etude.goal-celebrating { animation: study-tile .8s ease-out; }
+.t-sport.goal-celebrating { animation: sport-tile .75s ease-out; }
+@keyframes goal-flash { 0%{opacity:0} 18%{opacity:1} 100%{opacity:0} }
+@keyframes goal-message { 0%{opacity:0;transform:translate(-50%,-50%) scale(.65)} 25%{opacity:1;transform:translate(-50%,-50%) scale(1.08)} 75%{opacity:1;transform:translate(-50%,-50%) scale(1)} 100%{opacity:0;transform:translate(-50%,-62%) scale(.96)} }
+@keyframes money-rain { 0%{transform:translate3d(0,-25px,0) rotate(-25deg);opacity:0} 10%{opacity:1} 75%{opacity:1} 100%{transform:translate3d(var(--drift),260px,0) rotate(var(--spin));opacity:0} }
+@keyframes sleep-drift { 0%{transform:translate3d(0,-15px,0) rotate(-12deg) scale(.7);opacity:0} 18%{opacity:1} 65%{opacity:.95} 100%{transform:translate3d(var(--drift),220px,0) rotate(20deg) scale(1.12);opacity:0} }
+@keyframes study-burst { 0%{transform:translate3d(0,0,0) rotate(-20deg) scale(.45);opacity:0} 18%{opacity:1} 70%{opacity:1} 100%{transform:translate3d(var(--drift),var(--rise),0) rotate(var(--spin)) scale(1.05);opacity:0} }
+@keyframes sport-burst { 0%{transform:translate3d(0,0,0) rotate(0) scale(.55);opacity:0} 18%{opacity:1} 70%{opacity:1} 100%{transform:translate3d(var(--drift),var(--rise),0) rotate(var(--spin)) scale(1.15);opacity:0} }
+@keyframes money-tile { 0%,100%{box-shadow:0 0 0 rgba(240,190,55,0)} 35%{box-shadow:0 0 0 2px rgba(240,190,55,.5),0 0 30px rgba(240,190,55,.22)} }
+@keyframes sleep-tile { 0%,100%{box-shadow:0 0 0 rgba(135,147,255,0)} 35%{box-shadow:0 0 0 2px rgba(135,147,255,.45),0 0 30px rgba(135,147,255,.2)} }
+@keyframes study-tile { 0%,100%{box-shadow:0 0 0 rgba(92,224,157,0)} 35%{box-shadow:0 0 0 2px rgba(92,224,157,.45),0 0 30px rgba(92,224,157,.2)} }
+@keyframes sport-tile { 0%,100%{transform:translateX(0);box-shadow:0 0 0 rgba(255,91,139,0)} 20%{transform:translateX(-2px)} 40%{transform:translateX(2px);box-shadow:0 0 0 2px rgba(255,91,139,.45),0 0 30px rgba(255,91,139,.2)} 60%{transform:translateX(-1px)} 80%{transform:translateX(1px)} }
+@media (prefers-reduced-motion: reduce) {
+  .goal-celebration, .goal-celebration *, .goal-celebration::before, .goal-celebrating { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="gr-sleep" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5e6ad2"/><stop offset="1" stop-color="#b4baff"/></linearGradient>
+  <linearGradient id="gr-etude" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f9a6b"/><stop offset="1" stop-color="#86e8b4"/></linearGradient>
+  <linearGradient id="gr-sport" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d0587a"/><stop offset="1" stop-color="#ffaab5"/></linearGradient>
+  <linearGradient id="gr-argent" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c4912c"/><stop offset="1" stop-color="#ffdd7a"/></linearGradient>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+  <symbol id="i-coins" viewBox="0 0 24 24"><path d="M4 10h12"/><path d="M4 14h9"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></symbol>
+  <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></symbol>
+</defs>
+</svg>
+<header class="appbar">
+  <div class="ab-row">
+    <div class="ab-title"><span class="ab-date" id="today-line"></span><h1>Agenda</h1></div>
+    <button class="todaybtn" id="wk-today" hidden>Aujourd’hui</button>
+  </div>
+  <div class="weeknav">
+    <button id="prev" aria-label="Semaine précédente"><svg class="i" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
+    <div class="weeklabel"><b id="wk-title"></b><span id="wk-range"></span></div>
+    <button id="next" aria-label="Semaine suivante"><svg class="i" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+  </div>
+</header>
+
+<main>
+<section class="tab on" id="tab-agenda">
+  <div class="viewbar">
+    <div class="seg2" id="view-seg" data-v="day"><i class="thumb"></i><button type="button" data-v="day">Jour</button><button type="button" data-v="week">Semaine</button></div>
+  </div>
+  <div class="daystrip" id="daystrip"></div>
+  <div class="wrap" id="calwrap"><div class="cal" id="cal"></div></div>
+</section>
+
+<section class="tab" id="tab-stats">
+  <div class="card hero">
+    <div class="avhead"><b id="av-title"></b><span class="avstatus" id="av-status"></span></div>
+    <div class="avstage"><canvas id="av-canvas" width="144" height="96" aria-label="Avatar pixel art animé"></canvas></div>
+    <div class="avbadges" id="av-badges"></div>
+    <div class="avbtns">
+      <button class="big alt" id="av-custom"><svg class="i" aria-hidden="true"><use href="#i-palette"/></svg><span>Personnaliser</span></button>
+      <button class="big alt" id="av-weeks"><svg class="i" aria-hidden="true"><use href="#i-grid"/></svg><span>Mes semaines</span></button>
+    </div>
+  </div>
+
+  <div class="card xpcard">
+    <div class="lvl" id="xp-lvl"></div>
+    <div class="pbar"><i id="xp-bar" class="g-xp"></i></div>
+    <div class="tmsg" id="xp-msg"></div>
+    <label class="rewardbox"><svg class="i" aria-hidden="true"><use href="#i-gift"/></svg><input class="rwi" id="in-reward" type="text" maxlength="60" placeholder="Ma récompense au prochain niveau" aria-label="Récompense au prochain niveau"></label>
+  </div>
+
+  <div class="bento">
+  <div class="tile t-etude">
+    <div class="tl-top"><span class="tl-name"><svg class="i" aria-hidden="true"><use href="#i-book"/></svg>Étude</span><button class="edit" data-goal="etude" aria-label="Modifier l’objectif"><svg class="i s" aria-hidden="true"><use href="#i-pencil"/></svg></button></div>
+    <div class="ring"><svg viewBox="0 0 44 44"><circle class="rt" cx="22" cy="22" r="18"/><circle class="rf" id="ring-etude" cx="22" cy="22" r="18" stroke="url(#gr-etude)"/></svg><b class="rp" id="pct-etude">0%</b></div>
+    <div class="tl-val" id="val-etude"></div>
+  </div>
+  <div class="tile t-sport">
+    <div class="tl-top"><span class="tl-name"><svg class="i" aria-hidden="true"><use href="#i-activity"/></svg>Sport</span><button class="edit" data-goal="sport" aria-label="Modifier l’objectif"><svg class="i s" aria-hidden="true"><use href="#i-pencil"/></svg></button></div>
+    <div class="ring"><svg viewBox="0 0 44 44"><circle class="rt" cx="22" cy="22" r="18"/><circle class="rf" id="ring-sport" cx="22" cy="22" r="18" stroke="url(#gr-sport)"/></svg><b class="rp" id="pct-sport">0%</b></div>
+    <div class="tl-val" id="val-sport"></div>
+  </div>
+  <div class="tile t-sleep">
+    <div class="tl-top"><span class="tl-name"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg>Sommeil</span></div>
+    <div class="ring"><svg viewBox="0 0 44 44"><circle class="rt" cx="22" cy="22" r="18"/><circle class="rf" id="ring-sleep" cx="22" cy="22" r="18" stroke="url(#gr-sleep)"/></svg><b class="rp" id="pct-sleep">0%</b></div>
+    <div class="tl-val" id="val-sleep"></div>
+  </div>
+  <div class="tile t-argent">
+    <div class="tl-top"><span class="tl-name"><svg class="i" aria-hidden="true"><use href="#i-coins"/></svg>Argent</span><button class="edit" data-goal="argent" aria-label="Modifier l’objectif"><svg class="i s" aria-hidden="true"><use href="#i-pencil"/></svg></button></div>
+    <div class="ring"><svg viewBox="0 0 44 44"><circle class="rt" cx="22" cy="22" r="18"/><circle class="rf" id="ring-argent" cx="22" cy="22" r="18" stroke="url(#gr-argent)"/></svg><b class="rp" id="pct-argent">0%</b></div>
+    <div class="tl-val" id="val-argent"></div><div class="tl-sub" id="sub-argent"></div>
+  </div>
+  </div>
+
+  <div class="card" id="history" hidden></div>
+  <div class="foot"><span id="sync">Connexion…</span></div>
+</section>
+</main>
+
+<nav class="tabbar" aria-label="Navigation">
+  <button class="tb on" id="tb-agenda"><svg class="i" aria-hidden="true"><use href="#i-calendar"/></svg><span>Agenda</span></button>
+  <button class="fab" id="fab" aria-label="Ajouter"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+  <button class="tb" id="tb-stats"><svg class="i" aria-hidden="true"><use href="#i-trophy"/></svg><span>Progrès</span></button>
+</nav>
+
+<div class="modal" id="modal" hidden><div class="sheet" id="sheet"></div></div>
+
+<script>
+var START = 7, END = 23, H = 40;
+function ic(n, c) { return '<svg class="i' + (c ? " " + c : "") + '" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
+function todayDow() { return (new Date().getDay() + 6) % 7; }
+var view = (window.innerWidth < 700) ? "day" : "week";
+try { var sv = localStorage.getItem("abdoView"); if (sv === "day" || sv === "week") view = sv; } catch (e) {}
+var selDay = todayDow(), tab = "agenda";
+var uclCourses = [];
+var uclCalendarLoaded = false;
+var uclCalendarError = false;
+var DAYS = ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
+var DAYS_LONG = ["Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"];
+var MONTHS = ["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
+var TYPES = {
+  etude: { label: "Étude", icon: ic("book") },
+  argent: { label: "Argent", icon: ic("coins"), title: "Uber Eats" },
+  sport: { label: "Sport", icon: ic("activity") }
+};
+var CHECKABLE = { etude: 1, argent: 1, sport: 1 };
+var WEEK0 = new Date(2026, 9, 19);
+var SLEEP_TOTAL = 14;
+var LEVELS = [
+  { n: "Recrue", x: 0 }, { n: "Apprenti", x: 500 }, { n: "Studieux", x: 1200 }, { n: "Discipliné", x: 2200 },
+  { n: "Régulier", x: 3500 }, { n: "Expert", x: 5000 }, { n: "Maître", x: 7000 }, { n: "Légende", x: 9500 }
+];
+function $(id) { return document.getElementById(id); }
+
+function E(d, s, e, type, title, sub, extra) {
+  var o = { d: d, s: s, e: e, t: type, title: title, sub: sub || "" };
+  if (extra) for (var k in extra) o[k] = extra[k];
+  return o;
+}
+function S(d, s, e, course) {
+  return E(d, s, e, "etude", "Étude", fmt(s) + " – " + fmt(e));
+}
+function SN(d, s, e, course) {
+  return E(d, s, e, "etude", "Étude — " + course, fmt(s) + " – " + fmt(e));
+}
+function build(i) {
+  var ev = [], d;
+  if (i !== 1) {
+    // CM gardés : Management, PPS, Éthique. TP Économétrie gardé. CM GDO, Économétrie et TDO sautés.
+    ev.push(E(0, 14.5, 16.5, "cours", "CM Management et stratégie"));
+    ev.push(E(1, 13.5, 15.5, "cours", "TP Économétrie"));
+    ev.push(E(2, 8.5, 10.5, "cours", "PPS (Public policy seminar)"));
+    ev.push(E(3, 10.5, 12.5, "cours", "CM Éthique et économie"));
+  }
+  ev.push(E(2, 17, 18.5, "prive", "Cours particulier", "17h – 18h30"));
+  if (i === 2) {
+    ev.push(E(1, 16.5, 18.25, "ecole", "École de devoirs", "16h30 – 18h15"));
+    ev.push(E(3, 16.5, 18.25, "ecole", "École de devoirs", "16h30 – 18h15"));
+  }
+  if (i === 1) {
+    // Semaine sans cours : étude 12h – 18h, travail à partir de 18h.
+    var plan = [
+      ["GDO", "Économétrie"],
+      ["GDO", "TDO"],
+      ["Économétrie", "Management"],
+      ["GDO", "Management"],
+      ["GDO", "TDO"],
+      ["Économétrie", "TDO"],
+      ["GDO", "Éthique"]
+    ];
+    for (d = 0; d < 7; d++) {
+      ev.push(SN(d, 12, 14.75, plan[d][0]));
+      ev.push(SN(d, 15.25, d === 2 ? 17 : 18, plan[d][1]));
+      ev.push(E(d, d === 2 ? 19 : 18, 22, "uber", "Uber Eats", (d === 2 ? "19h" : "18h") + " – 22h"));
+    }
+    return ev;
+  }
+  var wk = ["GDO", "Économétrie", "TDO"];
+  for (d = 4; d <= 6; d++) {
+    ev.push(S(d, 7.5, 10, wk[d - 4]));
+    ev.push(E(d, 11, 22, "uber", "Uber Eats", "11h – 22h"));
+  }
+  ev.push(S(0, 7.5, 10.5, "GDO"), S(0, 11, 14, "Économétrie"), S(0, 19.5, 21, "TDO"));
+  ev.push(S(1, 7.5, 10, "GDO"), S(1, 10.5, 13, "Économétrie"), S(1, 19.5, 21, "TDO"));
+  ev.push(S(2, 11, 13.5, "TDO"), S(2, 14, 16, "PPS"), S(2, 19.5, 21, "Éthique"));
+  ev.push(S(3, 7.5, 10, "GDO"), S(3, 13.5, 16, "Management"), S(3, 19.5, 21, "Économétrie"));
+  return ev;
+}
+
+/* ===== Moteur pixel art (144 x 96) ===== */
+var PW = 144, PH = 96, GY = 88;
+var _cc = {};
+function C(hex) {
+  if (_cc[hex] !== undefined) return _cc[hex];
+  var n = parseInt(hex.slice(1), 16);
+  var v = ((255 << 24) | ((n & 255) << 16) | (((n >> 8) & 255) << 8) | ((n >> 16) & 255)) >>> 0;
+  _cc[hex] = v; return v;
+}
+function mix(hex, f) {
+  var n = parseInt(hex.slice(1), 16), r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  function ch(c) { return f >= 0 ? Math.round(c + (255 - c) * f) : Math.round(c * (1 + f)); }
+  return "#" + ((1 << 24) | (ch(r) << 16) | (ch(g) << 8) | ch(b)).toString(16).slice(1);
+}
+function hash(a, b) { var h = (a * 374761393 + b * 668265263) | 0; h = (h ^ (h >>> 13)) * 1274126177 | 0; return ((h ^ (h >>> 16)) >>> 0) / 4294967296; }
+function Layer() { this.b = new Uint32Array(PW * PH); }
+Layer.prototype.px = function (x, y, c) { x = Math.round(x); y = Math.round(y); if (x >= 0 && y >= 0 && x < PW && y < PH) this.b[y * PW + x] = c; };
+Layer.prototype.rect = function (x, y, w, h, c) { for (var j = 0; j < h; j++) for (var i = 0; i < w; i++) this.px(x + i, y + j, c); };
+Layer.prototype.disc = function (cx, cy, r, c, fn) {
+  var R = Math.ceil(r);
+  for (var j = -R; j <= R; j++) for (var i = -R; i <= R; i++)
+    if (i * i + j * j <= r * r + 0.5) { var v = fn ? fn(Math.round(cx) + i, Math.round(cy) + j) : c; if (v) this.px(cx + i, cy + j, v); }
+};
+Layer.prototype.line = function (x0, y0, x1, y1, c, t) {
+  t = t || 1; var o = -Math.floor((t - 1) / 2);
+  x0 = Math.round(x0); y0 = Math.round(y0); x1 = Math.round(x1); y1 = Math.round(y1);
+  var dx = Math.abs(x1 - x0), dy = -Math.abs(y1 - y0), sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1, err = dx + dy;
+  for (;;) {
+    this.rect(x0 + o, y0 + o, t, t, c);
+    if (x0 === x1 && y0 === y1) break;
+    var e2 = 2 * err;
+    if (e2 >= dy) { err += dy; x0 += sx; }
+    if (e2 <= dx) { err += dx; y0 += sy; }
+  }
+};
+Layer.prototype.poly = function (pts, c, fn) {
+  var minY = 1e9, maxY = -1e9, i, k;
+  pts.forEach(function (p) { minY = Math.min(minY, p[1]); maxY = Math.max(maxY, p[1]); });
+  for (var y = Math.floor(minY); y <= Math.ceil(maxY); y++) {
+    var xs = [], yy = y + 0.5;
+    for (i = 0; i < pts.length; i++) {
+      var a = pts[i], b = pts[(i + 1) % pts.length];
+      if ((a[1] <= yy && b[1] > yy) || (b[1] <= yy && a[1] > yy)) xs.push(a[0] + (yy - a[1]) * (b[0] - a[0]) / (b[1] - a[1]));
+    }
+    xs.sort(function (p, q) { return p - q; });
+    for (k = 0; k + 1 < xs.length; k += 2)
+      for (var x = Math.round(xs[k]); x < Math.round(xs[k + 1]); x++) { var v2 = fn ? fn(x, y) : c; if (v2) this.px(x, y, v2); }
+  }
+};
+function outlineLayer(L, oc) {
+  var s = L.b, d = new Uint32Array(s), x, y;
+  for (y = 0; y < PH; y++) for (x = 0; x < PW; x++) {
+    if (s[y * PW + x]) continue;
+    if ((x > 0 && s[y * PW + x - 1]) || (x < PW - 1 && s[y * PW + x + 1]) || (y > 0 && s[(y - 1) * PW + x]) || (y < PH - 1 && s[(y + 1) * PW + x])) d[y * PW + x] = oc;
+  }
+  L.b = d;
+}
+function unpackU(c) { return [c & 255, (c >> 8) & 255, (c >> 16) & 255]; }
+function packU(r, g, b) { return ((255 << 24) | (b << 16) | (g << 8) | r) >>> 0; }
+function lerpU(c, t, tr, tg, tb) { var u = unpackU(c); return packU(Math.round(u[0] + (tr - u[0]) * t), Math.round(u[1] + (tg - u[1]) * t), Math.round(u[2] + (tb - u[2]) * t)); }
+function outlineSel(L, rim) {
+  var s = L.b, d = new Uint32Array(s), x, y, i, n;
+  for (y = 0; y < PH; y++) for (x = 0; x < PW; x++) {
+    i = y * PW + x;
+    if (s[i]) {
+      if (rim) {
+        if (!(y > 0 && s[i - PW])) d[i] = lerpU(s[i], 0.42, 130, 215, 232);
+        else if (!(x > 0 && s[i - 1])) d[i] = lerpU(s[i], 0.22, 90, 160, 190);
+      }
+      continue;
+    }
+    n = (x > 0 && s[i - 1]) || (x < PW - 1 && s[i + 1]) || (y > 0 && s[i - PW]) || (y < PH - 1 && s[i + PW]);
+    if (n) d[i] = lerpU(n, 0.64, 6, 10, 18);
+  }
+  L.b = d;
+}
+function blit(out, L, dy) {
+  for (var y = 0; y < PH; y++) for (var x = 0; x < PW; x++) {
+    var v = L.b[y * PW + x]; if (!v) continue;
+    var ty = y + dy; if (ty >= 0 && ty < PH) out[ty * PW + x] = v;
+  }
+}
+function bandsOf(c) { return { hi: mix(c, 0.3), mid: c, lo: mix(c, -0.32) }; }
+function bandFn(y0, y1, b) {
+  return function (x, y) {
+    var t = (y - y0) / Math.max(1, y1 - y0), ck = (x + y) % 2 === 0;
+    if (t < 0.18) return C(b.hi);
+    if (t < 0.27) return C(ck ? b.hi : b.mid);
+    if (t > 0.78) return C(b.lo);
+    if (t > 0.68) return C(ck ? b.lo : b.mid);
+    return C(b.mid);
+  };
+}
+
+/* ===== Décor de nuit ===== */
+var TOWERS = [
+  [0, 10, 26, 0], [11, 8, 34, 0], [20, 12, 22, 0], [33, 7, 40, 0], [41, 10, 28, 0], [52, 9, 36, 0], [62, 12, 24, 0],
+  [75, 10, 46, 1], [86, 9, 30, 0], [96, 12, 38, 0], [109, 8, 26, 0], [118, 11, 42, 0], [130, 7, 30, 0], [138, 6, 22, 0]
+];
+function drawNight(out, f) {
+  var x, y, bands = [[0, "#04121a"], [12, "#061d27"], [26, "#082a35"], [40, "#0b3640"], [52, "#0f4650"], [62, "#14565f"]];
+  for (y = 0; y < 66; y++) { var col = C(bands[0][1]); bands.forEach(function (b) { if (y >= b[0]) col = C(b[1]); }); for (x = 0; x < PW; x++) out[y * PW + x] = col; }
+  var L = new Layer(), i;
+  for (i = 0; i < 34; i++) {
+    var sx = Math.floor(hash(i, 7) * PW), sy = Math.floor(hash(i, 13) * 38);
+    var tw = (Math.floor(f / 3) + i) % 7 === 0;
+    L.px(sx, sy, C(tw ? "#ffffff" : (i % 3 ? "#7fb2c4" : "#b8d8e2")));
+  }
+  blit(out, L, 0);
+  var M = new Layer(); // croissant de lune + halo
+  for (var gy = 0; gy < 32; gy++) for (var gx = 90; gx < 136; gx++) { var dd = Math.sqrt((gx - 112) * (gx - 112) + (gy - 14) * (gy - 14)); if (dd > 7 && dd < 14 && ((gx + gy) % 2 === 0) && dd < 10 + (Math.floor(f / 6) % 2)) M.px(gx, gy, C("#0f4a54")); else if (dd >= 10 && dd < 14 && ((gx + gy) % 4 === 0)) M.px(gx, gy, C("#0c3d47")); }
+  M.disc(112, 14, 7, C("#f3efe0")); M.disc(116, 11, 6, C("#082a35"));
+  M.disc(110, 17, 1.2, C("#d6d1bc"));
+  blit(out, M, 0);
+  var AP = new Layer(); // avion, oiseaux, étoile filante
+  var px0 = (f * 0.3) % (PW + 30) - 10; AP.px(px0, 11, C("#ffffff")); AP.px(px0 - 2, 11, C(Math.floor(f / 5) % 2 ? "#ff4a3a" : "#5a1a16")); AP.px(px0 + 2, 11, C(Math.floor(f / 5) % 2 ? "#3aff7a" : "#154a2a"));
+  for (var bi = 0; bi < 3; bi++) {
+    var bxx = ((PW + 40 - f * (1.1 + bi * 0.15) - bi * 46) % (PW + 40) + PW + 40) % (PW + 40) - 10, byy = 20 + bi * 7 + Math.round(Math.sin(f * 0.3 + bi) * 1), up = Math.floor(f / 2 + bi) % 2;
+    AP.px(bxx, byy, C("#0a2a33")); AP.px(bxx - 1, byy + (up ? -1 : 1), C("#0a2a33")); AP.px(bxx + 1, byy + (up ? -1 : 1), C("#0a2a33")); AP.px(bxx - 2, byy + (up ? -2 : 1), C("#0a2a33")); AP.px(bxx + 2, byy + (up ? -2 : 1), C("#0a2a33"));
+  }
+  var sa = f % 150; if (sa < 9) for (var si = 0; si < 7; si++) AP.px(28 + sa * 4 - si * 3, 4 + sa * 2 - si * 1.4, C(si < 2 ? "#ffffff" : (si < 4 ? "#bfe6f0" : "#4f8ea0")));
+  blit(out, AP, 0);
+  var off1 = Math.floor(f * 0.25) % PW, F = new Layer();
+  [0, 1].forEach(function (rep) {
+    TOWERS.forEach(function (b, k) {
+      var bx = b[0] - off1 + rep * PW, h = Math.round(b[2] * 0.7);
+      F.rect(bx + 1, 66 - h, b[1] - 1, h, C("#0c3039"));
+      for (var wy = 66 - h + 2; wy < 64; wy += 3) for (var wx = bx + 2; wx < bx + b[1] - 1; wx += 3) if (hash(wx + rep * 7, wy + k) > 0.72) F.px(wx, wy, C("#2c7882"));
+    });
+  });
+  blit(out, F, 0);
+  var off2 = Math.floor(f * 0.6) % PW, N = new Layer(), lights = [];
+  [0, 1].forEach(function (rep) {
+    TOWERS.forEach(function (b, k) {
+      var bx = b[0] - off2 + rep * PW, h = b[2], top = 66 - h;
+      N.rect(bx, top, b[1], h, C("#07161d"));
+      N.rect(bx, top, 1, h, C("#0d2a33"));
+      if (b[3]) { // tour à flèche éclairée
+        N.rect(bx + 2, top - 6, b[1] - 4, 6, C("#07161d")); N.rect(bx + 4, top - 12, b[1] - 8, 6, C("#07161d")); N.rect(bx + b[1] / 2 - 1, top - 20, 2, 8, C("#07161d"));
+        N.rect(bx + 3, top - 5, b[1] - 6, 3, C("#ffd88a")); N.rect(bx + 5, top - 11, b[1] - 10, 3, C("#ffe8b0")); N.px(bx + b[1] / 2, top - 21, C("#aef2ff"));
+      }
+      for (var wy = top + 2; wy < 64; wy += 3) for (var wx = bx + 2; wx < bx + b[1] - 1; wx += 2) {
+        var hv = hash(wx - b[0] + rep * 300, wy + k * 5), flick = hash(wx + wy, Math.floor(f / 24));
+        if (hv > 0.38) {
+          var cc = hv > 0.9 ? "#8fe3ff" : (hv > 0.62 ? "#ffd27a" : "#ffb347");
+          if (flick < 0.04) cc = "#07161d";
+          N.px(wx, wy, C(cc));
+          if (wy > 52 && hv > 0.62) lights.push(wx);
+        }
+      }
+    });
+  });
+  blit(out, N, 0);
+  var Wt = new Layer(); // eau
+  Wt.rect(0, 66, PW, 12, C("#0a3640"));
+  for (y = 66; y < 78; y++) for (x = 0; x < PW; x++) if (((x * 3 + y * 7 + Math.floor(f / 2)) % 11) === 0) Wt.px(x, y, C("#14606a"));
+  lights.forEach(function (lx, k) {
+    for (var ry = 67; ry < 77; ry++) if (((ry + k + Math.floor(f / 2)) % 3) === 0) Wt.px(lx, ry, C(ry < 71 ? "#d9a24f" : "#8a6a3a"));
+  });
+  for (var my = 67; my < 78; my++) { var mw = 1 + ((my + Math.floor(f / 2)) % 3); for (var mx = 112 - mw; mx <= 112 + mw; mx++) if (((mx + my) % 2) === 0) Wt.px(mx, my, C(my < 72 ? "#d8d4bf" : "#7e8a86")); }
+  var bt = ((PW + 30 - f * 0.4) % (PW + 30) + PW + 30) % (PW + 30) - 14;
+  Wt.rect(bt, 73, 9, 2, C("#0a1c24")); Wt.rect(bt + 2, 71, 4, 2, C("#0a1c24")); Wt.px(bt + 3, 70, C("#ffd27a")); Wt.px(bt - 1, 73, C("#ff6a4a")); Wt.rect(bt + 1, 75, 6, 1, C("#b9873a"));
+  var bt2 = ((PW + 50 - f * 0.25 - 70) % (PW + 50) + PW + 50) % (PW + 50) - 20;
+  Wt.rect(bt2, 70, 12, 2, C("#0a1c24")); Wt.rect(bt2 + 3, 68, 6, 2, C("#0a1c24")); Wt.px(bt2 + 6, 67, C("#8fe3ff")); Wt.px(bt2 + 6, 72, C("#2c7882"));
+  blit(out, Wt, 0);
+  var BR = new Layer(), boff = Math.floor(f * 0.35) % 72; // pont suspendu
+  BR.rect(0, 67, PW, 2, C("#0b2a33")); BR.rect(0, 67, PW, 1, C("#1f5a66"));
+  for (var tx = -72; tx < PW + 72; tx += 72) {
+    var cx = tx - boff + 30;
+    BR.rect(cx - 1, 50, 3, 18, C("#0b2a33")); BR.rect(cx - 2, 50, 5, 1, C("#16424d")); BR.px(cx, 49, C(Math.floor(f / 5) % 2 ? "#ff5a4a" : "#6a1e18"));
+    for (var cxx = cx; cxx <= cx + 72; cxx++) {
+      var tt = (cxx - cx) / 72, cy3 = Math.round(52 + 4 * tt * (1 - tt) * 12);
+      BR.px(cxx, cy3, C("#1f5a66"));
+      if ((cxx - cx) % 6 === 0 && tt > 0.05 && tt < 0.95) { BR.rect(cxx, cy3, 1, 67 - cy3, C("#12404a")); BR.px(cxx, cy3, C("#ffd27a")); }
+    }
+  }
+  blit(out, BR, 0);
+  var P = new Layer(), poff = Math.floor(f * 2) % 72, rl = Math.floor(f * 2) % 8;
+  P.rect(0, 77, PW, 2, C("#1a2230")); P.rect(0, 77, PW, 1, C("#3c4a63"));
+  for (var px2 = -8; px2 < PW + 8; px2 += 8) P.rect(px2 - rl, 73, 1, 5, C("#2a3446"));
+  P.rect(0, 73, PW, 1, C("#3c4a63"));
+  for (var lx = -72; lx < PW + 72; lx += 72) {
+    var bx3 = lx - poff + 40;
+    P.rect(bx3, 48, 2, 30, C("#2a3446")); P.rect(bx3 - 1, 47, 6, 2, C("#2a3446")); P.rect(bx3 + 2, 49, 3, 2, C("#ffe9a8"));
+  }
+  blit(out, P, 0);
+  var lamp = new Layer(); // halo de lampadaire
+  for (var lx2 = -72; lx2 < PW + 72; lx2 += 72) {
+    var bx4 = lx2 - poff + 40;
+    for (var gy = 51; gy < 78; gy++) for (var gx = bx4 - 6; gx < bx4 + 11; gx++) if (((gx + gy + f) % 2) === 0 && Math.abs(gx - (bx4 + 3)) < (gy - 49) * 0.42) lamp.px(gx, gy, C("#6a5d3a"));
+  }
+  blit(out, lamp, 0);
+  var R = new Layer();
+  R.rect(0, 79, PW, 17, C("#1b1f29")); R.rect(0, 79, PW, 1, C("#4a5266")); R.rect(0, 80, PW, 1, C("#2c3242")); R.rect(0, 95, PW, 1, C("#12151c"));
+  var doff = (f * 3) % 16;
+  for (x = -16; x < PW + 16; x += 16) R.rect(x - doff, 92, 8, 1, C("#c8ccd6"));
+  blit(out, R, 0);
+  var SH = new Layer(); SH.rect(26, 88, 84, 2, C("#0d1016")); blit(out, SH, 0);
+}
+
+/* ===== Véhicules (silhouettes reconnaissables) ===== */
+function wheel(W, cx, cy, r, f, rim) {
+  W.disc(cx, cy, r, C("#171922"));
+  W.disc(cx, cy, r - 1, C("#1d2029"), function (x, y) { return (x + y) % 3 === 0 && (x - cx) * (x - cx) + (y - cy) * (y - cy) > (r - 2.2) * (r - 2.2) ? C("#2a2e3a") : 0; });
+  W.disc(cx, cy, r - 3, C(rim));
+  W.disc(cx, cy, r - 3, C(rim), function (x, y) { return (y < cy - 1 && x < cx + 1) ? C(mix(rim, 0.35)) : (y > cy + 2 ? C(mix(rim, -0.2)) : C(rim)); });
+  var sc = C(mix(rim, -0.5));
+  var k = f % 4;
+  if (k === 0) { W.line(cx - r + 4, cy, cx + r - 4, cy, sc); W.line(cx, cy - r + 4, cx, cy + r - 4, sc); }
+  else if (k === 1) { W.line(cx - r + 5, cy - r + 5, cx + r - 5, cy + r - 5, sc); W.line(cx + r - 5, cy - r + 5, cx - r + 5, cy + r - 5, sc); }
+  else if (k === 2) { W.line(cx - r + 4, cy - 1, cx + r - 4, cy + 1, sc); W.line(cx - 1, cy - r + 4, cx + 1, cy + r - 4, sc); }
+  else { W.line(cx - r + 5, cy - r + 6, cx + r - 5, cy + r - 6, sc); W.line(cx + r - 5, cy - r + 6, cx - r + 5, cy + r - 6, sc); }
+  W.disc(cx, cy, 2.3, C("#9aa0ae")); W.disc(cx, cy, 1.2, C("#3a3e4a"));
+  W.px(cx - r + 3, cy - 1, C("#2a2d38"));
+}
+var GOLD = { hi: "#ffe27a", mid: "#f2b631", lo: "#b97a05" };
+var DK = "#14151a", CH = ["#f2f4f8", "#b9bfcb", "#6d7484"];
+function gradeFn(y0, y1, b) { return bandFn(y0, y1, b); }
+function glass(B, pts, topA, topB) { B.poly(pts, C("#6f8696")); B.line(topA[0], topA[1], topB[0], topB[1], C("#cfe6f2"), 1); }
+
+/* --- SYM GTS : maxi-scooter gris, gros coffre noir, grands rétroviseurs --- */
+function scooterSYM(B, f, b) {
+  var s = b || { hi: "#cfd4de", mid: "#9ca3af", lo: "#6c7280" };
+  B.rect(50, 80, 18, 3, C(CH[1])); B.rect(50, 80, 18, 1, C(CH[0]));
+  B.line(30, 56, 36, 50, C(CH[1]), 2); B.line(36, 50, 52, 52, C(CH[1]), 2);                 // poignée passager chromée
+  B.rect(18, 40, 20, 17, C("#14161c")); B.rect(18, 40, 20, 2, C("#3a3f4d")); B.rect(18, 55, 20, 2, C("#0a0b0e")); B.rect(21, 46, 14, 1, C("#262a35")); // gros top-case
+  B.rect(22, 57, 18, 1, C("#2a2d38"));
+  B.poly([[30, 80], [29, 68], [33, 62], [40, 59], [62, 59], [69, 64], [70, 80]], C(s.mid), gradeFn(59, 80, s));
+  B.rect(30, 74, 40, 6, C("#3a3f4c")); B.rect(30, 74, 40, 1, C("#585f70"));                  // bas de caisse noir
+  B.rect(31, 66, 1, 5, C("#e53935"));
+  B.line(38, 68, 64, 66, C(s.lo), 1);
+  B.poly([[38, 58], [40, 52], [46, 51], [48, 55], [66, 55], [68, 58], [64, 60], [40, 60]], C(DK)); B.rect(48, 55, 18, 1, C("#303544")); // selle + dosseret
+  B.rect(68, 77, 20, 3, C("#14161c")); B.rect(66, 79, 24, 2, C(s.mid));
+  B.poly([[84, 80], [92, 80], [100, 72], [105, 62], [104, 53], [98, 49], [92, 52], [88, 64]], C(s.mid), gradeFn(49, 80, s)); // tablier large
+  B.poly([[94, 52], [99, 52], [102, 58], [97, 62]], C("#22252e"));                           // masque noir
+  B.rect(100, 55, 6, 7, C("#f6f2cc")); B.rect(100, 54, 6, 1, C("#9fd6ff")); B.px(105, 66, C("#ff9d2e")); // phare angulaire + LED
+  B.poly([[93, 52], [96, 36], [103, 38], [100, 52]], C("#6f8696")); B.line(96, 36, 103, 38, C("#cfe6f2"), 1); // haut pare-brise
+  B.line(95, 46, 91, 38, C(CH[1]), 2); B.rect(84, 27, 9, 12, C("#aeb4bf")); B.rect(86, 29, 5, 8, C("#14161c")); B.rect(84, 27, 9, 1, C("#e6e9ef")); // grands rétros
+  B.line(91, 50, 101, 48, C(DK), 2); B.rect(101, 47, 3, 3, C("#0a0b0e"));
+  B.line(102, 56, 97, 80, C(CH[1]), 2);                                                      // fourche argent
+  B.line(89, 77, 91, 73, C(s.hi), 3); B.line(91, 73, 97, 71, C(s.hi), 3); B.line(97, 71, 102, 73, C(s.hi), 3); B.line(102, 73, 104, 77, C(s.hi), 3); // garde-boue
+  return { hip: [60, 54], hand: [101, 48], foot: [80, 74], lean: 2, wr: 7, wb: [42, 81], wf: [97, 81], rim: "#aeb4c0", light: [106, 59] };
+}
+
+/* --- Yamaha XMAX : urbain agressif, queue très relevée, double X lumineux, grandes ouïes --- */
+function scooterXMAX(B, f) {
+  var b = bandsOf("#2a4fa6"), bk = "#12151d", i;
+  B.rect(52, 81, 16, 3, C("#1b1e27")); B.rect(66, 81, 5, 3, C(CH[1]));
+  B.poly([[24, 53], [33, 54], [46, 57], [66, 62], [70, 68], [70, 80], [32, 80], [28, 66]], C(b.mid), gradeFn(53, 80, b)); // queue dressée
+  B.poly([[24, 53], [33, 54], [36, 58], [28, 57]], C(bk));                                  // becquet de queue noir
+  B.rect(24, 54, 7, 2, C("#ff2a2a")); B.rect(24, 56, 2, 4, C("#ff2a2a")); B.px(26, 54, C("#ffb0a8")); // feu en L
+  B.line(34, 56, 44, 54, C(bk), 2); B.line(44, 54, 48, 57, C(bk), 2);                        // poignée anguleuse
+  B.poly([[34, 71], [60, 63], [67, 67], [40, 77]], C(bk));                                  // grande ouïe latérale
+  for (i = 0; i < 4; i++) B.line(38 + i * 6, 74 - i * 2, 44 + i * 6, 68 - i * 2, C(CH[1]), 1);
+  B.line(30, 64, 68, 65, C(b.hi), 1); B.line(33, 78, 69, 76, C(b.lo), 1);
+  B.poly([[36, 55], [40, 50], [48, 50], [50, 54], [66, 58], [68, 62], [40, 62]], C(DK)); B.rect(40, 50, 8, 1, C("#303544")); B.rect(50, 54, 16, 1, C("#303544")); // selle étagée
+  B.rect(68, 77, 20, 3, C(bk)); B.rect(66, 79, 24, 2, C(b.lo));
+  B.poly([[84, 80], [92, 80], [104, 72], [117, 62], [111, 54], [101, 49], [94, 52], [88, 64]], C(b.mid), gradeFn(49, 80, b)); // nez en lame
+  B.poly([[96, 65], [108, 61], [114, 63], [101, 72]], C(bk)); B.line(97, 67, 108, 63, C("#2c4a8a"), 1);        // prise d'air basse
+  B.line(99, 52, 110, 60, C("#fff4c0"), 1); B.line(99, 60, 110, 52, C("#fff4c0"), 1); B.rect(104, 55, 2, 2, C("#ffffff")); // phares en X
+  B.px(112, 62, C("#ff9d2e"));
+  B.poly([[94, 52], [97, 40], [108, 42], [103, 53]], C("#5e7686")); B.line(97, 40, 108, 42, C("#d6eef8"), 1); // pare-brise incliné
+  B.line(99, 46, 96, 40, C(bk), 1); B.poly([[92, 36], [99, 37], [97, 41], [91, 40]], C(b.hi)); B.rect(93, 37, 4, 2, C(bk)); // rétro lame
+  B.line(91, 52, 101, 50, C(DK), 2); B.rect(101, 49, 3, 3, C("#0a0b0e"));
+  B.line(103, 58, 98, 80, C(CH[1]), 2);
+  B.poly([[91, 77], [94, 71], [103, 68], [112, 69], [105, 73], [99, 72]], C(b.hi), gradeFn(68, 77, b)); // garde-boue en lame
+  return { hip: [60, 55], hand: [101, 50], foot: [80, 74], lean: 3, wr: 7, wb: [42, 81], wf: [98, 81], rim: "#aeb4c0", light: [112, 57] };
+}
+
+/* --- Yamaha TMAX : prédateur noir et rouge, regard en V, bosse centrale, échappement apparent --- */
+function scooterTMAX(B, f) {
+  var b = bandsOf("#2e3340"), rd = "#ff3b30", bk = "#0e1016", i;
+  B.line(42, 81, 70, 73, C(CH[1]), 4); B.line(42, 80, 70, 72, C(CH[0]), 1); B.line(46, 83, 70, 76, C(CH[2]), 1); // bras oscillant alu
+  B.line(66, 78, 33, 73, C(CH[1]), 4); B.line(66, 77, 33, 72, C(CH[0]), 1); B.rect(26, 69, 10, 7, C("#3a3f4c")); B.rect(26, 69, 10, 1, C("#7a8296")); B.rect(24, 71, 3, 3, C(bk)); // échappement apparent
+  B.poly([[28, 70], [38, 63], [52, 65], [48, 70]], C(bk));                                   // protège-roue
+  B.poly([[20, 61], [34, 57], [52, 57], [58, 61], [52, 65], [24, 66]], C(b.mid), gradeFn(57, 66, b)); // queue basse
+  B.poly([[20, 56], [30, 55], [31, 59], [24, 60]], C(bk));                                  // aileron arrière
+  B.rect(20, 61, 4, 3, C("#ff2a2a")); B.px(21, 61, C("#ffb0a8"));
+  B.poly([[54, 58], [66, 48], [80, 51], [89, 62], [87, 78], [56, 78]], C(b.mid), gradeFn(48, 78, b)); // bosse centrale
+  for (i = 0; i < 9; i++) for (var j = 0; j < 6; j++) if ((i + j) % 2 === 0) B.px(60 + i * 3, 56 + j * 4, C(bk)); // texture carbone
+  B.line(58, 74, 86, 58, C(rd), 1); B.line(60, 77, 87, 62, C(mix(rd, -0.4)), 1);
+  B.line(66, 49, 80, 52, C(rd), 1);
+  B.poly([[36, 59], [40, 55], [58, 55], [64, 58], [60, 61], [38, 61]], C(DK)); B.rect(40, 55, 18, 1, C("#303544")); // selle plate
+  B.rect(74, 77, 14, 3, C(bk)); B.rect(74, 79, 14, 1, C(rd));
+  B.poly([[84, 80], [92, 80], [106, 74], [119, 64], [112, 53], [100, 47], [94, 51], [88, 64]], C(b.mid), gradeFn(47, 80, b)); // façade de prédateur
+  B.line(92, 73, 113, 60, C(rd), 1); B.line(94, 76, 112, 64, C(mix(rd, -0.4)), 1);
+  B.line(98, 52, 112, 57, C(bk), 2);                                                        // sourcil sombre
+  B.line(98, 55, 111, 59, C("#fff4c0"), 1); B.line(98, 58, 109, 63, C("#fff4c0"), 1); B.px(110, 59, C("#ffffff")); // regard en V
+  B.poly([[96, 65], [109, 63], [113, 66], [101, 73]], C(bk)); for (i = 0; i < 3; i++) B.line(99 + i * 3, 70 - i * 2, 103 + i * 3, 66 - i * 2, C(rd), 1); // grandes entrées d'air
+  B.poly([[90, 58], [99, 53], [99, 58]], C(rd));                                            // ailette
+  B.poly([[94, 51], [99, 41], [109, 44], [104, 53]], C("#3b4856")); B.line(99, 41, 109, 44, C("#c4dcea"), 1); // pare-brise bas et noir
+  B.line(100, 46, 98, 41, C(bk), 1); B.poly([[93, 38], [100, 39], [98, 43], [92, 42]], C(b.hi)); B.rect(94, 39, 4, 2, C(bk));
+  B.line(91, 51, 101, 49, C(DK), 2); B.rect(101, 48, 3, 3, C("#0a0b0e"));
+  B.line(104, 57, 98, 80, C(CH[0]), 2); B.line(106, 60, 100, 80, C(rd), 1);
+  B.poly([[92, 76], [96, 69], [106, 66], [118, 68], [108, 72], [100, 71]], C(b.mid), gradeFn(66, 76, b)); B.line(96, 70, 117, 68, C(rd), 1); // garde-boue en bec
+  return { hip: [58, 54], hand: [101, 49], foot: [78, 75], lean: 3, wr: 7, wb: [42, 81], wf: [99, 81], rim: "#c9ced8", light: [113, 59] };
+}
+
+/* --- Yamaha Tracer 7 : sport-tourisme caréné, double phare empilé, bicylindre apparent --- */
+function motoTracer(B, f) {
+  var b = bandsOf("#2d3a58"), ac = "#c6f03a", i;
+  B.line(44, 80, 64, 72, C(CH[1]), 3); B.line(44, 79, 64, 71, C(CH[0]), 1);                  // bras oscillant alu
+  B.line(70, 78, 46, 78, C("#9aa0b0"), 3); B.rect(28, 73, 22, 6, C(CH[1])); B.rect(28, 73, 22, 1, C(CH[0])); B.rect(28, 78, 22, 1, C(CH[2])); // silencieux
+  B.poly([[62, 60], [84, 58], [90, 66], [86, 78], [60, 78]], C("#3d4252")); B.rect(62, 59, 22, 2, C("#6a7284")); // moteur
+  for (i = 0; i < 5; i++) B.rect(64 + i * 4, 62, 1, 12, C("#252936"));
+  B.rect(64, 70, 12, 6, C("#4f566a")); B.rect(66, 72, 8, 2, C("#6a7284"));
+  B.line(88, 68, 80, 78, C(CH[1]), 2); B.line(80, 78, 66, 78, C(CH[1]), 2);                   // collecteurs chromés
+  B.rect(92, 64, 6, 11, C("#252936")); for (i = 0; i < 4; i++) B.line(92, 65 + i * 3, 97, 65 + i * 3, C("#4a5266"), 1); // radiateur
+  B.line(94, 52, 64, 66, C("#1e222c"), 2);                                                  // cadre
+  B.poly([[29, 57], [35, 50], [50, 52], [52, 58], [47, 62], [31, 62]], C(b.mid), gradeFn(50, 62, b));  // queue relevée
+  B.rect(27, 55, 3, 3, C("#e53935")); B.line(34, 52, 46, 53, C("#1e222c"), 2);
+  B.poly([[38, 56], [41, 51], [64, 51], [68, 55], [64, 59], [40, 59]], C(DK)); B.rect(41, 51, 23, 1, C("#303544"));
+  B.poly([[64, 54], [70, 47], [88, 47], [94, 52], [90, 61], [68, 61]], C(b.mid), gradeFn(47, 61, b)); // réservoir + flancs
+  B.line(70, 57, 90, 56, C(ac), 1);
+  B.poly([[90, 49], [98, 44], [108, 52], [111, 63], [105, 69], [95, 60]], C(b.mid), gradeFn(44, 69, b)); // nez pointu
+  B.line(94, 63, 108, 58, C(ac), 1);
+  B.rect(104, 51, 6, 3, C("#f6f2cc")); B.rect(105, 56, 6, 3, C("#f6f2cc")); B.rect(104, 54, 6, 1, C("#14161c")); // deux phares empilés
+  B.poly([[93, 46], [97, 32], [105, 34], [102, 48]], C("#6f8696")); B.line(97, 32, 105, 34, C("#cfe6f2"), 1);
+  B.line(89, 47, 99, 44, C(DK), 2); B.rect(99, 43, 3, 3, C("#0a0b0e")); B.rect(94, 40, 4, 3, C(b.hi));
+  B.line(97, 52, 104, 80, C("#aeb4c0"), 2);
+  B.line(98, 72, 101, 68, C(b.mid), 2); B.line(101, 68, 107, 66, C(b.mid), 2); B.line(107, 66, 112, 70, C(b.mid), 2);
+  B.rect(70, 76, 5, 2, C(CH[1]));
+  return { hip: [56, 50], hand: [100, 44], foot: [72, 75], lean: 4, wr: 8, wb: [44, 80], wf: [104, 80], rim: "#2a2d38", light: [110, 55] };
+}
+
+/* --- BMW R 1200 GS : bec, cylindre boxer, arbre de transmission, valises alu --- */
+function motoGS(B, f, gold) {
+  var body = gold ? GOLD : { hi: "#ffffff", mid: "#e8eaf0", lo: "#a9aebb" };
+  var beak = gold ? GOLD : bandsOf("#f2c230");
+  var dark = gold ? { hi: "#ffe27a", mid: "#d99a1c", lo: "#8a5a05" } : { hi: "#4a4f5c", mid: "#2e3138", lo: "#1b1d22" };
+  var pan = gold ? GOLD : { hi: "#eef0f5", mid: "#c4c9d3", lo: "#8a8f9c" }, metal = gold ? ["#fff2a8", "#f2b631", "#b97a05"] : CH, i;
+  var accent = gold ? GOLD.lo : "#2f6fd0";
+  B.line(46, 80, 70, 74, C(metal[1]), 4); B.line(46, 79, 70, 73, C(metal[0]), 1);            // bras oscillant tubulaire
+  B.rect(52, 77, 8, 5, C(metal[1])); B.rect(52, 77, 8, 1, C(metal[0])); // carter de cardan
+  B.rect(30, 72, 18, 4, C(metal[1])); B.rect(30, 72, 18, 1, C(metal[0])); B.rect(30, 75, 18, 1, C(metal[2]));  // silencieux
+  B.rect(24, 52, 22, 18, C(pan.mid), gradeFn(52, 70, pan)); B.rect(24, 52, 22, 1, C(pan.hi)); for (i = 0; i < 3; i++) B.rect(27, 56 + i * 4, 16, 1, C(pan.lo)); // valise alu
+  B.line(24, 52, 56, 47, C("#2a2d38"), 2);                                                  // porte-bagages
+  B.rect(60, 58, 26, 20, C(dark.mid)); B.rect(60, 58, 26, 2, C(dark.hi)); B.rect(60, 76, 26, 2, C(dark.lo)); // carter moteur
+  B.disc(66, 69, 8, C(dark.mid), function (x, y) { return ((y + 1) % 3 === 0) ? C(metal[1]) : C(dark.mid); }); // cylindre boxer (ailettes)
+  B.disc(66, 69, 3, C(metal[0])); B.disc(66, 69, 1.4, C(dark.lo));
+  B.line(86, 70, 96, 66, C("#2a2d38"), 3);                                                  // Telelever
+  B.line(96, 50, 70, 58, C("#1e222c"), 2);
+  B.poly([[38, 52], [40, 46], [62, 46], [66, 50], [62, 55], [40, 55]], C(DK)); B.rect(40, 46, 22, 1, C("#303544"));
+  B.poly([[62, 49], [70, 40], [88, 40], [94, 46], [90, 57], [64, 57]], C(body.mid), gradeFn(40, 57, body)); // grand réservoir
+  B.line(66, 53, 90, 52, C(accent), 1);
+  B.poly([[92, 44], [98, 38], [107, 44], [109, 57], [103, 63], [94, 57]], C(dark.mid), gradeFn(38, 63, dark)); // face avant
+  B.rect(103, 47, 5, 7, C("#f6f2cc")); B.rect(103, 54, 5, 1, C("#9fd6ff")); B.rect(104, 42, 4, 3, C("#f6f2cc")); // phare asymétrique
+  B.poly([[94, 38], [98, 20], [107, 22], [104, 40]], C("#6f8696")); B.line(98, 20, 107, 22, C("#cfe6f2"), 1); // haut pare-brise
+  B.poly([[99, 60], [117, 67], [113, 72], [100, 67]], C(beak.mid), gradeFn(60, 72, beak));   // bec iconique
+  B.line(88, 40, 101, 38, C(DK), 2); B.rect(101, 37, 3, 3, C("#0a0b0e")); B.rect(103, 33, 2, 8, C(DK)); // guidon + protège-mains
+  B.line(98, 50, 105, 80, C(metal[0]), 3);
+  B.rect(66, 74, 5, 2, C(metal[1]));
+  return { hip: [54, 46], hand: [101, 39], foot: [69, 73], lean: 5, wr: 8, wb: [46, 80], wf: [105, 80], rim: gold ? "#ffd75a" : "#c9ced8", light: [109, 52], pillion: { hip: [41, 46], foot: [59, 72] } };
+}
+var VEHICLES = [
+  { n: "SYM GTS", draw: function (B, f) { return scooterSYM(B, f); } },
+  { n: "Yamaha XMAX", draw: function (B, f) { return scooterXMAX(B, f); } },
+  { n: "Yamaha TMAX", draw: function (B, f) { return scooterTMAX(B, f); } },
+  { n: "Yamaha Tracer 7", draw: function (B, f) { return motoTracer(B, f); } },
+  { n: "BMW GS 1200", draw: function (B, f) { return motoGS(B, f, false); } },
+  { n: "BMW GS 1200 Or", draw: function (B, f) { return motoGS(B, f, true); } }
+];
+
+/* ===== Personnage + composition ===== */
+var PX_DEFAULT = { skin: "#e0ac69", hair: "court", hairColor: "#2a211b", helmet: "#d93a3a", vest: "#15171d", pants: "#23262f", shoes: "#3d4150" };
+var PX_SKINS = ["#ffdbb4", "#f1c27d", "#e0ac69", "#c68642", "#8d5524"];
+var PX_HAIRS = [{ k: "court", n: "Court" }, { k: "boucles", n: "Bouclés" }, { k: "long", n: "Long" }, { k: "aucun", n: "Aucun" }];
+var PX_HAIR_COLORS = ["#2a211b", "#5b3a22", "#d9b46a", "#b5532a", "#9aa0aa"];
+var PX_HELMETS = ["#d93a3a", "#3b82c4", "#2f9e8f", "#f2a93b", "#8e5bd6", "#e8e8ee", "#15171d"];
+var PX_VESTS = ["#15171d", "#2b2f3a", "#3b82c4", "#d93a3a", "#2f7d4f", "#e8e8ee"];
+var PX_PANTS = ["#23262f", "#15171d", "#2f3a56", "#4a4f5c", "#5a4a3a"];
+var PX_SHOES = ["#3d4150", "#15171d", "#e8e8ee", "#d93a3a", "#8a8f9c"];
+var MAXT = 5;
+
+function ik(a, b, l1, l2, sgn) {
+  var dx = b[0] - a[0], dy = b[1] - a[1], d = Math.sqrt(dx * dx + dy * dy);
+  d = Math.min(d, l1 + l2 - 0.05);
+  var c = (l1 * l1 + d * d - l2 * l2) / (2 * l1 * d); c = Math.max(-1, Math.min(1, c));
+  var th = Math.atan2(dy, dx) + sgn * Math.acos(c);
+  return [a[0] + l1 * Math.cos(th), a[1] + l1 * Math.sin(th)];
+}
+function lerp(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]; }
+
+function drawRider(B, an, o, tr, f) {
+  var M = tr.sport, G = tr.argent, S = tr.etude;
+  var skin = o.skin, skinD = mix(o.skin, -0.2), skinH = mix(o.skin, 0.16), skinDD = mix(o.skin, -0.38);
+  var vest = o.vest, vestH = mix(o.vest, 0.35), vestL = mix(o.vest, -0.3);
+  var hip = an.hip, lean = an.lean;
+  var sh = [hip[0] + lean, hip[1] - 16];
+  var ax = sh[0] - hip[0], ay = sh[1] - hip[1], al = Math.sqrt(ax * ax + ay * ay); ax /= al; ay /= al;
+  var pfx = -ay, pfy = ax;
+  function along(t, w, side) { return [hip[0] + (sh[0] - hip[0]) * t + pfx * w * side, hip[1] + (sh[1] - hip[1]) * t + pfy * w * side]; }
+  var wh = 8 + M * 0.5, wm = 8 + M * 0.9, ws = 9 + M * 1.5;
+  var head = [sh[0] + lean * 0.3 + 1, sh[1] - 9];
+  var neck = [sh[0] + lean * 0.15 + 1, sh[1] - 3];
+  var pantsC = o.pants, shoeC = o.shoes;
+
+  /* cheveux longs derrière */
+  if (o.hair === "long") for (var i = 0; i < 9; i++) { var wy = Math.round(Math.sin((i + f * 1.3) * 0.9)); B.rect(head[0] - 6 - i, head[1] + 1 + wy + Math.floor(i / 4), 1, 3, C(o.hairColor)); }
+
+  /* jambe */
+  var foot = an.foot, dist = Math.sqrt(Math.pow(foot[0] - hip[0], 2) + Math.pow(foot[1] - hip[1], 2));
+  var ll = Math.max(14, dist / 2 + 2.4), knee = ik(hip, foot, ll, ll, -1);
+  var tw = 6 + (M >= 3 ? 1 : 0) + (M >= 5 ? 1 : 0), sw2 = 5 + (M >= 4 ? 1 : 0);
+  B.line(hip[0], hip[1] - 1, knee[0], knee[1], C(pantsC), tw);
+  B.line(knee[0], knee[1], foot[0], foot[1] - 2, C(pantsC), sw2);
+  B.line(hip[0] + 1, hip[1] - 3, knee[0], knee[1] - 2, C(mix(pantsC, 0.3)), 1);
+  B.rect(knee[0] - 1, knee[1] - 3, 3, 2, C(mix(pantsC, 0.4))); B.line(knee[0] - 2, knee[1] + 1, knee[0] + 1, knee[1] + 3, C(mix(pantsC, -0.3)), 1);
+  B.rect(foot[0] - 3, foot[1] - 2, 9, 4, C(shoeC)); B.px(foot[0] + 2, foot[1] - 2, C("#aeb4c0")); B.px(foot[0] + 4, foot[1] - 2, C("#aeb4c0")); B.rect(foot[0] - 3, foot[1] + 1, 9, 1, C(mix(shoeC, -0.4))); B.rect(foot[0] - 3, foot[1] - 2, 9, 1, C(mix(shoeC, 0.3)));
+
+  /* torse */
+  var tor = [along(0, wh / 2, -1), along(0.5, wm / 2, -1), along(1, ws / 2, -1), along(1, ws / 2, 1), along(0.62, wm / 2 + 0.5 + M * 0.5, 1), along(0, wh / 2, 1)];
+  var nude = M >= 5, torn = M === 4;
+  var tl = hip[1] - sh[1];
+  B.poly(tor, C(vest), function (x, y) {
+    var t = (hip[1] - y) / tl; // 0 bas -> 1 haut
+    var lat = (x - (hip[0] + (sh[0] - hip[0]) * t)) / Math.max(1, (ws / 2));
+    if (nude) { // torse nu et musclé
+      var c = skin;
+      if (t > 0.86) c = skinH;
+      var px = Math.round(x - hip[0] - (sh[0] - hip[0]) * t);
+      if (t > 0.5 && t < 0.78 && lat > -0.2 && lat < 0.55 && ((Math.round(t * 20) % 4) === 0)) c = skinD; // pecs
+      if (t > 0.16 && t < 0.5 && (Math.round(t * 20) % 3) === 0 && lat > -0.45 && lat < 0.55) c = skinD; // abdos
+      if (t > 0.1 && t < 0.78 && Math.abs(lat - 0.05) < 0.07) c = skinD; // ligne centrale
+      if (lat < -0.55) c = skinD;
+      return C(c);
+    }
+    if (torn) {
+      var band = (lat + 0.7) - t * 1.3, jag = ((x + y) % 3) * 0.06;
+      if (t > 0.12 && t < 0.9 && Math.abs(band) < 0.24 + jag) return C((x + y) % 4 === 0 ? skinD : skin);
+      if (t > 0.1 && t < 0.35 && lat > 0.3 && (x + y) % 5 === 0) return C(skin);
+    }
+    return lat < -0.35 ? C(vestL) : (t > 0.9 ? C(vestH) : C(vest));
+  });
+  if (!nude) { B.line(hip[0] + 1, hip[1] - 1, sh[0] + 1, sh[1] + 4, C(vestL), 1); }
+  B.rect(hip[0] - 4, hip[1] - 2, wh + 2, 2, C(mix(pantsC, 0.15)));
+  if (M < 4) {
+    B.line(neck[0] + 2, neck[1] + 4, hip[0] + 4, hip[1] - 3, C("#7c8494"), 1);
+    B.rect(neck[0] - 2, neck[1] + 1, 6, 2, C(mix(vest, 0.3)));
+    B.rect(hip[0] - 3, hip[1] - 4, wh + 1, 2, C(vestL));
+    if (M >= 2) { B.rect(neck[0] - 1, neck[1] + 3, 4, 6, C("#e8eaf0")); B.rect(neck[0], neck[1] + 4, 1, 4, C("#c8ccd6")); }
+  }
+  /* cou */
+  B.rect(neck[0] - 1, neck[1] - 2, 4, 5, C(skinD));
+  /* chaîne */
+  var chain = G >= 1, chainBig = G >= 3, ch = "#f0b429";
+  if (chain) {
+    var c0 = along(0.93, ws / 2 - 2, 1), c1 = along(0.93, -ws / 2 + 3, 1);
+    B.line(neck[0] - 2, neck[1] + 2, neck[0] + 3, neck[1] + 2, C(ch), chainBig ? 2 : 1);
+    B.line(neck[0] - 2, neck[1] + 2, neck[0] + 0, neck[1] + 6, C(ch), 1); B.line(neck[0] + 3, neck[1] + 2, neck[0] + 1, neck[1] + 6, C(ch), 1);
+    if (chainBig) B.rect(neck[0] - 1, neck[1] + 6, 3, 3, C("#ffe27a"));
+    if (G >= 5) B.px(neck[0], neck[1] + 7, C("#ffffff"));
+  }
+  /* tête */
+  var hx = Math.round(head[0]), hy = Math.round(head[1]);
+  B.disc(hx, hy, 6, C(skin));
+  B.rect(hx - 3, hy + 3, 2, 3, C(skinD));
+  B.px(hx + 3, hy + 2, C("#ffffff")); B.px(hx + 3, hy + 3, C("#ffffff")); B.px(hx + 4, hy + 2, C("#16162a")); B.px(hx + 4, hy + 3, C("#16162a"));
+  B.px(hx + 6, hy + 3, C(skinD)); B.px(hx + 6, hy + 4, C(skinD)); B.rect(hx + 3, hy + 5, 3, 1, C("#9a4a3a")); B.px(hx + 4, hy + 4, C(skinH)); B.px(hx + 2, hy + 6, C(skinD));
+  if (o.hair === "court") B.rect(hx - 6, hy + 1, 3, 5, C(o.hairColor));
+  if (o.hair === "boucles") { B.rect(hx - 6, hy + 1, 3, 3, C(o.hairColor)); B.rect(hx - 5, hy + 4, 3, 3, C(o.hairColor)); B.rect(hx - 2, hy + 6, 3, 2, C(o.hairColor)); }
+  if (o.hair === "long") B.rect(hx - 6, hy, 3, 7, C(o.hairColor));
+  /* casque : rouge, devient or avec la richesse */
+  var hb = o.helmet, hbands = { hi: mix(hb, 0.3), mid: hb, lo: mix(hb, -0.3) };
+  B.disc(hx, hy - 1, 7, 0, function (x, y) {
+    if (y > hy + 1) return 0;
+    var t = (y - (hy - 8)) / 9, gx = x - hx, gold = false;
+    if (G === 1) gold = gx >= -1 && gx <= 0;
+    else if (G === 2) gold = t < 0.38;
+    else if (G === 3) gold = t < 0.68 || (gx >= -1 && gx <= 0);
+    else if (G === 4) gold = t < 0.88;
+    else if (G >= 5) gold = true;
+    if (gold) return C(t < 0.25 ? GOLD.hi : (t > 0.8 ? GOLD.lo : GOLD.mid));
+    return C(t < 0.22 ? hbands.hi : (t > 0.8 ? hbands.lo : hbands.mid));
+  });
+  B.rect(hx - 7, hy, 3, 4, C(G >= 5 ? GOLD.lo : hbands.lo));
+  B.px(hx - 3, hy - 6, C("#ffffff")); B.px(hx - 2, hy - 6, C(mix(G >= 5 ? GOLD.hi : hb, 0.65))); B.px(hx - 4, hy - 5, C(mix(G >= 5 ? GOLD.hi : hb, 0.5))); B.px(hx + 1, hy - 7, C(mix(G >= 5 ? GOLD.hi : hb, 0.4)));
+  B.rect(hx + 5, hy - 3, 6, 3, C("#2a2d3a")); B.rect(hx + 5, hy - 3, 6, 1, C("#4a4f60"));
+  B.rect(hx - 6, hy + 1, 13, 1, C(mix(G >= 5 ? GOLD.lo : hb, -0.4)));
+  B.px(hx - 1, hy + 2, C("#2a2d3a")); B.px(hx - 1, hy + 3, C("#2a2d3a"));
+  /* bras */
+  var shoulder = [sh[0] + pfx * 1.5, sh[1] + 3], hd = [an.hand[0] - 1, an.hand[1] + 1];
+  var bd = Math.sqrt(Math.pow(hd[0] - shoulder[0], 2) + Math.pow(hd[1] - shoulder[1], 2));
+  var al1 = Math.max(12, bd / 2 + 0.8), elbow = ik(shoulder, hd, al1, al1, 1);
+  var uw = 4 + M * 0.6, fw = 3 + M * 0.5;
+  uw = Math.round(uw); fw = Math.round(fw);
+  var tornSleeve = M === 4, wrp = lerp(elbow, hd, 0.8);
+  B.line(shoulder[0], shoulder[1], elbow[0], elbow[1], C(skin), uw);
+  B.line(elbow[0], elbow[1], hd[0], hd[1], C(skin), fw);
+  if (M >= 2) B.line(elbow[0] + 1, elbow[1] - 1, hd[0] - 3, hd[1] - 1, C(skinH), 1);
+  if (M <= 1) {                                   // manches longues jusqu'au poignet
+    B.line(shoulder[0], shoulder[1], elbow[0], elbow[1], C(vest), uw + 1);
+    B.line(elbow[0], elbow[1], wrp[0], wrp[1], C(vest), fw + 1);
+    B.line(shoulder[0], shoulder[1] - 1, elbow[0], elbow[1] - 1, C(vestH), 1);
+  } else if (M === 2) {                           // manches retroussées au coude
+    B.line(shoulder[0], shoulder[1], elbow[0], elbow[1], C(vest), uw + 1);
+    B.line(shoulder[0], shoulder[1] - 1, elbow[0], elbow[1] - 1, C(vestH), 1);
+    B.rect(elbow[0] - 1, elbow[1] - Math.round(uw / 2) - 1, 3, uw + 2, C(mix(vest, 0.34)));
+  } else if (M === 3) {                           // manches coupées court, gros biceps
+    var cut3 = lerp(shoulder, elbow, 0.36);
+    B.line(shoulder[0], shoulder[1], cut3[0], cut3[1], C(vest), uw + 1);
+    B.rect(cut3[0], cut3[1] - Math.round(uw / 2) - 1, 2, uw + 2, C(mix(vest, 0.34)));
+  } else if (tornSleeve) {
+    var cut = lerp(shoulder, elbow, 0.5);
+    B.line(shoulder[0], shoulder[1], cut[0], cut[1], C(vest), uw + 1);
+    for (var r2 = 0; r2 < 4; r2++) B.px(cut[0] + 1 + r2 % 2, cut[1] + uw / 2 + (r2 % 2), C(vest));
+    var sw3 = Math.round(Math.sin(f * 1.1) * 1);
+    B.rect(cut[0] + 2, cut[1] + uw / 2 + 1 + sw3, 3, 1, C(vestL));
+  }
+  if (M >= 3) {                                   // biceps qui gonflent
+    var bc = lerp(shoulder, elbow, 0.6), fl = (Math.floor(f / 2) % 2) ? 1 : 0;
+    B.disc(bc[0], bc[1] - 1 - fl, 1.8 + (M - 2) * 0.7, C(skin), function (x, y) { return y < bc[1] - 1 - fl ? C(skinH) : C(skin); });
+  }
+  if (M >= 1 && M <= 3) B.rect(wrp[0] - 1, wrp[1] - Math.round(fw / 2) - 1, 3, fw + 2, C("#f4f6fa"));  // bracelets blancs
+  if (G >= 2) { var wp = lerp(elbow, hd, 0.9); B.rect(wp[0] - 1, wp[1] - 2, G >= 4 ? 4 : 3, G >= 4 ? 4 : 3, C(G >= 4 ? "#ffe27a" : "#f7c948")); B.px(wp[0], wp[1] - 1, C("#8a5a05")); }
+  B.rect(hd[0] - 1, hd[1] - 2, 5, 5, C(skin)); B.rect(hd[0] + 2, hd[1] - 2, 1, 5, C(skinD));
+
+  /* chapeau de diplômé, de plus en plus gros et doré */
+  if (S >= 1) {
+    var w = 9 + 3 * S, cx = hx + 1, yb = hy - 10;
+    var board = S >= 5 ? GOLD : (S >= 4 ? { hi: "#ffe27a", mid: "#f2b631", lo: "#b97a05" } : { hi: "#343b50", mid: "#1f2430", lo: "#141824" });
+    var edge = S >= 3 && S < 4 ? "#f0b429" : null;
+    var baseC = S >= 5 ? GOLD.mid : "#1f2430";
+    B.rect(cx - 5, yb + 2, 11, 3, C(baseC)); B.rect(cx - 5, yb + 2, 11, 1, C(S >= 5 ? GOLD.hi : "#343b50"));
+    B.rect(cx - w / 2 + 3, yb - 1, w - 6, 1, C(edge || board.hi));
+    B.rect(cx - w / 2 + 1, yb, w - 2, 1, C(board.mid));
+    B.rect(cx - w / 2 + 3, yb + 1, w - 6, 1, C(edge ? "#b97a05" : board.lo));
+    B.px(cx, yb, C(S >= 3 ? "#ffe27a" : "#343b50"));
+    if (S >= 2) {
+      var tx = cx + Math.floor(w / 2) - 2, swing = (Math.floor(f / 2) % 2) ? 1 : 0;
+      B.line(cx, yb, tx, yb, C("#f0b429"), 1); B.rect(tx + swing, yb + 1, 1, 5, C("#f0b429")); B.px(tx + swing, yb + 6, C("#ffe27a"));
+    }
+  }
+  return { head: [hx, hy], shoulder: shoulder, elbow: elbow, hand: hd, S: S, capY: hy - 10 };
+}
+
+
+/* ===== Passagère (richesse 4 et 5) ===== */
+var HEART = [".x.x.", "xxxxx", "xxxxx", ".xxx.", "..x.."];
+function drawPassenger(B, an, G, f) {
+  var P = an.pillion; if (!P || G < 4) return null;
+  var five = G >= 5;
+  var skin = "#f6d2a8", skinD = mix(skin, -0.2), skinH = mix(skin, 0.15);
+  var hair = five ? "#f1cf72" : "#4a2f22", hairH = five ? "#fff2c0" : "#7d563a";
+  var jac = five ? "#f4e4ae" : "#8e1f3d", jacH = mix(jac, 0.3), jacL = mix(jac, -0.3);
+  var pants = five ? "#171922" : "#4a6fa5", boot = five ? "#f2b631" : "#ecf0f5";
+  var hel = five ? { hi: "#ffffff", mid: "#f7ecc0", lo: "#cdbb7a" } : { hi: "#ffffff", mid: "#ecf0f5", lo: "#a9b4c6" };
+  var trim = five ? "#f2b631" : "#ff6fa5", lip = five ? "#e0245e" : "#d0505e";
+  var hip = P.hip, foot = P.foot, i;
+  var sh = [hip[0] + 3, hip[1] - 13], hd = [sh[0] + 2, sh[1] - 8], hx = Math.round(hd[0]), hy = Math.round(hd[1]);
+  /* cheveux longs au vent */
+  var len = five ? 15 : 11;
+  for (i = 0; i < len; i++) {
+    var wy = Math.round(Math.sin((i + f * 1.2) * 0.6) * (0.6 + i * 0.07));
+    B.rect(hx - 6 - i, hy + 1 + wy + Math.floor(i / 5), 1, five ? 5 : 3, C(i % 3 === 0 ? hairH : hair));
+  }
+  /* jambe */
+  var dist = Math.sqrt(Math.pow(foot[0] - hip[0], 2) + Math.pow(foot[1] - hip[1], 2)), ll = Math.max(12, dist / 2 + 2.2), knee = ik(hip, foot, ll, ll, -1);
+  B.line(hip[0], hip[1], knee[0], knee[1], C(pants), 5); B.line(knee[0], knee[1], foot[0], foot[1] - 2, C(pants), 4);
+  B.line(hip[0] + 1, hip[1] - 2, knee[0], knee[1] - 2, C(mix(pants, 0.3)), 1);
+  B.rect(foot[0] - 2, foot[1] - 3, 7, 5, C(boot)); B.rect(foot[0] - 2, foot[1] + 1, 7, 1, C(mix(boot, -0.35))); B.rect(foot[0] - 2, foot[1] - 3, 7, 1, C(mix(boot, 0.35)));
+  /* buste */
+  B.poly([[hip[0] - 4, hip[1] + 1], [sh[0] - 5, sh[1] + 2], [sh[0] - 2, sh[1] - 1], [sh[0] + 3, sh[1] + 1], [hip[0] + 3, hip[1] + 1]], C(jac), function (x, y) { return x <= sh[0] - 2 - (hip[1] - y) * 0.1 ? C(jacL) : (y < sh[1] + 3 ? C(jacH) : C(jac)); });
+  B.line(sh[0] + 1, sh[1] + 2, hip[0] + 2, hip[1] - 1, C(five ? "#f2b631" : "#cfd3dc"), 1);
+  B.rect(hip[0] - 3, hip[1] - 1, 7, 2, C(five ? "#f2b631" : "#2a2d38"));
+  if (five) { B.px(sh[0] - 1, sh[1] + 5, C("#f2b631")); B.px(sh[0] - 1, sh[1] + 8, C("#f2b631")); }
+  /* cou et collier */
+  B.rect(hx - 1, hy + 4, 3, 4, C(skinD));
+  if (five) { B.rect(hx - 1, hy + 7, 4, 1, C("#f2b631")); B.px(hx + 1, hy + 8, C("#ffe27a")); }
+  /* visage */
+  B.disc(hx, hy, 5, C(skin));
+  B.px(hx + 2, hy + 1, C("#ffffff")); B.px(hx + 2, hy + 2, C("#ffffff")); B.px(hx + 3, hy + 1, C("#2a2d3a")); B.px(hx + 3, hy + 2, C("#2a2d3a"));
+  B.px(hx + 2, hy, C("#16162a")); B.px(hx + 3, hy, C("#16162a")); if (five) B.px(hx + 4, hy + 1, C("#16162a"));
+  B.px(hx + 5, hy + 2, C(skinD)); B.rect(hx + 2, hy + 4, 3, 1, C(lip)); if (five) B.px(hx + 3, hy + 5, C(mix(lip, 0.3)));
+  B.px(hx + 1, hy + 3, C(mix("#ff8aa0", five ? 0.2 : 0))); B.px(hx - 3, hy + 2, C(skinD));
+  if (five) { B.px(hx - 2, hy + 3, C("#f2b631")); B.px(hx - 2, hy + 4, C("#ffe27a")); }
+  /* casque */
+  B.disc(hx, hy - 1, 6, 0, function (x, y) {
+    if (y > hy) return 0;
+    var t = (y - (hy - 7)) / 8;
+    if (t > 0.35 && t < 0.55) return C(trim);
+    return C(t < 0.22 ? hel.hi : (t > 0.8 ? hel.lo : hel.mid));
+  });
+  B.rect(hx - 6, hy - 1, 3, 5, C(hair)); B.rect(hx - 5, hy + 3, 3, 3, C(hair));
+  B.rect(hx + 3, hy - 3, 4, 2, C("#2a2d3a")); B.rect(hx - 5, hy, 11, 1, C(hel.lo));
+  B.px(hx - 2, hy - 6, C("#ffffff")); B.px(hx - 1, hy - 6, C(mix(hel.mid, 0.6)));
+  return { sh: sh, hd: hd, five: five, jac: jac, jacH: jacH, skin: skin, trim: trim };
+}
+function drawPassengerArms(B, pr, an) {
+  if (!pr) return;
+  var s = [pr.sh[0] + 1, pr.sh[1] + 3], t = [an.hip[0] + 3, an.hip[1] - 6];
+  var el = ik(s, t, 8, 8, 1);
+  B.line(s[0], s[1], el[0], el[1], C(pr.jac), 3); B.line(el[0], el[1], t[0], t[1], C(pr.jac), 3);
+  B.line(s[0], s[1] - 1, el[0], el[1] - 1, C(pr.jacH), 1);
+  B.rect(t[0] - 1, t[1] - 1, 3, 3, C(pr.skin));
+  if (pr.five) B.px(el[0] + 3, el[1] + 1, C("#f2b631"));
+}
+function drawLoveFx(B, pr, f) {
+  if (!pr) return;
+  var n = pr.five ? 4 : 2, i, k;
+  for (i = 0; i < n; i++) {
+    var age = (f + i * 5) % 16; if (age > 13) continue;
+    var hx = pr.hd[0] - 14 - i * 6 + Math.round(Math.sin(age * 0.5 + i) * 2), hy = pr.hd[1] - 6 - age;
+    for (var j = 0; j < HEART.length; j++) for (k = 0; k < HEART[j].length; k++) if (HEART[j][k] === "x") B.px(hx + k, hy + j, C(pr.five ? "#ff5a9a" : "#ff8fb5"));
+    B.px(hx + 1, hy + 1, C("#ffffff"));
+  }
+  if (pr.five) for (i = 0; i < 5; i++) {
+    var a2 = (f * 2 + i * 7) % 14; if (a2 > 10) continue;
+    var sx = pr.hd[0] - 8 + i * 4, sy = pr.hd[1] + 14 - a2;
+    B.px(sx, sy, C("#fff6c0")); B.px(sx - 1, sy, C("#ffd75a")); B.px(sx + 1, sy, C("#ffd75a")); B.px(sx, sy - 1, C("#ffd75a")); B.px(sx, sy + 1, C("#ffd75a"));
+  }
+}
+
+/* ===== Intelligence : symboles, ampoule, toge, diplôme, hologramme boursier ===== */
+var GLYPHS = {
+  S: ["xxxxx", ".x...", "..x..", ".x...", "xxxxx"],
+  P: ["x...x", "...x.", "..x..", ".x...", "x...x"],
+  E: ["..xxx", ".x...", "xxxx.", ".x...", "..xxx"],
+  PI: ["xxxxx", ".x.x.", ".x.x.", ".x.x.", ".x..x"]
+};
+var REAR = [[27, 57], [34, 60], [36, 60], [34, 58], [27, 52], [27, 52]];
+function drawGlyph(B, g, x, y, col) {
+  for (var j = 0; j < g.length; j++) for (var i = 0; i < g[j].length; i++) if (g[j][i] === "x") B.px(x + i, y + j, C(col));
+}
+function drawDiploma(B, p, f, gold) {
+  var x = p[0], y = p[1], sw = Math.round(Math.sin(f * 0.8)), cream = gold ? "#f4dc94" : "#f1ead2";
+  B.rect(x, y - 12, 4, 12, C(cream)); B.rect(x, y - 12, 1, 12, C(mix(cream, -0.1))); B.rect(x + 3, y - 12, 1, 12, C(mix(cream, -0.2)));
+  B.rect(x - 1, y - 12, 6, 2, C(mix(cream, -0.08))); B.rect(x - 1, y - 2, 6, 2, C(mix(cream, -0.08)));
+  B.rect(x, y - 8, 4, 2, C("#d6282e"));
+  B.rect(x + 1 + sw, y - 6, 1, 6, C("#d6282e")); B.px(x + 1 + sw, y + 1, C("#a81c22"));
+  if (gold) { B.px(x + 1, y - 10, C("#ffe27a")); B.px(x + 2, y - 4, C("#ffe27a")); }
+}
+function drawGown(B, an, S, f) {
+  var hip = an.hip, sh = [hip[0] + an.lean, hip[1] - 16], gold = S >= 5, i, y;
+  for (i = 0; i < 26; i++) {
+    var x = sh[0] - 4 - i, w1 = Math.sin(i * 0.45 - f * 0.9), w2 = Math.sin(i * 0.4 - f * 0.9 + 1.2);
+    var top = sh[1] + 1 + Math.round(w1 * (0.6 + i * 0.1)) + Math.floor(i * 0.2);
+    var bot = sh[1] + 14 + Math.round(w2 * (0.8 + i * 0.14)) + Math.floor(i * 0.3);
+    for (y = top; y <= bot; y++) {
+      var fold = ((i + (y - top)) % 6 < 2);
+      var c = y === top ? "#6572c4" : (y === bot ? (gold ? "#f2b631" : "#4a579c") : (fold ? "#3a4585" : "#2a3260"));
+      B.px(x, y, C(c));
+    }
+    if (gold && i % 2 === 0) B.px(x, bot - 1, C("#ffe27a"));
+  }
+}
+function drawBrainFx(B, rp, an, S, f) {
+  if (S < 2) return;
+  var i, hx = rp.head[0], hy = rp.head[1], gold = S >= 5;
+  var keys = ["S", "P", "E", "PI"], n = S >= 4 ? 4 : S;
+  for (i = 0; i < n; i++) {
+    var age = (f + i * 11) % 44, gx = hx - 12 - age, gy = hy - 10 + i * 7 + Math.round(Math.sin(age * 0.25 + i) * 2);
+    drawGlyph(B, GLYPHS[keys[i]], gx, gy, gold ? (age < 30 ? "#ffd75a" : "#a8832a") : (age < 30 ? "#9fe8ff" : "#4e8da0"));
+  }
+  if (S >= 3) {
+    var bx = hx + 1 + Math.floor((9 + 3 * S) / 2) + 6, by = hy - 14, on = (f % 6) < 4, k;
+    if (on) for (var gy2 = by - 7; gy2 <= by + 7; gy2++) for (var gx2 = bx - 7; gx2 <= bx + 7; gx2++) { var dd = Math.sqrt((gx2 - bx) * (gx2 - bx) + (gy2 - by) * (gy2 - by)); if (dd > 3.5 && dd < 7 && ((gx2 + gy2) % 2 === 0)) B.px(gx2, gy2, C(dd < 5 ? "#8a7a30" : "#4f4a22")); }
+    B.disc(bx, by, 4, C("#2a2410")); B.disc(bx, by, 3, C(on ? "#ffe066" : "#d9bb55")); B.px(bx - 1, by - 1, C("#fffbd0"));
+    B.rect(bx - 1, by + 4, 3, 1, C("#9aa0aa")); B.px(bx, by + 5, C("#6b7080"));
+    if (on) [[0, -7], [-6, -3], [6, -3], [-7, 1], [7, 1]].forEach(function (d2) { B.px(bx + d2[0], by + d2[1], C("#ffd75a")); });
+  }
+  if (S >= 5) {
+    var cx = hx + 1, cy = hy - 11, hw = Math.floor((9 + 3 * S) / 2) + 3, kk;
+    for (kk = 0; kk < 28; kk++) if ((kk + f) % 2 === 0) B.px(cx + Math.cos(kk / 28 * 6.2832) * hw, cy + Math.sin(kk / 28 * 6.2832) * 6 - 1, C("#ffd75a"));
+  }
+}
+
+function drawSportFx(B, rp, M, f) {
+  if (M < 2) return;
+  var hx = rp.head[0], hy = rp.head[1], k;
+  for (k = 0; k < 2; k++) {
+    var age = (f + k * 4) % 9; if (age > 6) continue;
+    var dx = k ? hx - 8 : hx + 8, dy = hy - 6 + age;
+    B.px(dx, dy, C("#bfe9ff")); B.px(dx, dy + 1, C("#6fc3f0"));
+  }
+  if (M >= 3) {
+    var bc = lerp(rp.shoulder, rp.elbow, 0.6), on = (f % 4) < 2;
+    [[-5, -6], [5, -7], [0, -9]].forEach(function (o, i) {
+      var x = bc[0] + o[0], y = bc[1] + o[1], c = C(on ? "#ffe27a" : "#ff9d2e");
+      B.px(x, y, c); if (on || i === 1) { B.px(x - 1, y, c); B.px(x + 1, y, c); B.px(x, y - 1, c); B.px(x, y + 1, c); }
+    });
+  }
+}
+
+function renderFrame(out, frame, o, tr, anim) {
+  var f = anim ? frame : 0, G = Math.max(0, Math.min(MAXT, tr.argent)), M = tr.sport;
+  tr = { argent: G, etude: tr.etude, sport: M };
+  drawNight(out, f);
+  var OL = C("#34566e"), veh = VEHICLES[G];
+  var W = new Layer(), B = new Layer(), bob = (Math.floor(f / 2) % 2) ? -1 : 0;
+  var an = veh.draw(B, f);
+  // phare : faisceau
+  var beam = new Layer(), lx = an.light[0], ly = an.light[1];
+  for (var bx = lx; bx < Math.min(PW, lx + 24); bx++) for (var by = ly - 6; by < ly + 12; by++) {
+    var half = 1.2 + (bx - lx) * 0.2, cy2 = ly + 1 + (bx - lx) * 0.16;
+    if (Math.abs(by - cy2) < half && ((bx + by + f) % 2 === 0)) beam.px(bx, by, C((bx - lx) < 10 ? "#fff4b0" : "#a89c64"));
+  }
+  blit(out, beam, 0);
+  wheel(W, an.wb[0], an.wb[1], an.wr, f, an.rim); wheel(W, an.wf[0], an.wf[1], an.wr, f, an.rim);
+  var SL = new Layer(); // lignes de vitesse
+  for (var q = 0; q < 6; q++) { var ly2 = 34 + Math.floor(hash(q, 3) * 44), ln = 7 + (q % 3) * 5, sx2 = PW - ((f * (5 + q % 3) + q * 41) % (PW + 30)); SL.rect(sx2, ly2, ln, 1, C(q % 2 ? "#33566a" : "#4a7388")); }
+  blit(out, SL, 0);
+  var bl = new Layer(); // halo du phare
+  for (var gy = ly - 7; gy <= ly + 7; gy++) for (var gx = lx - 7; gx <= lx + 7; gx++) { var dd = Math.sqrt((gx - lx) * (gx - lx) + (gy - ly) * (gy - ly)); if (dd < 7 && ((gx + gy) % 2 === 0) && dd > 2) bl.px(gx, gy, C(dd < 4.5 ? "#d9c98a" : "#7d7348")); }
+  blit(out, bl, 0);
+  outlineSel(W, true); blit(out, W, 0);
+  if (tr.etude >= 4) drawDiploma(B, REAR[G] || [30, 52], f, tr.etude >= 5);
+  var pass = drawPassenger(B, an, G, f);
+  var rp = drawRider(B, an, o, tr, f);
+  drawPassengerArms(B, pass, an);
+  outlineSel(B, true);
+  drawBrainFx(B, rp, an, tr.etude, f);
+  drawSportFx(B, rp, tr.sport, f);
+  // éclats d’or (richesse élevée) et chapeau doré
+  if (G >= 4 || tr.etude >= 5) {
+    [[26, 50, 0], [112, 36, 3], [124, 60, 6], [18, 70, 9], [70, 30, 5]].forEach(function (c, k) {
+      var age = (f + c[2]) % 10; if (age > 7) return;
+      var sx = c[0], sy = c[1] - age;
+      B.px(sx, sy, C("#fff6c0")); B.px(sx - 1, sy, C("#ffd75a")); B.px(sx + 1, sy, C("#ffd75a")); B.px(sx, sy - 1, C("#ffd75a")); B.px(sx, sy + 1, C("#ffd75a"));
+    });
+  }
+  // lambeaux de vêtements arrachés
+  if (M >= 4) {
+    var n = M >= 5 ? 9 : 4;
+    for (var i = 0; i < n; i++) {
+      var age2 = (f * 2 + i * 5) % 36; if (age2 > 30) continue;
+      var px2 = rp.shoulder[0] - 4 - age2 * 1.3, py2 = rp.shoulder[1] + 3 + i * 2 + Math.sin(age2 * 0.4 + i) * 3 + age2 * 0.12;
+      B.rect(px2, py2, 2 + (i % 2), 1, C(i % 3 ? "#15171d" : "#262a35"));
+    }
+  }
+  drawLoveFx(B, pass, f);
+  blit(out, B, bob);
+  // pot d’échappement : fumée
+  for (var k = 0; k < 3; k++) {
+    var age3 = (f + k * 3) % 9; if (age3 > 7) continue;
+    var P = new Layer(); P.rect(an.wb[0] - 18 - age3 * 1.4, 80 - age3 * 0.5, age3 < 4 ? 2 : 1, age3 < 4 ? 2 : 1, C("#7f8794")); blit(out, P, 0);
+  }
+  // halo or sous la moto en or
+  if (G >= 5) { var UG = new Layer(); for (var ux = 26; ux < 118; ux++) if (((ux + f) % 3) !== 0) UG.px(ux, 89, C("#f7c948")); blit(out, UG, 0); }
+}
+
+
+function fmt(h) {
+  var hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+  return hh + "h" + (mm ? (mm < 10 ? "0" + mm : mm) : "");
+}
+function r2(x) { return Math.round(x * 100) / 100; }
+function fr(x) { return String(r2(x)).replace(".", ","); }
+function weekStart(i) { var d = new Date(WEEK0); d.setDate(d.getDate() + 7 * i); return d; }
+function newId() { return "n" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+
+/* ---------- État ---------- */
+var LS_KEY = "abdoState3";
+function norm(p) {
+  p = p || {};
+  var s = { weeks: p.weeks || {}, lever: p.lever || {}, coucher: p.coucher || {}, reward: p.reward || "", avatar: p.avatar || {},
+            done: p.done || {}, extra: p.extra || {}, updated: p.updated || 0 };
+  Object.keys(s.extra).forEach(function (k) {
+    var v = parseFloat(s.extra[k]) || 0;
+    if (v > 0) {
+      var w = s.weeks[k] = s.weeks[k] || {};
+      w.entries = w.entries || [];
+      w.entries.push({ id: "m" + k, k: "argent", gains: v, charges: 0 });
+    }
+  });
+  s.extra = {};
+  return s;
+}
+var state = norm(null);
+try {
+  var raw = localStorage.getItem(LS_KEY) || localStorage.getItem("abdoState2");
+  if (raw) state = norm(JSON.parse(raw));
+} catch (e) {}
+function saveLocal() { try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {} }
+/* Semaines hors des 3 premières : on retire les blocs par défaut déjà enregistrés (seulement s'ils sont intacts). */
+try {
+  if (!localStorage.getItem("semNouvellesVides")) {
+    Object.keys(state.weeks).forEach(function (k) {
+      var i = +k, w = state.weeks[k];
+      if ((i < 0 || i > 2) && w && w.blocks) {
+        var intact = true;
+        w.blocks.forEach(function (b) { if (String(b.id).indexOf("d" + i + "-") !== 0 || b.done) intact = false; });
+        if (intact) delete w.blocks;
+      }
+    });
+    saveLocal();
+    localStorage.setItem("semNouvellesVides", "1");
+  }
+} catch (e) {}
+/* Nouveau planning de la semaine du 26/10 : efface une seule fois les blocs par défaut déjà enregistrés. */
+try {
+  if (!localStorage.getItem("planSem2")) {
+    var w1 = state.weeks[1];
+    if (w1 && w1.blocks) {
+      var brut = true;
+      for (var z = 0; z < w1.blocks.length; z++) if (String(w1.blocks[z].id).indexOf("d1-") !== 0) brut = false;
+      if (brut) { delete w1.blocks; saveLocal(); }
+    }
+    localStorage.setItem("planSem2", "1");
+  }
+} catch (e) {}
+function hasData() {
+  return Object.keys(state.weeks).length || Object.keys(state.lever).length || Object.keys(state.coucher).length ||
+    Object.keys(state.done).length || Object.keys(state.avatar).length || state.reward;
+}
+
+function realWeekIdx() {
+  var n = new Date();
+  var days = Math.floor((Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()) - Date.UTC(2026, 9, 19)) / 86400000);
+  return Math.floor(days / 7);
+}
+var cur = realWeekIdx();
+
+function defaultBlocks(i) {
+  if (i < 0 || i > 2) return [];   // nouvelles semaines : vides, à remplir à la main
+  var pat = Math.min(i, 2);
+  return build(pat).map(function (e) {
+    var type = e.t === "etude" ? "etude" : e.t === "cours" ? "cours" : "argent";
+    var oldId = (pat + "-" + e.d + "-" + e.s + "-" + e.t).replace(/\./g, "_");
+    return { id: "d" + i + "-" + oldId, day: e.d, start: e.s, end: e.e, type: type, title: e.title,
+             done: i >= 0 && i <= 2 && !!state.done[oldId] };
+  });
+}
+function dateParts(iso) {
+  var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
+  return m ? { y: +m[1], mo: +m[2] - 1, d: +m[3] } : null;
+}
+function weekIndexForDate(iso) {
+  var p = dateParts(iso); if (!p) return null;
+  var days = Math.floor((Date.UTC(p.y, p.mo, p.d) - Date.UTC(2026, 9, 19)) / 86400000);
+  return Math.floor(days / 7);
+}
+function dayIndexForDate(iso) {
+  var p = dateParts(iso); if (!p) return null;
+  return (new Date(p.y, p.mo, p.d).getDay() + 6) % 7;
+}
+function timeAsHours(value) {
+  var m = /^(\d{2}):(\d{2})$/.exec(value || "");
+  return m ? (+m[1] + (+m[2] / 60)) : null;
+}
+function isoWeekNumber(iso) {
+  var p = dateParts(iso); if (!p) return null;
+  var d = new Date(Date.UTC(p.y, p.mo, p.d));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+}
+function uclBlocksForWeek(i) {
+  return uclCourses.filter(function (c) {
+    var n = isoWeekNumber(c.date);
+    return weekIndexForDate(c.date) === i && n !== null && n >= 3;
+  }).map(function (c) {
+    return { id: "ucl-" + c.uid, day: dayIndexForDate(c.date), start: timeAsHours(c.start), end: timeAsHours(c.end),
+      type: "cours", title: c.title || "Cours UCLouvain", location: c.location || "", teacher: c.teacher || "",
+      courseCode: c.courseCode || "", date: c.date, imported: true, done: false };
+  }).filter(function (b) { return b.day !== null && b.start !== null && b.end !== null && b.end > b.start; });
+}
+function getBlocks(i) {
+  var w = state.weeks[i];
+  var base = (w && w.blocks) ? w.blocks.slice() : defaultBlocks(i);
+  var ws = weekStart(i);
+  var iso = ws.getFullYear() + "-" + String(ws.getMonth() + 1).padStart(2, "0") + "-" + String(ws.getDate()).padStart(2, "0");
+  var weekNo = isoWeekNumber(iso);
+  // Conserver intégralement les semaines ISO 1 et 2. Dès la semaine ISO 3,
+  // le calendrier UCLouvain devient la source des cours et remplace les cours locaux.
+  if (weekNo !== null && weekNo >= 3) base = base.filter(function (b) { return b.type !== "cours"; });
+  var imported = uclBlocksForWeek(i);
+  imported.forEach(function (b) {
+    if (!base.some(function (existing) { return existing.id === b.id; })) base.push(b);
+  });
+  return base;
+}
+function loadUclCalendar() {
+  var url = new URL("data/cours.json", document.baseURI);
+  url.searchParams.set("v", String(Date.now()));
+  fetch(url.toString(), { cache: "no-store" }).then(function (response) {
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    return response.json();
+  }).then(function (data) {
+    if (!data || !Array.isArray(data.events)) throw new Error("Format JSON invalide");
+    uclCourses = data.events;
+    uclCalendarLoaded = true;
+    uclCalendarError = false;
+    renderAll();
+  }).catch(function (error) {
+    uclCalendarError = true;
+    console.warn("Horaire UCLouvain indisponible ; le tracker continue avec son agenda local.", error);
+  });
+}
+function ensureWeek(i) {
+  var w = state.weeks[i];
+  if (!w) w = state.weeks[i] = {};
+  if (!w.blocks) w.blocks = defaultBlocks(i);
+  if (!w.entries) w.entries = [];
+  if (!w.goals) w.goals = {};
+  return w;
+}
+function goalsOf(i) {
+  var g = (state.weeks[i] && state.weeks[i].goals) || {};
+  return {
+    etude: g.etude != null ? g.etude : (i === 1 ? 35 : 28),
+    sport: g.sport != null ? g.sport : 3,
+    argent: g.argent != null ? g.argent : 450
+  };
+}
+
+/* ---------- Sauvegarde / synchronisation ---------- */
+var ref = null, dirty = false, writing = false, timer = null;
+var SYNC_TXT = { connecting: "Connexion…", ok: "Synchronisé", saving: "Synchronisation…", local: "Enregistré sur cet appareil", error: "Erreur de synchronisation" };
+function setSync(k) { $("sync").textContent = SYNC_TXT[k]; }
+function persist() {
+  state.updated = Date.now();
+  saveLocal();
+  if (!ref) return;
+  dirty = true; setSync("saving");
+  clearTimeout(timer);
+  timer = setTimeout(flush, 500);
+}
+function clean(o) { return JSON.parse(JSON.stringify(o, function (k, v) { return k.charAt(0) === "_" ? undefined : v; })); }
+async function flush() {
+  if (writing) { timer = setTimeout(flush, 300); return; }
+  writing = true; dirty = false;
+  try {
+    await ref.set({ weeks: clean(state.weeks), lever: state.lever, coucher: state.coucher, reward: state.reward, avatar: state.avatar,
+                    done: state.done, extra: state.extra, updated: state.updated });
+    if (!dirty) setSync("ok");
+  } catch (e) { setSync("error"); }
+  writing = false;
+  if (dirty) timer = setTimeout(flush, 300);
+}
+
+/* ---------- Calculs ---------- */
+function totals(i) {
+  var w = state.weeks[i] || {};
+  var t = { study: 0, sport: 0, gains: 0, charges: 0, lever: 0, coucher: 0 };
+  getBlocks(i).forEach(function (b) {
+    if (!b.done) return;
+    var h = b.end - b.start;
+    if (b.type === "etude") t.study += h; else if (b.type === "sport") t.sport += h;
+  });
+  (w.entries || []).forEach(function (e) {
+    if (e.k === "argent") { t.gains += e.gains; t.charges += e.charges; }
+    else if (e.k === "etude") t.study += e.h;
+    else if (e.k === "sport") t.sport += e.h;
+  });
+  t.net = t.gains - t.charges;
+  for (var d = 0; d < 7; d++) {
+    if (state.lever[i + "-" + d]) t.lever++;
+    if (state.coucher[i + "-" + d]) t.coucher++;
+  }
+  var g = goalsOf(i);
+  t.xp = Math.round(t.study * 24) + Math.round(t.sport * 24) + Math.round(Math.max(0, t.net) * 0.4) +
+    t.lever * 20 + t.coucher * 20 +
+    (t.lever >= 5 ? 50 : 0) + (t.study >= g.etude ? 100 : 0) + (t.net >= g.argent ? 100 : 0);
+  return t;
+}
+function maxWeek() {
+  var m = Math.max(2, cur);
+  Object.keys(state.weeks).forEach(function (k) { m = Math.max(m, +k); });
+  Object.keys(state.lever).concat(Object.keys(state.coucher)).forEach(function (k) { m = Math.max(m, parseInt(k, 10) || 0); });
+  return m;
+}
+function minWeek() {
+  var m = 0;
+  Object.keys(state.weeks).forEach(function (k) { m = Math.min(m, +k); });
+  Object.keys(state.lever).concat(Object.keys(state.coucher)).forEach(function (k) { var v = parseInt(k, 10); if (!isNaN(v)) m = Math.min(m, v); });
+  return m;
+}
+function totalXP() {
+  var sum = 0, m = maxWeek();
+  for (var i = minWeek(); i <= m; i++) sum += totals(i).xp;
+  return sum;
+}
+function bedLabel(dt) {
+  var days = Math.round((new Date(dt.getFullYear(), dt.getMonth(), dt.getDate()) - new Date(2026, 9, 17)) / 86400000);
+  var targets = [2.5, 2, 1.5, 1, 0.5, 0];
+  var h = targets[Math.min(5, Math.max(0, days))];
+  return h === 0 ? "minuit" : fmt(h);
+}
+
+/* ---------- Affichage ---------- */
+function setBar(id, pct) { $(id).style.width = Math.max(0, Math.min(100, pct)) + "%"; }
+function pctOf(v, g) { return g > 0 ? Math.round(Math.max(0, Math.min(100, v / g * 100))) : 0; }
+
+function renderWeekNav() {
+  var a = weekStart(cur), b = weekStart(cur);
+  b.setDate(b.getDate() + 6);
+  $("wk-title").textContent = "Semaine " + (cur + 1 < 0 ? "−" + (-(cur + 1)) : (cur + 1));
+  $("wk-range").textContent = a.getDate() + (a.getMonth() !== b.getMonth() ? " " + MONTHS[a.getMonth()] : "") + " – " + b.getDate() + " " + MONTHS[b.getMonth()];
+  $("wk-today").hidden = cur === realWeekIdx() && (view === "week" || selDay === todayDow());
+}
+function setRing(k, pct, html) {
+  var c = 2 * Math.PI * 18, p = Math.max(0, Math.min(100, pct)), ring = $("ring-" + k);
+  ring.style.strokeDasharray = (p / 100 * c) + " " + c;
+  ring.style.opacity = p > 0 ? 1 : 0;
+  $("pct-" + k).textContent = Math.round(p) + "%";
+  $("val-" + k).innerHTML = html;
+}
+var goalProgressByWeek = {};
+var goalParticles = {
+  argent: ["🪙", "💵", "💸", "🪙", "💵", "✨", "🪙", "💸", "💵", "🪙", "✨", "💵", "💸", "🪙", "💵", "🪙", "💸", "✨"],
+  sleep: ["🌙", "⭐", "✨", "☁️", "🌟", "⭐", "💤", "✨", "🌙", "☁️", "⭐", "💫", "✨", "🌟"],
+  etude: ["📚", "📖", "✏️", "✨", "🏆", "📚", "📝", "⭐", "📖", "✨", "📚", "🧠", "⭐", "📖"],
+  sport: ["⚡", "💪", "🏆", "🔥", "⚡", "💪", "✨", "🏅", "🔥", "⚡", "💪", "🏆", "💥", "⚡"]
+};
+function celebrateGoal(kind) {
+  var tile = document.querySelector(".t-" + kind);
+  if (!tile) return;
+  var previous = tile.querySelector(".goal-celebration");
+  if (previous) previous.remove();
+  var overlay = document.createElement("div");
+  overlay.className = "goal-celebration " + (kind === "argent" ? "money" : kind === "sleep" ? "sleep" : kind === "etude" ? "study" : "sport");
+  var message = document.createElement("div");
+  message.className = "goal-message";
+  message.textContent = kind === "argent" ? "💰 Objectif argent atteint !" : kind === "sleep" ? "🌙 Sommeil réparateur !" : kind === "etude" ? "📚 Objectif étude atteint !" : "🏆 Objectif sport atteint !";
+  overlay.appendChild(message);
+  var items = goalParticles[kind] || ["✨"];
+  items.forEach(function (symbol, index) {
+    var particle = document.createElement("span");
+    particle.className = "goal-particle";
+    particle.textContent = symbol;
+    particle.style.setProperty("--x", (4 + Math.random() * 90) + "%");
+    particle.style.setProperty("--size", (15 + Math.random() * 15) + "px");
+    particle.style.setProperty("--dur", (kind === "argent" ? 1.45 : 1.2 + Math.random() * .8) + "s");
+    particle.style.setProperty("--delay", (Math.random() * .55) + "s");
+    particle.style.setProperty("--drift", ((Math.random() - .5) * 100) + "px");
+    particle.style.setProperty("--rise", (-80 - Math.random() * 150) + "px");
+    particle.style.setProperty("--spin", ((Math.random() - .5) * 540) + "deg");
+    overlay.appendChild(particle);
+  });
+  tile.appendChild(overlay);
+  tile.classList.remove("goal-celebrating");
+  void tile.offsetWidth;
+  tile.classList.add("goal-celebrating");
+  // L’animation reste active tant que l’objectif est à 100 %.
+}
+function celebrateAction(kind, detail) {
+  var old = document.querySelector(".action-celebration");
+  if (old) old.remove();
+  var overlay = document.createElement("div");
+  overlay.className = "action-celebration " + kind;
+  var labels = { argent: "💰 Argent ajouté !", sleep: "🌙 Sommeil validé !", etude: "📚 Bravo pour l’étude !", sport: "🏆 Séance de sport validée !" };
+  var label = document.createElement("div");
+  label.className = "action-label";
+  label.textContent = labels[kind] || "✨ Progression enregistrée !";
+  if (detail) label.textContent += "  " + detail;
+  overlay.appendChild(label);
+  var particles = goalParticles[kind] || ["✨"];
+  for (var i = 0; i < 42; i++) {
+    var particle = document.createElement("span");
+    particle.className = "action-particle";
+    particle.textContent = particles[i % particles.length];
+    particle.style.setProperty("--x", (Math.random() * 100) + "%");
+    particle.style.setProperty("--size", (16 + Math.random() * 22) + "px");
+    particle.style.setProperty("--dur", (1.05 + Math.random() * .85) + "s");
+    particle.style.setProperty("--delay", (Math.random() * .28) + "s");
+    particle.style.setProperty("--drift", ((Math.random() - .5) * 180) + "px");
+    particle.style.setProperty("--spin", ((Math.random() - .5) * 600) + "deg");
+    overlay.appendChild(particle);
+  }
+  document.body.appendChild(overlay);
+  window.setTimeout(function () { if (overlay.parentNode) overlay.remove(); }, 2400);
+}
+
+function renderObjectives() {
+  var t = totals(cur), g = goalsOf(cur);
+  var sleep = t.lever + t.coucher;
+  var progress = {
+    sleep: pctOf(sleep, SLEEP_TOTAL),
+    etude: pctOf(t.study, g.etude),
+    sport: pctOf(t.sport, g.sport),
+    argent: pctOf(t.net, g.argent)
+  };
+  ["argent", "sleep", "etude", "sport"].forEach(function (kind) {
+    var tile = document.querySelector(".t-" + kind);
+    var overlay = tile && tile.querySelector(".goal-celebration");
+    if (progress[kind] >= 100) {
+      // Lance l’animation si l’objectif vient d’être atteint ou si on revient sur sa semaine.
+      if (!overlay) celebrateGoal(kind);
+    } else if (overlay) {
+      // Arrête la pluie dès que l’objectif n’est plus à 100 %.
+      overlay.remove();
+      if (tile) tile.classList.remove("goal-celebrating");
+    }
+  });
+  goalProgressByWeek[cur] = progress;
+  setRing("sleep", progress.sleep, "<b>" + sleep + "</b> / " + SLEEP_TOTAL);
+  setRing("etude", progress.etude, "<b>" + fr(t.study) + "</b> / " + fr(g.etude) + " h");
+  setRing("sport", progress.sport, "<b>" + fr(t.sport) + "</b> / " + fr(g.sport) + " h");
+  setRing("argent", progress.argent, "<b>" + fr(t.net) + "</b> / " + fr(g.argent) + " €");
+  $("sub-argent").textContent = (t.gains || t.charges) ? "Gains " + fr(t.gains) + " € − charges " + fr(t.charges) + " €" : "";
+}
+function renderXP() {
+  var xp = totalXP(), l = 0, k;
+  for (k = 0; k < LEVELS.length; k++) if (xp >= LEVELS[k].x) l = k;
+  var nxt = LEVELS[l + 1], c0 = LEVELS[l].x;
+  $("xp-lvl").innerHTML = "Niveau " + (l + 1) + " · " + LEVELS[l].n + " <span>— " + xp + " XP</span>";
+  setBar("xp-bar", nxt ? (xp - c0) / (nxt.x - c0) * 100 : 100);
+  $("xp-msg").textContent = "+" + totals(cur).xp + " XP cette semaine" + (nxt ? " · reste " + (nxt.x - xp) + " XP avant " + nxt.n : " · niveau maximum");
+}
+
+function layoutDay(list) {
+  list.sort(function (a, b) { return a.start - b.start || a.end - b.end; });
+  var clusters = [], grp = null, grpEnd = -1;
+  list.forEach(function (b) {
+    if (!grp || b.start >= grpEnd) { grp = []; clusters.push(grp); grpEnd = b.end; } else grpEnd = Math.max(grpEnd, b.end);
+    grp.push(b);
+  });
+  clusters.forEach(function (cl) {
+    var cols = [];
+    cl.forEach(function (b) {
+      var c = 0;
+      while (cols[c] !== undefined && cols[c] > b.start) c++;
+      cols[c] = b.end; b._c = c;
+    });
+    cl.forEach(function (b) { b._n = cols.length; });
+  });
+}
+function mkEl(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+
+function renderCalendar() {
+  var ws = weekStart(cur), blocks = getBlocks(cur), todayStr = new Date().toDateString();
+  var cal = $("cal"), day = view === "day", d, dates = [];
+  H = day ? 58 : 40;
+  cal.className = "cal" + (day ? " day" : "");
+  cal.style.setProperty("--hh", H + "px");
+  cal.style.setProperty("--ht", ((END - START) * H) + "px");
+  cal.innerHTML = "";
+  for (d = 0; d < 7; d++) { var dt = new Date(ws); dt.setDate(dt.getDate() + d); dates.push(dt); }
+  var days = day ? [selDay] : [0, 1, 2, 3, 4, 5, 6];
+  function isToday(x) { return dates[x].toDateString() === todayStr; }
+  if (!day) {
+    cal.appendChild(mkEl("div", "head"));
+    days.forEach(function (x) { cal.appendChild(mkEl("div", "head" + (isToday(x) ? " today" : ""), DAYS[x] + "<small>" + dates[x].getDate() + "/" + (dates[x].getMonth() + 1) + "</small>")); });
+  }
+  cal.appendChild(mkEl("div", "scell first srow-top"));
+  days.forEach(function (x) {
+    var cu = mkEl("div", "scell srow-top" + (isToday(x) ? " today" : ""));
+    cu.appendChild(sleepBtn("lever", cur + "-" + x, "", ic("sun") + " Lever 7h"));
+    cal.appendChild(cu);
+  });
+  var tm = mkEl("div", "times");
+  for (var h = START; h < END; h++) { var sp = mkEl("span", "", h + " h"); sp.style.top = ((h - START) * H) + "px"; tm.appendChild(sp); }
+  cal.appendChild(tm);
+  days.forEach(function (x) {
+    var col = mkEl("div", "col" + (isToday(x) ? " today" : ""));
+    var list = blocks.filter(function (b) { return b.day === x; });
+    layoutDay(list);
+    list.forEach(function (b) { col.appendChild(blockEl(b)); });
+    if (isToday(x)) { var nw = mkEl("div", "now"); nw.id = "now"; col.appendChild(nw); }
+    cal.appendChild(col);
+  });
+  cal.appendChild(mkEl("div", "scell first srow-bottom"));
+  days.forEach(function (x) {
+    var cv = mkEl("div", "scell srow-bottom" + (isToday(x) ? " today" : ""));
+    cv.appendChild(sleepBtn("coucher", cur + "-" + x, "", ic("moon") + " Coucher " + bedLabel(dates[x])));
+    cal.appendChild(cv);
+  });
+  placeNow();
+}
+function placeNow() {
+  var el = $("now"); if (!el) return;
+  var n = new Date(), h = n.getHours() + n.getMinutes() / 60;
+  el.style.display = (h < START || h > END) ? "none" : "";
+  el.style.top = ((h - START) * H) + "px";
+}
+function renderDayStrip() {
+  var box = $("daystrip"); box.hidden = view !== "day";
+  if (view !== "day") return;
+  var ws = weekStart(cur), todayStr = new Date().toDateString(), blocks = getBlocks(cur);
+  box.innerHTML = "";
+  for (var d = 0; d < 7; d++) (function (d) {
+    var dt = new Date(ws); dt.setDate(dt.getDate() + d);
+    var types = {}; blocks.forEach(function (b) { if (b.day === d) types[b.type] = 1; });
+    var dots = Object.keys(types).slice(0, 3).map(function (t) { return '<i class="dot ' + t + '"></i>'; }).join("");
+    var btn = mkEl("button", "dpill" + (d === selDay ? " sel" : "") + (dt.toDateString() === todayStr ? " today" : ""),
+      "<small>" + DAYS[d] + "</small><b>" + dt.getDate() + '</b><span class="dots">' + dots + "</span>");
+    btn.type = "button"; btn.setAttribute("aria-pressed", d === selDay ? "true" : "false");
+    btn.onclick = function () { selDay = d; renderAll(); };
+    box.appendChild(btn);
+  })(d);
+}
+function renderViewBar() {
+  $("view-seg").setAttribute("data-v", view);
+  $("today-line").textContent = new Date().toLocaleDateString("fr-BE", { weekday: "long", day: "numeric", month: "long" });
+}
+function shiftDay(n) {
+  selDay += n;
+  if (selDay > 6) { selDay = 0; cur++; } else if (selDay < 0) { selDay = 6; cur--; }
+  renderAll();
+}
+function setTab(t) {
+  tab = t;
+  ["agenda", "stats"].forEach(function (k) {
+    $("tab-" + k).classList.toggle("on", t === k);
+    $("tb-" + k).classList.toggle("on", t === k);
+  });
+  window.scrollTo(0, 0);
+}
+function openQuick() {
+  var rows = [
+    ["bloc", "calendar", "Bloc dans l’agenda", "Étude, argent, sport…"],
+    ["gains", "coins", "Mes gains", "Montant gagné et charges"],
+    ["etude", "book", "Heures d’étude", "Ajouter des heures faites"],
+    ["sport", "activity", "Heures de sport", "Ajouter des heures faites"]
+  ];
+  openModal(head("Ajouter") + '<div class="qlist">' + rows.map(function (r) {
+    return '<button type="button" class="qrow" data-q="' + r[0] + '"><span class="qi q-' + r[0] + '">' + ic(r[1]) + '</span><span class="qt"><b>' + r[2] + "</b><small>" + r[3] + "</small></span>" + ic("chevron-right") + "</button>";
+  }).join("") + "</div>");
+  bindClose();
+  $("sheet").onclick = function (e) {
+    var b = e.target.closest ? e.target.closest(".qrow") : null;
+    if (!b) return;
+    var q = b.getAttribute("data-q");
+    closeModal();
+    if (q === "bloc") openBlockForm(null); else if (q === "gains") openGains(); else openHours(q);
+  };
+}
+function sleepBtn(kind, key, pos, label) {
+  var b = mkEl("button", "sl" + (state[kind][key] ? " on" : ""), label);
+  b.setAttribute("aria-pressed", state[kind][key] ? "true" : "false");
+  b.onclick = function () {
+    if (state[kind][key]) delete state[kind][key]; else { state[kind][key] = 1; celebrateAction("sleep", ""); }
+    persist(); renderAll();
+  };
+  return b;
+}
+function escapeHTML(value) {
+  return String(value == null ? "" : value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+function openImportedCourse(b) {
+  var p = dateParts(b.date), dateLabel = b.date || "";
+  if (p) dateLabel = DAYS_LONG[dayIndexForDate(b.date)] + " " + p.d + " " + MONTHS[p.mo] + " " + p.y;
+  var details = '<div class="sub" style="margin:0 0 12px">' + escapeHTML(dateLabel) + '</div>' +
+    '<div style="padding:10px 0;border-top:1px solid var(--line)"><strong>Horaire</strong><div class="sub">' + escapeHTML(fmt(b.start) + " – " + fmt(b.end)) + '</div></div>' +
+    '<div style="padding:10px 0;border-top:1px solid var(--line)"><strong>Local</strong><div class="sub">' + escapeHTML(b.location || "Local non communiqué") + '</div></div>' +
+    (b.teacher ? '<div style="padding:10px 0;border-top:1px solid var(--line)"><strong>Professeur</strong><div class="sub">' + escapeHTML(b.teacher) + '</div></div>' : '') +
+    (b.courseCode ? '<div style="padding:10px 0;border-top:1px solid var(--line)"><strong>Code du cours</strong><div class="sub">' + escapeHTML(b.courseCode) + '</div></div>' : '') +
+    '<div class="btns"><button class="btn primary" id="m-cancel">Fermer</button></div>';
+  openModal(head(escapeHTML(b.title || "Cours UCLouvain")) + details);
+  bindClose();
+}
+
+function blockEl(b) {
+  var el = mkEl("div", "ev " + b.type + (b._n > 1 ? " over" : "") + (b.done ? " done" : ""));
+  var s = Math.max(START, b.start), e = Math.min(END, b.end);
+  el.style.top = ((s - START) * H) + "px";
+  el.style.height = (Math.max(14, (e - s) * H - 2)) + "px";
+  el.style.left = (b._c / b._n * 100 + 1) + "%";
+  el.style.width = (100 / b._n - 2) + "%";
+  el.innerHTML = "<b></b>" + ((e - s) >= 0.75 ? fmt(b.start) + " – " + fmt(b.end) : "");
+  el.firstChild.textContent = b.title;
+  if (b.imported && b.location) el.appendChild(mkEl("small", "room", b.location));
+  el.setAttribute("role", "button"); el.setAttribute("tabindex", "0");
+  el.onclick = function () { if (b.imported) openImportedCourse(b); else openBlockForm(b.id); };
+  el.onkeydown = function (ev) { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); if (b.imported) openImportedCourse(b); else openBlockForm(b.id); } };
+  if (CHECKABLE[b.type]) {
+    var chk = mkEl("button", "chk", b.done ? "✓" : "");
+    chk.setAttribute("aria-label", "Marquer comme fait");
+    chk.setAttribute("aria-pressed", b.done ? "true" : "false");
+    chk.onclick = function (ev) {
+      ev.stopPropagation();
+      var blk = ensureWeek(cur).blocks.filter(function (x) { return x.id === b.id; })[0];
+      if (blk) { blk.done = !blk.done; persist(); renderAll(); }
+    };
+    el.appendChild(chk);
+  }
+  return el;
+}
+function renderHistory() {
+  var w = state.weeks[cur], list = (w && w.entries) || [], box = $("history");
+  box.hidden = !list.length;
+  if (!list.length) { box.innerHTML = ""; return; }
+  box.innerHTML = "";
+  list.forEach(function (e) {
+    var row = mkEl("div", "hrow");
+    var txt = e.k === "argent"
+      ? ic("coins") + "+ " + fr(e.gains - e.charges) + " €<small>Gains " + fr(e.gains) + " € − charges " + fr(e.charges) + " €</small>"
+      : ic(e.k === "etude" ? "book" : "activity") + "+ " + fr(e.h) + " h";
+    row.appendChild(mkEl("div", "", txt));
+    var del = mkEl("button", "hdel", ic("x", "s"));
+    del.setAttribute("aria-label", "Supprimer cet ajout");
+    del.onclick = function () {
+      var ww = ensureWeek(cur);
+      ww.entries = ww.entries.filter(function (x) { return x.id !== e.id; });
+      persist(); renderAll();
+    };
+    row.appendChild(del);
+    box.appendChild(row);
+  });
+}
+function renderAll() { renderWeekNav(); renderViewBar(); renderAvatar(); renderObjectives(); renderXP(); renderDayStrip(); renderCalendar(); renderHistory(); }
+
+/* ---------- Fenêtres ---------- */
+function openModal(html) { $("sheet").innerHTML = html; $("modal").hidden = false; }
+function closeModal() { if (typeof avDrop === "function") avDrop("prev"); $("modal").hidden = true; $("sheet").innerHTML = ""; $("sheet").className = "sheet"; $("sheet").onclick = null; }
+$("modal").addEventListener("click", function (e) { if (e.target === $("modal")) closeModal(); });
+document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
+function head(title) { return '<h2>' + title + '<button class="x" id="m-x" aria-label="Fermer">' + ic("x") + '</button></h2>'; }
+function bindClose() { $("m-x").onclick = closeModal; if ($("m-cancel")) $("m-cancel").onclick = closeModal; }
+function numVal(id) { var v = parseFloat(String($(id).value).replace(",", ".")); return isNaN(v) ? 0 : Math.max(0, v); }
+
+function dayOptions(sel) {
+  var ws = weekStart(cur), out = "";
+  for (var d = 0; d < 7; d++) {
+    var dt = new Date(ws); dt.setDate(dt.getDate() + d);
+    out += '<option value="' + d + '"' + (d === sel ? " selected" : "") + ">" + DAYS_LONG[d] + " " + dt.getDate() + "/" + (dt.getMonth() + 1) + "</option>";
+  }
+  return out;
+}
+function timeOptions(from, to, sel) {
+  var out = "";
+  for (var h = from; h <= to + 1e-9; h += 0.25) out += '<option value="' + h + '"' + (Math.abs(h - sel) < 1e-6 ? " selected" : "") + ">" + fmt(h) + "</option>";
+  return out;
+}
+function openBlockForm(id) {
+  var blk = id ? getBlocks(cur).filter(function (x) { return x.id === id; })[0] : null;
+  var type = blk ? blk.type : "etude";
+  var isCours = type === "cours";
+  var html = head(blk ? "Modifier le bloc" : "Nouveau bloc");
+  if (!isCours) {
+    html += '<label>Type</label><div class="types">' + Object.keys(TYPES).map(function (k) {
+      return '<button type="button" class="tbtn ' + k + (k === type ? " sel" : "") + '" data-t="' + k + '"><span>' + TYPES[k].icon + '</span>' + TYPES[k].label + '</button>';
+    }).join("") + "</div>";
+  } else {
+    html += '<div class="sub" style="margin:0 0 4px"></div>';
+  }
+  html += '<label for="f-day">Jour</label><select id="f-day">' + dayOptions(blk ? blk.day : 0) + "</select>" +
+    '<div class="row2"><div><label for="f-start">Début</label><select id="f-start">' + timeOptions(7, 22.75, blk ? blk.start : 9) + "</select></div>" +
+    '<div><label for="f-end">Fin</label><select id="f-end">' + timeOptions(7.25, 23, blk ? blk.end : 11) + "</select></div></div>" +
+    '<div class="err" id="f-err"></div>' +
+    '<div class="btns">' + (blk ? '<button class="btn danger" id="f-del">Supprimer</button>' : '<button class="btn" id="m-cancel">Annuler</button>') +
+    '<button class="btn primary" id="f-save">Enregistrer</button></div>';
+  openModal(html);
+  bindClose();
+  if (isCours) $("sheet").querySelector(".sub").textContent = blk.title;
+  var sel = type;
+  Array.prototype.forEach.call($("sheet").querySelectorAll(".tbtn"), function (btn) {
+    btn.onclick = function () {
+      sel = btn.getAttribute("data-t");
+      Array.prototype.forEach.call($("sheet").querySelectorAll(".tbtn"), function (x) { x.classList.toggle("sel", x === btn); });
+    };
+  });
+  $("f-save").onclick = function () {
+    var day = parseInt($("f-day").value, 10), s = parseFloat($("f-start").value), e = parseFloat($("f-end").value);
+    if (!(e > s)) { $("f-err").textContent = "L’heure de fin doit être après le début."; return; }
+    var w = ensureWeek(cur);
+    if (blk) {
+      var b = w.blocks.filter(function (x) { return x.id === blk.id; })[0];
+      if (b) {
+        if (!isCours && sel !== b.type) {
+          var oldDefault = b.type === "argent" ? TYPES.argent.title : TYPES[b.type].label;
+          if (b.title === oldDefault) b.title = sel === "argent" ? TYPES.argent.title : TYPES[sel].label;
+          b.type = sel;
+        }
+        b.day = day; b.start = s; b.end = e;
+      }
+    } else {
+      w.blocks.push({ id: newId(), day: day, start: s, end: e, type: sel, title: sel === "argent" ? TYPES.argent.title : TYPES[sel].label, done: false });
+    }
+    persist(); closeModal(); renderAll();
+  };
+  if (blk) {
+    var armed = false;
+    $("f-del").onclick = function () {
+      if (!armed) { armed = true; this.textContent = "Confirmer"; return; }
+      var w = ensureWeek(cur);
+      w.blocks = w.blocks.filter(function (x) { return x.id !== blk.id; });
+      persist(); closeModal(); renderAll();
+    };
+  }
+}
+function openGains() {
+  openModal(head("Ajouter mes gains") +
+    '<label for="g-gains">Combien as-tu gagné ? (€)</label><input id="g-gains" type="number" inputmode="decimal" min="0" step="any" placeholder="0">' +
+    '<label for="g-ch">Quelles sont tes charges ? Essence, etc. (€)</label><input id="g-ch" type="number" inputmode="decimal" min="0" step="any" placeholder="0">' +
+    '<div class="net"><span>Bénéfice net</span><b id="g-net">0 €</b></div><div class="err" id="g-err"></div>' +
+    '<div class="btns"><button class="btn" id="m-cancel">Annuler</button><button class="btn primary" id="g-save">Ajouter</button></div>');
+  bindClose();
+  function upd() { var n = numVal("g-gains") - numVal("g-ch"); $("g-net").textContent = fr(n) + " €"; }
+  $("g-gains").oninput = upd; $("g-ch").oninput = upd;
+  $("g-save").onclick = function () {
+    var g = numVal("g-gains"), c = numVal("g-ch");
+    if (!g && !c) { $("g-err").textContent = "Entre au moins un montant."; return; }
+    ensureWeek(cur).entries.push({ id: newId(), k: "argent", gains: g, charges: c });
+    if (g > 0 || c > 0) celebrateAction("argent", (g > 0 ? "+" + fr(g) + " €" : ""));
+    persist(); closeModal(); renderAll();
+  };
+  $("g-gains").focus();
+}
+function openHours(kind) {
+  var label = kind === "etude" ? "d’étude" : "de sport";
+  openModal(head("Ajouter des heures " + label) +
+    '<label for="h-val">Nombre d’heures</label><input id="h-val" type="number" inputmode="decimal" min="0" step="0.25" placeholder="0">' +
+    '<div class="chips"><button class="chip" data-v="0.5">+ 0,5 h</button><button class="chip" data-v="1">+ 1 h</button><button class="chip" data-v="2">+ 2 h</button></div>' +
+    '<div class="err" id="h-err"></div>' +
+    '<div class="btns"><button class="btn" id="m-cancel">Annuler</button><button class="btn primary" id="h-save">Ajouter</button></div>');
+  bindClose();
+  Array.prototype.forEach.call($("sheet").querySelectorAll(".chip"), function (c) {
+    c.onclick = function () { $("h-val").value = r2(numVal("h-val") + parseFloat(c.getAttribute("data-v"))); };
+  });
+  $("h-save").onclick = function () {
+    var h = numVal("h-val");
+    if (!(h > 0)) { $("h-err").textContent = "Entre un nombre d’heures."; return; }
+    ensureWeek(cur).entries.push({ id: newId(), k: kind, h: h });
+    celebrateAction(kind, "+" + fr(h) + " h");
+    persist(); closeModal(); renderAll();
+  };
+  $("h-val").focus();
+}
+function openGoal(kind) {
+  var g = goalsOf(cur)[kind], unit = kind === "argent" ? "€" : "h";
+  var name = kind === "etude" ? "d’étude" : kind === "sport" ? "de sport" : "d’argent";
+  openModal(head("Objectif " + name) +
+    '<label for="o-val">Objectif de la semaine (' + unit + ')</label><input id="o-val" type="number" inputmode="decimal" min="0" step="any" value="' + g + '">' +
+    '<div class="err" id="o-err"></div>' +
+    '<div class="btns"><button class="btn" id="m-cancel">Annuler</button><button class="btn primary" id="o-save">Enregistrer</button></div>');
+  bindClose();
+  $("o-save").onclick = function () {
+    var v = numVal("o-val");
+    if (!(v > 0)) { $("o-err").textContent = "Entre un objectif supérieur à 0."; return; }
+    ensureWeek(cur).goals[kind] = v;
+    persist(); closeModal(); renderAll();
+  };
+}
+
+/* ---------- Boutons ---------- */
+$("prev").onclick = function () { cur--; renderAll(); };
+$("wk-today").onclick = function () { cur = realWeekIdx(); selDay = todayDow(); renderAll(); };
+$("next").onclick = function () { cur++; renderAll(); };
+$("fab").onclick = openQuick;
+$("tb-agenda").onclick = function () { setTab("agenda"); };
+$("tb-stats").onclick = function () { setTab("stats"); };
+Array.prototype.forEach.call($("view-seg").querySelectorAll("button"), function (b) {
+  b.onclick = function () {
+    view = b.getAttribute("data-v");
+    try { localStorage.setItem("abdoView", view); } catch (e) {}
+    renderAll();
+  };
+});
+(function () {
+  var sx = 0, sy = 0, t0 = 0, on = false, el = $("calwrap");
+  el.addEventListener("touchstart", function (e) {
+    if (view !== "day" || e.touches.length !== 1) { on = false; return; }
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY; t0 = Date.now(); on = true;
+  }, { passive: true });
+  el.addEventListener("touchend", function (e) {
+    if (!on) return; on = false;
+    var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 2 && Date.now() - t0 < 700) shiftDay(dx < 0 ? 1 : -1);
+  }, { passive: true });
+})();
+setInterval(placeNow, 30000);
+Array.prototype.forEach.call(document.querySelectorAll(".edit"), function (b) {
+  b.onclick = function () { openGoal(b.getAttribute("data-goal")); };
+});
+$("in-reward").value = state.reward || "";
+$("in-reward").oninput = function () { state.reward = this.value.slice(0, 60); persist(); };
+
+/* ---------- Avatar pixel art : affichage, personnalisation, semaines ---------- */
+function getAv() { var o = {}; for (var k in PX_DEFAULT) o[k] = (state.avatar && state.avatar[k]) || PX_DEFAULT[k]; return o; }
+function tiersOf(i) {
+  var t = totals(i), g = goalsOf(i);
+  function tr(v, goal) { var p = goal > 0 ? v / goal : 0; return p >= 1 ? 5 : Math.max(0, Math.floor(p * 5)); }
+  return { argent: tr(t.net, g.argent), etude: tr(t.study, g.etude), sport: tr(t.sport, g.sport) };
+}
+function weekStatus(i) {
+  var a = weekStart(i), b = weekStart(i + 1), n = new Date();
+  return n >= b ? "Terminée" : (n < a ? "À venir" : "En cours");
+}
+var avReduced = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+var avTargets = [], avFrame = 0, avFlash = 0, lastTiers = null, lastTiersWeek = -1;
+function avMake(el, get, still, id) {
+  var ctx = el.getContext("2d"), img = ctx.createImageData(PW, PH);
+  var tg = { el: el, ctx: ctx, img: img, d32: new Uint32Array(img.data.buffer), get: get, still: !!still, id: id || "" };
+  avTargets.push(tg); return tg;
+}
+function avDrop(id) { avTargets = avTargets.filter(function (t) { return t.id !== id; }); }
+function applyFlash(d32, amt) {
+  for (var i = 0; i < d32.length; i++) { var c = d32[i], r = c & 255, g = (c >> 8) & 255, b = (c >> 16) & 255; r += (255 - r) * amt; g += (255 - g) * amt; b += (255 - b) * amt; d32[i] = ((255 << 24) | (b << 16) | (g << 8) | r) >>> 0; }
+}
+function avPaint(tg, frame, flash) {
+  var a = tg.get();
+  renderFrame(tg.d32, frame, a.o, a.tr, !tg.still && !avReduced);
+  if (flash > 0) applyFlash(tg.d32, Math.min(0.75, flash * 0.11));
+  tg.ctx.putImageData(tg.img, 0, 0);
+}
+function avTick(ts) {
+  var fr = Math.floor(ts / 100);
+  if (fr !== avFrame) {
+    avFrame = fr;
+    if (!avReduced || avFlash > 0) {
+      avTargets.forEach(function (tg) { if (!tg.still && document.body.contains(tg.el) && tg.el.offsetWidth > 0) avPaint(tg, fr, tg.id === "main" ? avFlash : 0); });
+      if (avFlash > 0) avFlash--;
+    }
+  }
+  requestAnimationFrame(avTick);
+}
+var mainTarget = null;
+function renderAvatar() {
+  var tr = tiersOf(cur), o = getAv();
+  if (lastTiers && lastTiersWeek === cur && (tr.argent > lastTiers.argent || tr.etude > lastTiers.etude || tr.sport > lastTiers.sport)) avFlash = 8;
+  lastTiers = tr; lastTiersWeek = cur;
+  $("av-title").textContent = "Avatar de la semaine " + (cur + 1);
+  $("av-status").textContent = weekStatus(cur);
+  if (!mainTarget) mainTarget = avMake($("av-canvas"), function () { return { o: getAv(), tr: tiersOf(cur) }; }, false, "main");
+  avPaint(mainTarget, avFrame, avFlash);
+  $("av-badges").innerHTML = '<span class="avbadge">' + ic("coins") + VEHICLES[tr.argent].n + '</span><span class="avbadge">' + ic("book") + 'Intelligence ' + tr.etude + '/5</span><span class="avbadge">' + ic("activity") + 'Muscles ' + tr.sport + '/5</span>';
+}
+var END_WEEK = 35;   // semaine du 21 juin 2027 : fin de l’année académique
+function openWeeks() {
+  var real = realWeekIdx(), first = Math.min(0, minWeek(), cur), last = Math.max(real, cur, END_WEEK);
+  Object.keys(state.weeks).forEach(function (k) { last = Math.max(last, +k); });
+  openModal(head("Mes semaines") + '<div class="wgrid" id="wg"></div>');
+  $("sheet").className = "sheet wide";
+  bindClose();
+  var grid = $("wg"), queue = [], selCard = null;
+  for (var i = first; i <= last; i++) {
+    (function (i) {
+      var tr = tiersOf(i), t = totals(i), g = goalsOf(i);
+      var a = weekStart(i), b = weekStart(i); b.setDate(b.getDate() + 6);
+      var future = i > real && !(t.xp > 0 || tr.argent + tr.etude + tr.sport > 0);
+      var card = mkEl("button", "wcard" + (i === cur ? " sel" : "") + (future ? " future" : ""));
+      card.type = "button";
+      var info = mkEl("div", "wt");
+      var range = a.getDate() + (a.getMonth() !== b.getMonth() ? " " + MONTHS[a.getMonth()] : "") + " – " + b.getDate() + " " + MONTHS[b.getMonth()];
+      var num = i + 1 < 0 ? "−" + (-(i + 1)) : (i + 1);
+      if (future) {
+        card.appendChild(mkEl("div", "wph", "À venir"));
+        info.innerHTML = '<b>Semaine ' + num + '</b>' + range;
+      } else {
+        var cv = document.createElement("canvas"); cv.width = PW; cv.height = PH; card.appendChild(cv);
+        queue.push(function () {
+          if (!document.body.contains(cv)) return;
+          var tg = { el: cv, ctx: cv.getContext("2d"), still: true };
+          tg.img = tg.ctx.createImageData(PW, PH); tg.d32 = new Uint32Array(tg.img.data.buffer);
+          renderFrame(tg.d32, 2, getAv(), tr, false); tg.ctx.putImageData(tg.img, 0, 0);
+        });
+        info.innerHTML = '<b>Semaine ' + num + '</b>' + range + " · " + weekStatus(i) +
+          '<div class="wst">' + VEHICLES[tr.argent].n + '<br>' + ic("coins") + ' ' + pctOf(t.net, g.argent) + ' % · ' + ic("book") + ' ' + pctOf(t.study, g.etude) + ' % · ' + ic("activity") + ' ' + pctOf(t.sport, g.sport) + ' %</div>';
+      }
+      card.appendChild(info);
+      card.onclick = function () { cur = i; if (i === real) selDay = todayDow(); closeModal(); renderAll(); };
+      grid.appendChild(card);
+      if (i === cur) selCard = card;
+    })(i);
+  }
+  if (selCard) setTimeout(function () { try { selCard.scrollIntoView({ block: "center" }); } catch (e) {} }, 0);
+  (function next() { var f = queue.shift(); if (f) { f(); setTimeout(next, 0); } })();
+}
+function swatches(k, list, cur0) {
+  return '<div class="sw-row">' + list.map(function (c) {
+    return '<button type="button" class="sw' + (c === cur0 ? " sel" : "") + '" data-k="' + k + '" data-v="' + c + '" style="background:' + c + '" aria-label="Couleur ' + c + '"></button>';
+  }).join("") + "</div>";
+}
+function options(k, list, cur0) {
+  return '<div class="sw-row">' + list.map(function (x) {
+    return '<button type="button" class="opt' + (x.k === cur0 ? " sel" : "") + '" data-k="' + k + '" data-v="' + x.k + '">' + x.n + "</button>";
+  }).join("") + "</div>";
+}
+function openCustom() {
+  var w = getAv(), real = tiersOf(cur), mode = "real";
+  openModal(head("Personnaliser mon avatar") +
+    '<div class="seg"><button type="button" class="sel" data-m="real">Mon niveau</button><button type="button" data-m="max">Niveau maximum</button></div>' +
+    '<div class="avprev"><canvas id="cp-canvas" width="144" height="96"></canvas></div>' +
+    '<label>Peau</label>' + swatches("skin", PX_SKINS, w.skin) +
+    '<label>Cheveux</label>' + options("hair", PX_HAIRS, w.hair) + '<div style="height:8px"></div>' + swatches("hairColor", PX_HAIR_COLORS, w.hairColor) +
+    '<label>Casque (avant l’or)</label>' + swatches("helmet", PX_HELMETS, w.helmet) +
+    '<label>Gilet</label>' + swatches("vest", PX_VESTS, w.vest) +
+    '<label>Pantalon</label>' + swatches("pants", PX_PANTS, w.pants) +
+    '<label>Chaussures</label>' + swatches("shoes", PX_SHOES, w.shoes) +
+    '<div class="btns"><button class="btn" id="m-cancel">Annuler</button><button class="btn primary" id="cp-save">Enregistrer</button></div>');
+  $("sheet").className = "sheet";
+  bindClose();
+  var tg = avMake($("cp-canvas"), function () { return { o: w, tr: mode === "max" ? { argent: 5, etude: 5, sport: 5 } : real }; }, false, "prev");
+  avPaint(tg, avFrame, 0);
+  $("sheet").onclick = function (e) {
+    var el = e.target.closest ? e.target.closest("button") : null;
+    if (!el) return;
+    var m = el.getAttribute("data-m"), k = el.getAttribute("data-k");
+    if (m) {
+      mode = m;
+      Array.prototype.forEach.call($("sheet").querySelectorAll(".seg button"), function (b) { b.classList.toggle("sel", b === el); });
+      avPaint(tg, avFrame, 0);
+    } else if (k) {
+      w[k] = el.getAttribute("data-v");
+      Array.prototype.forEach.call($("sheet").querySelectorAll('[data-k="' + k + '"]'), function (b) { b.classList.toggle("sel", b === el); });
+      avPaint(tg, avFrame, 0);
+    }
+  };
+  $("cp-save").onclick = function () { state.avatar = w; persist(); closeModal(); renderAll(); };
+}
+$("av-custom").onclick = openCustom;
+$("av-weeks").onclick = openWeeks;
+requestAnimationFrame(avTick);
+
+renderAll();
+loadUclCalendar();
+setSync("local");
+setTimeout(function () { var n = $("now"); if (n && n.style.display !== "none") { try { n.scrollIntoView({ block: "center" }); } catch (e) {} } }, 300);
+</script>
+</body>
+</html>
