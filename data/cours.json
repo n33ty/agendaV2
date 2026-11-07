@@ -2,7 +2,7 @@
   "timezone": "Europe/Brussels",
   "events": [
     {
-      "uid": "db3a21c1-fc27-4ca5-9456-6f66269af957@db3a.org",
+      "uid": "6fa46984-1c8d-4204-90b1-1405fd21fbba@6fa4.org",
       "title": "CM: Management et stratégie",
       "date": "2026-09-14",
       "start": "14:30",
@@ -14,7 +14,7 @@
       "teacher": "Hermant Pierre & Callens Isabelle"
     },
     {
-      "uid": "e5eecde6-84c3-4875-bce3-99c2462caf50@e5ee.org",
+      "uid": "b0659fcb-21d2-4349-83f0-65bbee9b8986@b065.org",
       "title": "CM: Econométrie",
       "date": "2026-09-15",
       "start": "10:45",
@@ -26,7 +26,7 @@
       "teacher": "Cours annulé"
     },
     {
-      "uid": "74b2b07f-7053-4a8d-acdc-a7b419646dab@74b2.org",
+      "uid": "1cdaed60-e39b-458a-a56f-fac5f8edb4e9@1cda.org",
       "title": "CM: Théorie des organisations",
       "date": "2026-09-15",
       "start": "15:45",
@@ -38,7 +38,7 @@
       "teacher": "Dejean Karine"
     },
     {
-      "uid": "ef7c076c-b5ce-413e-895a-1229315e1590@ef7c.org",
+      "uid": "251e6148-12cb-43d5-8264-a54bfee41b01@251e.org",
       "title": "CM: Public policy seminar",
       "date": "2026-09-16",
       "start": "08:30",
@@ -50,7 +50,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "83889e3c-0c2c-47c5-b6b8-cdecbb7d416a@8388.org",
+      "uid": "e0b9487c-8a03-4b64-a865-0a1c6524ac24@e0b9.org",
       "title": "CM: Public policy seminar",
       "date": "2026-09-16",
       "start": "08:30",
@@ -62,7 +62,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "cbe7425b-352a-466f-a162-a0a7ac6290a1@cbe7.org",
+      "uid": "6b99ae5f-71ad-47e2-af50-e15ec2d142cd@6b99.org",
       "title": "CM: Ethique et économie",
       "date": "2026-09-17",
       "start": "10:45",
@@ -74,7 +74,7 @@
       "teacher": "Vanderborght Yannick"
     },
     {
-      "uid": "38fe35f6-5cd3-4aa5-ad7f-f8b793a40500@38fe.org",
+      "uid": "3daec984-599e-410b-886c-436ae921ff3e@3dae.org",
       "title": "CM: Econométrie",
       "date": "2026-09-17",
       "start": "13:30",
@@ -86,7 +86,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "1f600406-f636-49f2-87d7-fc6662e9eb89@1f60.org",
+      "uid": "72e38aa7-1b77-4b86-8413-96fb49369af4@72e3.org",
       "title": "CM: Gestion des opérations",
       "date": "2026-09-18",
       "start": "10:45",
@@ -98,7 +98,7 @@
       "teacher": "Laurier Wim"
     },
     {
-      "uid": "d4c6a949-9189-4f19-a40d-10ff37a36613@d4c6.org",
+      "uid": "860ee2ea-6678-4aee-80ef-1861602b65af@860e.org",
       "title": "CM: Management et stratégie",
       "date": "2026-09-21",
       "start": "14:30",
@@ -110,7 +110,7 @@
       "teacher": "Hermant Pierre & Callens Isabelle"
     },
     {
-      "uid": "12a121e0-3c02-4775-9f97-396e80ffdaba@12a1.org",
+      "uid": "b14acb91-d2ce-49d4-aae9-ac5b5ae7908f@b14a.org",
       "title": "CM: Econométrie",
       "date": "2026-09-22",
       "start": "10:45",
@@ -122,7 +122,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "54bbe6af-1c79-430e-80ad-e7d2f6416170@54bb.org",
+      "uid": "6916241d-339c-4593-965f-23651d5f4e25@6916.org",
       "title": "CM: Théorie des organisations",
       "date": "2026-09-22",
       "start": "15:45",
@@ -134,7 +134,7 @@
       "teacher": "Dejean Karine"
     },
     {
-      "uid": "f206fb95-4d16-4338-85a7-134bb5e98d53@f206.org",
+      "uid": "27794588-ba6a-4a07-a207-328ab82ddb15@2779.org",
       "title": "CM: Public policy seminar",
       "date": "2026-09-23",
       "start": "08:30",
@@ -146,7 +146,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "dad2ac50-dc7f-43c6-8620-b508ef3a53d9@dad2.org",
+      "uid": "4efa04f6-85dc-482a-9e1b-253484ecba19@4efa.org",
       "title": "CM: Public policy seminar",
       "date": "2026-09-23",
       "start": "08:30",
@@ -158,7 +158,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "a905ed30-20f9-4fbb-adef-7fd08a54ef91@a905.org",
+      "uid": "2f2ce087-01c9-45fd-b75d-5894a71c677f@2f2c.org",
       "title": "CM: Ethique et économie",
       "date": "2026-09-24",
       "start": "10:45",
@@ -170,7 +170,7 @@
       "teacher": "Vanderborght Yannick"
     },
     {
-      "uid": "e9782df5-47af-49c4-ba5c-9515d1a830cc@e978.org",
+      "uid": "1cac7071-ef03-4922-86d0-55c5c4b3cc66@1cac.org",
       "title": "CM: Econométrie",
       "date": "2026-09-24",
       "start": "13:30",
@@ -182,7 +182,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "200c2ed3-c800-4deb-8e55-1f77fad71fd4@200c.org",
+      "uid": "36510b73-7685-4ea3-a301-117f9cb2ae4d@3651.org",
       "title": "CM: Gestion des opérations",
       "date": "2026-09-25",
       "start": "10:45",
@@ -194,7 +194,7 @@
       "teacher": "Laurier Wim"
     },
     {
-      "uid": "430a1bde-604e-4098-9942-8e1758ab2b9f@430a.org",
+      "uid": "1b7cb13d-c45a-4035-878d-2a49c90bdfc9@1b7c.org",
       "title": "TP: Econométrie",
       "date": "2026-09-28",
       "start": "14:00",
@@ -206,7 +206,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "8458ca75-ab55-4464-bd70-c0da983e7360@8458.org",
+      "uid": "0ee23c3c-b15c-417b-9b41-3c5598fa6990@0ee2.org",
       "title": "CM: Management et stratégie",
       "date": "2026-09-28",
       "start": "14:30",
@@ -218,7 +218,7 @@
       "teacher": "Hermant Pierre & Callens Isabelle"
     },
     {
-      "uid": "5f81a555-ec51-4021-b843-8f624d6aa08e@5f81.org",
+      "uid": "808c5b43-9c57-4d32-bdbb-ad43288bdad0@808c.org",
       "title": "TP: Econométrie",
       "date": "2026-09-29",
       "start": "08:30",
@@ -230,7 +230,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "fb6ab507-4813-42f5-b546-d381fe762da6@fb6a.org",
+      "uid": "5e8d2bbb-9591-42c5-b6f7-5329e800d0b9@5e8d.org",
       "title": "CM: Econométrie",
       "date": "2026-09-29",
       "start": "10:45",
@@ -242,7 +242,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "d729f187-04be-44c1-99f8-bd312a053023@d729.org",
+      "uid": "a4ca6f59-fcb7-4fad-967d-7b51b76f770a@a4ca.org",
       "title": "TP: Econométrie",
       "date": "2026-09-29",
       "start": "13:30",
@@ -254,7 +254,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "877779d2-50c2-4fc3-8a10-1eff7ce46d96@8777.org",
+      "uid": "1e383e15-2ac1-48c3-b442-b58d2b8dd958@1e38.org",
       "title": "CM: Théorie des organisations",
       "date": "2026-09-29",
       "start": "15:45",
@@ -266,7 +266,7 @@
       "teacher": "Dejean Karine"
     },
     {
-      "uid": "1f2832e1-a628-4898-8b7d-2c944eaa52e7@1f28.org",
+      "uid": "54861846-fa69-4bc1-a395-6fc362f5d5e0@5486.org",
       "title": "CM: Public policy seminar",
       "date": "2026-09-30",
       "start": "08:30",
@@ -278,7 +278,7 @@
       "teacher": "Latzer Hélène & Grandjean Gilles"
     },
     {
-      "uid": "20a4273c-10ce-469e-8d7c-02a9f77050b2@20a4.org",
+      "uid": "c9ea9906-117a-411e-a31a-6de08d6ad40b@c9ea.org",
       "title": "CM: Public policy seminar",
       "date": "2026-09-30",
       "start": "08:30",
@@ -290,7 +290,7 @@
       "teacher": "Latzer Hélène & Grandjean Gilles"
     },
     {
-      "uid": "8a2649fa-eb0d-41b4-8b03-54c8da92f320@8a26.org",
+      "uid": "4f51a6af-4c4d-4f1b-ba59-33f5907a05fa@4f51.org",
       "title": "TP: Gestion des opérations",
       "date": "2026-09-30",
       "start": "08:30",
@@ -302,7 +302,7 @@
       "teacher": "Polet Louis"
     },
     {
-      "uid": "74751b05-42f1-4669-9908-963f8e2ce49f@7475.org",
+      "uid": "4421cd85-d576-4978-b2b2-9b04a05542f8@4421.org",
       "title": "TP: Gestion des opérations",
       "date": "2026-09-30",
       "start": "13:30",
@@ -314,7 +314,7 @@
       "teacher": "Polet Louis"
     },
     {
-      "uid": "bbfd2bed-59c9-46d4-81b8-1891f634b7df@bbfd.org",
+      "uid": "4056ab8d-2108-423f-9512-291cbd4a6f4d@4056.org",
       "title": "CM: Ethique et économie",
       "date": "2026-10-01",
       "start": "10:45",
@@ -326,7 +326,7 @@
       "teacher": "Vanderborght Yannick"
     },
     {
-      "uid": "5dd0abec-14a0-470d-80e8-722770dd7906@5dd0.org",
+      "uid": "b9915220-1713-4942-9e3c-d990a410c369@b991.org",
       "title": "CM: Econométrie",
       "date": "2026-10-01",
       "start": "13:30",
@@ -338,7 +338,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "234b5403-a867-4429-9bd1-538e0968a28e@234b.org",
+      "uid": "3e4f64bc-5e8a-4dfb-a57f-21328a597cda@3e4f.org",
       "title": "CM: Gestion des opérations",
       "date": "2026-10-02",
       "start": "10:45",
@@ -350,7 +350,7 @@
       "teacher": "Laurier Wim"
     },
     {
-      "uid": "06f35507-faf3-41e7-81cd-8ea30a71c584@06f3.org",
+      "uid": "dcb6e442-e3fc-4a2a-b600-72d35c8a6f74@dcb6.org",
       "title": "CM: Management et stratégie",
       "date": "2026-10-05",
       "start": "14:30",
@@ -362,7 +362,7 @@
       "teacher": "Hermant Pierre & Callens Isabelle"
     },
     {
-      "uid": "afce1692-3681-499c-93dd-066eb4d05784@afce.org",
+      "uid": "30a21d23-965d-45b8-a83c-67b58a42febb@30a2.org",
       "title": "CM: Econométrie",
       "date": "2026-10-06",
       "start": "10:45",
@@ -374,7 +374,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "d0c2808d-2261-4f79-88a4-0137df3a5f97@d0c2.org",
+      "uid": "2749d614-699e-43ad-ab8e-6e8953714a0d@2749.org",
       "title": "CM: Théorie des organisations",
       "date": "2026-10-06",
       "start": "15:45",
@@ -386,7 +386,7 @@
       "teacher": "Dejean Karine"
     },
     {
-      "uid": "0ad9fd52-6b50-4d8d-8ff6-8374bf8adc1c@0ad9.org",
+      "uid": "7931044f-1995-43df-b98f-c5cc05139493@7931.org",
       "title": "CM: Public policy seminar",
       "date": "2026-10-07",
       "start": "08:30",
@@ -398,7 +398,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "36c11f0c-75ef-4ece-b9ac-f61d6b847894@36c1.org",
+      "uid": "3afa0e26-7f8d-43e4-896e-bd4a10db0f9f@3afa.org",
       "title": "CM: Public policy seminar",
       "date": "2026-10-07",
       "start": "08:30",
@@ -410,7 +410,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "c75edc89-9290-4176-91db-e813eb25adba@c75e.org",
+      "uid": "5bf7f92d-81ef-4fd5-9292-535763741165@5bf7.org",
       "title": "CM: Ethique et économie",
       "date": "2026-10-08",
       "start": "10:45",
@@ -422,7 +422,7 @@
       "teacher": "Vanderborght Yannick"
     },
     {
-      "uid": "7c653aec-85e5-4726-859b-91bf36d4e808@7c65.org",
+      "uid": "4681e468-a3a2-4ec6-825a-f7e473147684@4681.org",
       "title": "CM: Econométrie",
       "date": "2026-10-08",
       "start": "13:30",
@@ -434,7 +434,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "20b4d7de-eda6-4a45-9238-c76a2dda0bd4@20b4.org",
+      "uid": "014947dc-ce6e-4e3d-a9e3-2d5334da91c1@0149.org",
       "title": "TP: Econométrie",
       "date": "2026-10-12",
       "start": "14:00",
@@ -446,7 +446,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "0b35b1ac-b52a-4697-a064-e973370d684a@0b35.org",
+      "uid": "dc8f4569-ca17-4cb6-8dd7-52e8cb812e05@dc8f.org",
       "title": "CM: Management et stratégie",
       "date": "2026-10-12",
       "start": "14:30",
@@ -458,7 +458,7 @@
       "teacher": "Hermant Pierre & Callens Isabelle"
     },
     {
-      "uid": "e0d8dbe0-114b-4241-937b-7a600d591d5f@e0d8.org",
+      "uid": "f72e29ae-9551-4f0c-96d8-41855db3d50b@f72e.org",
       "title": "TP: Econométrie",
       "date": "2026-10-13",
       "start": "08:30",
@@ -470,7 +470,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "474c5527-3855-43da-8b14-727764cd8fb2@474c.org",
+      "uid": "ec5425a2-6437-4b1c-a8d2-3aee6225dd27@ec54.org",
       "title": "CM: Econométrie",
       "date": "2026-10-13",
       "start": "10:45",
@@ -482,7 +482,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "ec1e0af5-3e1a-4e07-848a-b04e3d83d43c@ec1e.org",
+      "uid": "9889a990-6e80-402a-bb6b-9dc9760daa9b@9889.org",
       "title": "TP: Econométrie",
       "date": "2026-10-13",
       "start": "13:30",
@@ -494,7 +494,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "9de1e44d-39e0-41dc-852d-509dc130a700@9de1.org",
+      "uid": "100f8da6-d4d2-4060-9351-98dcf795e3fe@100f.org",
       "title": "CM: Théorie des organisations",
       "date": "2026-10-13",
       "start": "15:45",
@@ -506,7 +506,7 @@
       "teacher": "Dejean Karine"
     },
     {
-      "uid": "51fbc020-0a44-4fb0-b7f6-0380534e825e@51fb.org",
+      "uid": "f615c245-1005-4f8c-b63f-eff1221b34f0@f615.org",
       "title": "TP: Théorie des jeux",
       "date": "2026-10-13",
       "start": "15:45",
@@ -518,7 +518,7 @@
       "teacher": "Ghislain Cyril"
     },
     {
-      "uid": "d0673694-5b02-4dc3-8c67-20f6c2fbab96@d067.org",
+      "uid": "1d9ad4ae-f2d8-4404-bcae-dc0b9ed77995@1d9a.org",
       "title": "CM: Public policy seminar",
       "date": "2026-10-14",
       "start": "08:30",
@@ -530,7 +530,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "56d84ce8-8e1d-45a8-88d8-70e2995159db@56d8.org",
+      "uid": "c97c7cd1-b1b7-4e26-80dc-76c9d749acd2@c97c.org",
       "title": "CM: Public policy seminar",
       "date": "2026-10-14",
       "start": "08:30",
@@ -542,7 +542,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "ca2390c6-3fa2-471e-b27a-0a438d3da0b5@ca23.org",
+      "uid": "a3e8e89e-9e65-4c5b-89b4-ede8da9b3847@a3e8.org",
       "title": "TP: Gestion des opérations",
       "date": "2026-10-14",
       "start": "08:30",
@@ -554,7 +554,7 @@
       "teacher": "Polet Louis"
     },
     {
-      "uid": "3822d425-6949-44d8-b58e-c1adb2821c7f@3822.org",
+      "uid": "1ee8d5e2-bb86-460e-9045-c351ba40dbce@1ee8.org",
       "title": "TP: Gestion des opérations",
       "date": "2026-10-14",
       "start": "13:30",
@@ -566,7 +566,7 @@
       "teacher": "Polet Louis"
     },
     {
-      "uid": "d6698885-042d-4618-a599-31fc176d464e@d669.org",
+      "uid": "6f508e1a-a00c-4b1a-b1af-1a0674e15214@6f50.org",
       "title": "CM: Ethique et économie",
       "date": "2026-10-15",
       "start": "10:45",
@@ -578,7 +578,7 @@
       "teacher": "Vanderborght Yannick"
     },
     {
-      "uid": "8d2f6870-ab18-44ad-b90e-7921e2c07ce5@8d2f.org",
+      "uid": "da43867f-ca55-469a-95dd-d4d339ffc1a3@da43.org",
       "title": "CM: Econométrie",
       "date": "2026-10-15",
       "start": "13:30",
@@ -590,7 +590,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "c3b47623-e7f8-4511-bca5-6133878badf7@c3b4.org",
+      "uid": "07fb81f3-16b8-423e-91d7-de79d77af1a0@07fb.org",
       "title": "CM: Gestion des opérations",
       "date": "2026-10-16",
       "start": "10:45",
@@ -602,7 +602,7 @@
       "teacher": "Laurier Wim"
     },
     {
-      "uid": "6b0be4cc-e806-4e10-a811-030eb8f076b4@6b0b.org",
+      "uid": "21ab7498-2364-410d-8501-6ad7e4107234@21ab.org",
       "title": "TP: Econométrie",
       "date": "2026-10-19",
       "start": "14:00",
@@ -614,7 +614,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "8bdbb847-e132-4221-a1ee-c0a56f73a9c7@8bdb.org",
+      "uid": "cac213f9-a7fa-49b5-a450-601c2ca4766e@cac2.org",
       "title": "CM: Management et stratégie",
       "date": "2026-10-19",
       "start": "14:30",
@@ -626,7 +626,7 @@
       "teacher": "Hermant Pierre & Callens Isabelle"
     },
     {
-      "uid": "9713c137-d64a-46d8-b4a2-c44d63debc52@9713.org",
+      "uid": "80393574-a516-4246-88e6-e6e23dbde46e@8039.org",
       "title": "TP: Econométrie",
       "date": "2026-10-20",
       "start": "08:30",
@@ -638,7 +638,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "16259d8e-0223-4488-9023-d756ec3b57cb@1625.org",
+      "uid": "6f57c580-05a6-42c7-8e62-61c3bdab35ca@6f57.org",
       "title": "CM: Econométrie",
       "date": "2026-10-20",
       "start": "10:45",
@@ -650,7 +650,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "86f6f4f0-e59f-4af7-b8b5-cac93ca5211b@86f6.org",
+      "uid": "60d0d2ca-70e6-4f45-af2a-d8cb9fb3d43f@60d0.org",
       "title": "TP: Econométrie",
       "date": "2026-10-20",
       "start": "13:30",
@@ -662,7 +662,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "1ca5da42-39a4-427a-85c3-60e6801b39cc@1ca5.org",
+      "uid": "ee91e99e-cbb2-421d-8ee0-3a110c9a9bde@ee91.org",
       "title": "CM: Théorie des organisations",
       "date": "2026-10-20",
       "start": "15:45",
@@ -674,7 +674,7 @@
       "teacher": "Dejean Karine"
     },
     {
-      "uid": "debf313f-5513-46d3-90b6-86f522e82ac8@debf.org",
+      "uid": "f3b2b52d-517d-4231-a749-062864add8b5@f3b2.org",
       "title": "CM: Public policy seminar",
       "date": "2026-10-21",
       "start": "08:30",
@@ -686,7 +686,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "3db67ee8-904c-4a04-a3e2-0591f51fbbd8@3db6.org",
+      "uid": "4294041a-51a0-43dd-b41b-581360a99bc4@4294.org",
       "title": "CM: Public policy seminar",
       "date": "2026-10-21",
       "start": "08:30",
@@ -698,7 +698,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "aafad20e-3da6-4222-8d6d-ea18a64ba428@aafa.org",
+      "uid": "156a2b16-1c03-4553-bf4c-30c884ea5698@156a.org",
       "title": "CM: Ethique et économie",
       "date": "2026-10-22",
       "start": "10:45",
@@ -710,7 +710,7 @@
       "teacher": "Vanderborght Yannick"
     },
     {
-      "uid": "463af8d0-acbe-4d20-b4b6-b4a54646a3b0@463a.org",
+      "uid": "aa2bda63-6395-4314-94d6-82d62f012a8a@aa2b.org",
       "title": "CM: Econométrie",
       "date": "2026-10-22",
       "start": "13:30",
@@ -722,7 +722,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "42757a80-096d-49b7-9d13-eaaf14c11125@4275.org",
+      "uid": "d2c83e32-d6b0-45ba-9094-bd4d5368286b@d2c8.org",
       "title": "CM: Gestion des opérations",
       "date": "2026-10-23",
       "start": "10:45",
@@ -734,7 +734,7 @@
       "teacher": "Laurier Wim"
     },
     {
-      "uid": "af84a0bf-f612-4e5a-85d5-5fde0839abe5@af84.org",
+      "uid": "34db1aa7-ddce-4be2-9476-9573459d5fc6@34db.org",
       "title": "TP: Econométrie",
       "date": "2026-11-02",
       "start": "14:00",
@@ -746,7 +746,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "6a5af347-30bf-40ae-82ad-56a4d4b2a58f@6a5a.org",
+      "uid": "707f748e-c6f6-477b-b0d5-e229bc5e956c@707f.org",
       "title": "CM: Management et stratégie",
       "date": "2026-11-02",
       "start": "14:30",
@@ -758,7 +758,7 @@
       "teacher": "Hermant Pierre & Callens Isabelle"
     },
     {
-      "uid": "dbaf99b6-d532-409d-8879-f74dcff72272@dbaf.org",
+      "uid": "cf48477f-f22c-48c8-8948-ba149ca03d24@cf48.org",
       "title": "TP: Econométrie",
       "date": "2026-11-03",
       "start": "08:30",
@@ -770,7 +770,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "10240db8-7a74-4a40-a46e-a8d7feea613a@1024.org",
+      "uid": "8ec59a6c-3a3f-4185-83f5-90813419fa11@8ec5.org",
       "title": "CM: Econométrie",
       "date": "2026-11-03",
       "start": "10:45",
@@ -782,7 +782,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "44717ced-c6e2-4060-a30b-8883f564f5f1@4471.org",
+      "uid": "f059e2e4-5eca-40b4-9803-f99e8ba861c1@f059.org",
       "title": "TP: Econométrie",
       "date": "2026-11-03",
       "start": "13:30",
@@ -794,7 +794,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "1a74b028-3869-4605-91f7-220fdeca8b68@1a74.org",
+      "uid": "a5277091-12e1-4f84-96d8-1fcb6c4c16c6@a527.org",
       "title": "CM: Théorie des organisations",
       "date": "2026-11-03",
       "start": "15:45",
@@ -806,7 +806,7 @@
       "teacher": "Dejean Karine"
     },
     {
-      "uid": "de0fbec6-766a-4706-aec3-a79f3eef61a2@de0f.org",
+      "uid": "b96de2b1-7bc1-4d7f-a222-70aa31d30fcc@b96d.org",
       "title": "TP: Théorie des jeux",
       "date": "2026-11-03",
       "start": "15:45",
@@ -818,7 +818,7 @@
       "teacher": "Ghislain Cyril"
     },
     {
-      "uid": "372c226e-70b4-49ac-a220-fa07964b5897@372c.org",
+      "uid": "cd4bd8fe-a1c8-4011-a19c-fab7a3305e2a@cd4b.org",
       "title": "CM: Public policy seminar",
       "date": "2026-11-04",
       "start": "08:30",
@@ -830,7 +830,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "8dfac285-09df-4874-970c-f4a2f43931b9@8dfa.org",
+      "uid": "3be0405b-31ba-477f-9d7b-efa836231c16@3be0.org",
       "title": "CM: Public policy seminar",
       "date": "2026-11-04",
       "start": "08:30",
@@ -842,7 +842,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "437182d5-cb42-47cb-9e67-0770af9ad18d@4371.org",
+      "uid": "7483dfd8-bdc1-4d26-8c64-2ea4e85cc519@7483.org",
       "title": "CM: Ethique et économie",
       "date": "2026-11-05",
       "start": "10:45",
@@ -854,7 +854,7 @@
       "teacher": "Vanderborght Yannick"
     },
     {
-      "uid": "8120948b-cb4e-4104-9541-0f5b27e60f00@8120.org",
+      "uid": "5259838b-4642-46c7-897e-50efaed5468f@5259.org",
       "title": "CM: Gestion des opérations",
       "date": "2026-11-06",
       "start": "10:45",
@@ -866,7 +866,7 @@
       "teacher": "Laurier Wim"
     },
     {
-      "uid": "bdb84741-d547-4fe6-8725-e828d584d7f6@bdb8.org",
+      "uid": "12173413-bae7-44e6-81ef-da20eba356e9@1217.org",
       "title": "CM: Econométrie",
       "date": "2026-11-06",
       "start": "13:30",
@@ -878,7 +878,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "1b38a9ed-27b7-4c8e-833e-6dd8f2e8dd54@1b38.org",
+      "uid": "f548a121-5d13-4aa7-9393-8f59de5cf7fe@f548.org",
       "title": "CM: Gestion des opérations",
       "date": "2026-11-09",
       "start": "08:30",
@@ -890,7 +890,7 @@
       "teacher": "Laurier Wim"
     },
     {
-      "uid": "f1082252-0c52-4913-ad0a-863e7a5db1c2@f108.org",
+      "uid": "2ad9c423-c95e-4037-9b8d-d9470759f68c@2ad9.org",
       "title": "CM: Management et stratégie",
       "date": "2026-11-09",
       "start": "14:30",
@@ -902,7 +902,7 @@
       "teacher": "Hermant Pierre & Callens Isabelle"
     },
     {
-      "uid": "cc939106-7f4a-440d-813a-84a2930b42b9@cc93.org",
+      "uid": "cbe26fbc-c072-4997-846a-cbcb971ae7e7@cbe2.org",
       "title": "CM: Econométrie",
       "date": "2026-11-10",
       "start": "10:45",
@@ -914,7 +914,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "5571565a-a1a8-4507-b2a6-8fcd5e25e22c@5571.org",
+      "uid": "78b7b469-67f8-428c-8b20-c9e4e9dc33a0@78b7.org",
       "title": "CM: Gestion des opérations",
       "date": "2026-11-10",
       "start": "15:45",
@@ -926,7 +926,7 @@
       "teacher": "Laurier Wim"
     },
     {
-      "uid": "45d3d777-25ec-4664-ba7e-d9a90da95d2b@45d3.org",
+      "uid": "611127b2-2d4a-448b-a0eb-30148f04d39c@6111.org",
       "title": "CM: Théorie des organisations",
       "date": "2026-11-10",
       "start": "15:45",
@@ -938,7 +938,7 @@
       "teacher": "Dejean Karine"
     },
     {
-      "uid": "b93ed1cc-5c31-4277-b128-acbc76397475@b93e.org",
+      "uid": "3eb1afe1-57b8-4111-85ad-da833cc0d231@3eb1.org",
       "title": "CM: Ethique et économie",
       "date": "2026-11-12",
       "start": "10:45",
@@ -950,7 +950,7 @@
       "teacher": "Vanderborght Yannick"
     },
     {
-      "uid": "9aabc3a5-6ae5-4ad3-93de-b3dd1a41f6e1@9aab.org",
+      "uid": "79a06ec1-c082-400a-80f1-506c075611eb@79a0.org",
       "title": "CM: Econométrie",
       "date": "2026-11-12",
       "start": "13:30",
@@ -962,7 +962,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "6365d6cb-5254-4786-a919-8a2f16ee6149@6365.org",
+      "uid": "02c1d966-035e-4efa-8cc7-8d01ed064df8@02c1.org",
       "title": "CM: Gestion des opérations",
       "date": "2026-11-13",
       "start": "10:45",
@@ -974,7 +974,7 @@
       "teacher": "Laurier Wim"
     },
     {
-      "uid": "f5653ba3-cff0-44ac-bf26-60e733086d93@f565.org",
+      "uid": "6b88c659-6083-4b55-a663-d22c6ebb339d@6b88.org",
       "title": "TP: Econométrie",
       "date": "2026-11-16",
       "start": "14:00",
@@ -986,7 +986,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "6bc9971e-c9f2-40dc-bdb1-b10a9b0d40e3@6bc9.org",
+      "uid": "f04b5481-2fe4-4d91-ae41-537d4c852a03@f04b.org",
       "title": "CM: Management et stratégie",
       "date": "2026-11-16",
       "start": "14:30",
@@ -998,7 +998,7 @@
       "teacher": "Hermant Pierre & Callens Isabelle"
     },
     {
-      "uid": "42392233-bf28-42e8-bbb6-2fda105a65e1@4239.org",
+      "uid": "35ad8207-4068-4ebb-86fa-7df486297b8e@35ad.org",
       "title": "TP: Econométrie",
       "date": "2026-11-17",
       "start": "08:30",
@@ -1010,7 +1010,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "a1296dab-d923-4271-ab46-604d8273a558@a129.org",
+      "uid": "67ec9157-09fc-4c2a-b303-eaa70cc11da3@67ec.org",
       "title": "CM: Econométrie",
       "date": "2026-11-17",
       "start": "10:45",
@@ -1022,7 +1022,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "8098016c-53f7-40dc-9fea-88da55c3187e@8098.org",
+      "uid": "1723b08b-73e1-4f03-a10a-c38f6ef3acc3@1723.org",
       "title": "TP: Econométrie",
       "date": "2026-11-17",
       "start": "13:30",
@@ -1034,7 +1034,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "372e95bf-ced2-48c4-94a6-a4b61ecdc764@372e.org",
+      "uid": "6a6eafab-ebd1-46a9-a005-9e531100952d@6a6e.org",
       "title": "CM: Théorie des organisations",
       "date": "2026-11-17",
       "start": "15:45",
@@ -1046,7 +1046,7 @@
       "teacher": "Dejean Karine"
     },
     {
-      "uid": "779d4ed8-d414-4fde-b613-d9576940e9a7@779d.org",
+      "uid": "e3bf49cf-539c-4c8e-8545-c99cd81338d2@e3bf.org",
       "title": "TP: Théorie des jeux",
       "date": "2026-11-17",
       "start": "15:45",
@@ -1058,7 +1058,7 @@
       "teacher": "Ghislain Cyril"
     },
     {
-      "uid": "8631318f-a6e5-42d3-b136-1f15d11c8bfd@8631.org",
+      "uid": "d5e52349-015d-4b83-a4ea-c155d054ca39@d5e5.org",
       "title": "CM: Public policy seminar",
       "date": "2026-11-18",
       "start": "08:30",
@@ -1070,7 +1070,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "8e284420-3026-4083-be50-95482c4c8af8@8e28.org",
+      "uid": "e5cb32f1-f62a-48d4-b648-71a4571f312a@e5cb.org",
       "title": "CM: Public policy seminar",
       "date": "2026-11-18",
       "start": "08:30",
@@ -1082,7 +1082,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "c27435e2-8b7e-4c8a-9c10-d736f2832604@c274.org",
+      "uid": "3d0c932e-314e-4ebf-94a2-2c9b0445ecd3@3d0c.org",
       "title": "CM: Ethique et économie",
       "date": "2026-11-19",
       "start": "10:45",
@@ -1094,7 +1094,7 @@
       "teacher": "Vanderborght Yannick"
     },
     {
-      "uid": "fc614ee5-a657-4f19-a636-390e901708f4@fc61.org",
+      "uid": "60eeba5d-9674-4540-bef2-61e2cff02d0c@60ee.org",
       "title": "CM: Econométrie",
       "date": "2026-11-19",
       "start": "13:30",
@@ -1106,7 +1106,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "bd23512f-5fe6-4954-9b48-75edf920ddd9@bd23.org",
+      "uid": "74df1677-5f79-4a41-8567-84232139730c@74df.org",
       "title": "CM: Gestion des opérations",
       "date": "2026-11-20",
       "start": "10:45",
@@ -1118,7 +1118,7 @@
       "teacher": "Laurier Wim"
     },
     {
-      "uid": "eb208212-e5bd-4d59-bfd3-c1e1514b1ed3@eb20.org",
+      "uid": "6613c2e1-11df-4c59-9203-10f16c67dfe4@6613.org",
       "title": "TP: Econométrie",
       "date": "2026-11-23",
       "start": "14:00",
@@ -1130,7 +1130,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "af8629ce-86aa-41a2-af8b-4a42dfde2654@af86.org",
+      "uid": "a2264f6f-78e5-4896-be30-bfb32e4d53f5@a226.org",
       "title": "CM: Management et stratégie",
       "date": "2026-11-23",
       "start": "14:30",
@@ -1142,7 +1142,7 @@
       "teacher": "Hermant Pierre & Callens Isabelle"
     },
     {
-      "uid": "4cb32a6e-c31d-4f51-95fa-6908097623b8@4cb3.org",
+      "uid": "430bd232-586b-4902-a3ea-b1baae21ed9a@430b.org",
       "title": "TP: Econométrie",
       "date": "2026-11-24",
       "start": "08:30",
@@ -1154,7 +1154,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "3c677b8f-829f-48f6-85e4-33b9c34c93c7@3c67.org",
+      "uid": "932a98b2-ac8a-483d-91f4-c934cd26d75d@932a.org",
       "title": "CM: Econométrie",
       "date": "2026-11-24",
       "start": "10:45",
@@ -1166,7 +1166,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "5cb626af-9570-4326-8b3d-71f45ab94814@5cb6.org",
+      "uid": "e4540e8f-50b2-4d17-b577-debbecdfa7da@e454.org",
       "title": "TP: Econométrie",
       "date": "2026-11-24",
       "start": "13:30",
@@ -1178,7 +1178,7 @@
       "teacher": "D'haegeleer Thaddée"
     },
     {
-      "uid": "2f7d97d8-4f2e-40be-b1f0-c622f99c42b9@2f7d.org",
+      "uid": "2173f837-fb05-4fe8-a418-1fc800a38f43@2173.org",
       "title": "CM: Théorie des organisations",
       "date": "2026-11-24",
       "start": "15:45",
@@ -1190,7 +1190,7 @@
       "teacher": "Dejean Karine"
     },
     {
-      "uid": "a4692791-29b4-4152-86a5-5f6d688ae088@a469.org",
+      "uid": "e149b26a-98f2-4a9c-b9d7-0e81fdd217cc@e149.org",
       "title": "CM: Public policy seminar",
       "date": "2026-11-25",
       "start": "08:30",
@@ -1202,7 +1202,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "5c05275c-ee78-4535-a750-2136b6a7e93d@5c05.org",
+      "uid": "b6731e43-a8e4-4a7b-95e7-f9c9a01a84ae@b673.org",
       "title": "CM: Public policy seminar",
       "date": "2026-11-25",
       "start": "08:30",
@@ -1214,7 +1214,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "3cba9528-23fa-4e2c-b994-a14ec962b40d@3cba.org",
+      "uid": "030bff7e-baae-4f4d-9097-716013936b97@030b.org",
       "title": "TP: Gestion des opérations",
       "date": "2026-11-25",
       "start": "08:30",
@@ -1226,7 +1226,7 @@
       "teacher": "Polet Louis"
     },
     {
-      "uid": "65feeb00-1f2b-48bb-a5a3-122880bd7d91@65fe.org",
+      "uid": "1b199a71-f174-4788-9f7e-435411e0509c@1b19.org",
       "title": "TP: Gestion des opérations",
       "date": "2026-11-25",
       "start": "13:30",
@@ -1238,7 +1238,7 @@
       "teacher": "Polet Louis"
     },
     {
-      "uid": "38e2c725-f63f-4b4a-96e0-0cc2aed5c6fc@38e2.org",
+      "uid": "7ca9a1ad-fef5-40d3-9bd5-f89c787c5b25@7ca9.org",
       "title": "CM: Ethique et économie",
       "date": "2026-11-26",
       "start": "10:45",
@@ -1250,7 +1250,7 @@
       "teacher": "Vanderborght Yannick"
     },
     {
-      "uid": "9c1e30bf-07b5-4164-bfa9-e6e195757e88@9c1e.org",
+      "uid": "64ffb8a6-3dad-4409-9459-3c29ae270886@64ff.org",
       "title": "CM: Econométrie",
       "date": "2026-11-26",
       "start": "13:30",
@@ -1262,7 +1262,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "63ebaf6a-9a5c-47c7-b597-a1dc98bdd454@63eb.org",
+      "uid": "7bc434d9-3625-4c7d-ac35-6cd8e8bcccc3@7bc4.org",
       "title": "CM: Gestion des opérations",
       "date": "2026-11-27",
       "start": "10:45",
@@ -1274,7 +1274,7 @@
       "teacher": "Laurier Wim"
     },
     {
-      "uid": "edefb573-48f7-456b-abb6-37c6bd21e9b3@edef.org",
+      "uid": "5edb16ef-a501-4df6-ad6b-17531d359aea@5edb.org",
       "title": "CM: Management et stratégie",
       "date": "2026-11-30",
       "start": "14:30",
@@ -1286,7 +1286,7 @@
       "teacher": "Hermant Pierre & Callens Isabelle"
     },
     {
-      "uid": "91d636ca-f4ab-4bf4-9abd-f7c73e05c469@91d6.org",
+      "uid": "f00d3f7c-73dc-4811-abe5-7036e5e0c548@f00d.org",
       "title": "CM: Econométrie",
       "date": "2026-12-01",
       "start": "10:45",
@@ -1298,7 +1298,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "70aee3df-4894-4093-b9ca-1b7f276fc50d@70ae.org",
+      "uid": "ab964a38-3f28-40c0-b293-f2c2a0b2d825@ab96.org",
       "title": "CM: Théorie des organisations",
       "date": "2026-12-01",
       "start": "15:45",
@@ -1310,7 +1310,7 @@
       "teacher": "Dejean Karine"
     },
     {
-      "uid": "d94ea2f5-7944-4c83-bf44-3f8f4f4f1129@d94e.org",
+      "uid": "caa57cc3-9a21-4dc5-86d0-2a068c2b3d7a@caa5.org",
       "title": "TP: Théorie des jeux",
       "date": "2026-12-01",
       "start": "15:45",
@@ -1322,7 +1322,7 @@
       "teacher": "Ghislain Cyril"
     },
     {
-      "uid": "73bb6080-c0f3-4cf0-93cb-2977047e133e@73bb.org",
+      "uid": "9ad3b67b-b2cb-46f2-b8ae-d4178a3f78c7@9ad3.org",
       "title": "CM: Public policy seminar",
       "date": "2026-12-02",
       "start": "08:30",
@@ -1334,7 +1334,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "d145e81b-afb8-4c61-af9f-c024752def2c@d145.org",
+      "uid": "b2007cde-4192-4d63-932a-e9a2e1d2bc3b@b200.org",
       "title": "CM: Public policy seminar",
       "date": "2026-12-02",
       "start": "08:30",
@@ -1346,7 +1346,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "247ea4aa-100c-43bc-baaa-517481c2eb06@247e.org",
+      "uid": "3ffffe43-0cbd-4a6f-a084-d1345cb6618f@3fff.org",
       "title": "CM: Ethique et économie",
       "date": "2026-12-03",
       "start": "10:45",
@@ -1358,7 +1358,7 @@
       "teacher": "Vanderborght Yannick"
     },
     {
-      "uid": "814fea69-b838-4dce-93c4-9cd49acc482d@814f.org",
+      "uid": "ad3be0d9-3a17-4aa7-a23e-7fd9cba0c541@ad3b.org",
       "title": "CM: Gestion des opérations",
       "date": "2026-12-04",
       "start": "10:45",
@@ -1370,7 +1370,7 @@
       "teacher": "Laurier Wim"
     },
     {
-      "uid": "6b18a3c2-f1cf-4a31-ac6e-fc80f0e16bc0@6b18.org",
+      "uid": "eca59e0a-2a57-4e3a-b594-9c69a65d896f@eca5.org",
       "title": "CM: Management et stratégie",
       "date": "2026-12-07",
       "start": "14:30",
@@ -1382,7 +1382,7 @@
       "teacher": "Hermant Pierre & Callens Isabelle"
     },
     {
-      "uid": "a7190a3a-34ed-4b92-9a0c-d976f82ce897@a719.org",
+      "uid": "82b2e970-4b17-4438-9069-5e24dc0ad920@82b2.org",
       "title": "CM: Théorie des organisations",
       "date": "2026-12-08",
       "start": "15:45",
@@ -1394,7 +1394,7 @@
       "teacher": "Dejean Karine"
     },
     {
-      "uid": "9f5efbfa-76ec-4cd5-af76-5ee75f6162e1@9f5e.org",
+      "uid": "c123ca33-494c-405d-860d-9969b5e82c06@c123.org",
       "title": "CM: Public policy seminar",
       "date": "2026-12-09",
       "start": "08:30",
@@ -1406,7 +1406,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "645a3ddc-1167-4100-a07e-de94b415aa5e@645a.org",
+      "uid": "d9c45f36-8daa-440c-9b0f-9e4656278b82@d9c4.org",
       "title": "CM: Public policy seminar",
       "date": "2026-12-09",
       "start": "08:30",
@@ -1418,7 +1418,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "06d36ac8-3a47-4240-b9ea-56f47a75f8ee@06d3.org",
+      "uid": "08b52f3f-ca45-408a-a487-df502854910b@08b5.org",
       "title": "TP: Gestion des opérations",
       "date": "2026-12-09",
       "start": "08:30",
@@ -1430,7 +1430,7 @@
       "teacher": "Polet Louis"
     },
     {
-      "uid": "e39777b3-fb1d-4492-b752-6e0b6d63093d@e397.org",
+      "uid": "ea979474-ce4b-4020-8ed7-6e5a1c2ee056@ea97.org",
       "title": "TP: Gestion des opérations",
       "date": "2026-12-09",
       "start": "13:30",
@@ -1442,7 +1442,7 @@
       "teacher": "Polet Louis"
     },
     {
-      "uid": "beaf3870-0c17-4822-a664-2622713211f4@beaf.org",
+      "uid": "cf5207c5-b348-49db-aca1-814ac06cb32c@cf52.org",
       "title": "CM: Ethique et économie",
       "date": "2026-12-10",
       "start": "10:45",
@@ -1454,7 +1454,7 @@
       "teacher": "Vanderborght Yannick"
     },
     {
-      "uid": "cf4cfa3a-ddf0-4b7a-94b1-514a261d7557@cf4c.org",
+      "uid": "c5f61b58-f501-4307-a179-1407ff1280b5@c5f6.org",
       "title": "CM: Management et stratégie",
       "date": "2026-12-14",
       "start": "14:30",
@@ -1466,7 +1466,7 @@
       "teacher": "Hermant Pierre & Callens Isabelle"
     },
     {
-      "uid": "d078087e-145b-43a4-b3d3-c4bf8855471d@d078.org",
+      "uid": "03162b78-fe82-452d-b0f5-e41530e63059@0316.org",
       "title": "CM: Théorie des organisations",
       "date": "2026-12-15",
       "start": "15:45",
@@ -1478,7 +1478,7 @@
       "teacher": "Dejean Karine"
     },
     {
-      "uid": "d7840b2b-40f9-4ba0-90da-37931b863a4c@d784.org",
+      "uid": "f910e6ee-260f-4093-ae66-bc6783784c4c@f910.org",
       "title": "TP: Théorie des jeux",
       "date": "2026-12-15",
       "start": "15:45",
@@ -1490,7 +1490,7 @@
       "teacher": "Ghislain Cyril"
     },
     {
-      "uid": "ddd82fab-4a50-4676-80b6-35818e468b07@ddd8.org",
+      "uid": "fdfcae32-f525-4d0c-914d-cb872b06c6ab@fdfc.org",
       "title": "CM: Public policy seminar",
       "date": "2026-12-16",
       "start": "08:30",
@@ -1502,7 +1502,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "d44e2465-8655-4ead-b79d-eaec2992257a@d44e.org",
+      "uid": "5d8b6ce3-0d89-483e-8c2a-3a5d244f9452@5d8b.org",
       "title": "CM: Public policy seminar",
       "date": "2026-12-16",
       "start": "08:30",
@@ -1514,7 +1514,7 @@
       "teacher": "Grandjean Gilles & Latzer Hélène"
     },
     {
-      "uid": "b74e1ede-a695-4ec9-9b30-010baf2a3b2d@b74e.org",
+      "uid": "e1dda2e3-06df-4fe1-bf58-53010471fa9c@e1dd.org",
       "title": "CM: Ethique et économie",
       "date": "2026-12-17",
       "start": "10:45",
@@ -1526,7 +1526,7 @@
       "teacher": "Vanderborght Yannick"
     },
     {
-      "uid": "86b27dd7-6908-4543-a453-d8ba6cd22b51@86b2.org",
+      "uid": "b52cd560-b4c3-42e2-8a13-c29a91f28f10@b52c.org",
       "title": "CM: Gestion des opérations",
       "date": "2026-12-18",
       "start": "10:45",
@@ -1538,7 +1538,7 @@
       "teacher": "Laurier Wim"
     },
     {
-      "uid": "a42429f8-a98e-4719-a9e3-b1006bd31e9a@a424.org",
+      "uid": "756999b4-9670-4441-acc9-b680ac2fb87b@7569.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-02-01",
       "start": "08:30",
@@ -1550,7 +1550,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "572d9251-53f5-42b6-9890-292e21017f1b@572d.org",
+      "uid": "24e5ed53-7975-4d04-a1f6-a9c1938d50b3@24e5.org",
       "title": "CM: Défis et enjeux environnementaux",
       "date": "2027-02-02",
       "start": "17:15",
@@ -1562,7 +1562,7 @@
       "teacher": "Frison Christine"
     },
     {
-      "uid": "922170c2-9c38-4b7a-8ab1-4c46bc496c7b@9221.org",
+      "uid": "5b3d05b9-4866-48a4-8c8d-92158b64a384@5b3d.org",
       "title": "CM: Economie industrielle",
       "date": "2027-02-03",
       "start": "10:45",
@@ -1574,7 +1574,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "2b5c122e-ac8e-4803-a86b-28bfb5e6c3d8@2b5c.org",
+      "uid": "d24addca-a0a1-4629-bdca-7e425f775357@d24a.org",
       "title": "CM: Economie industrielle",
       "date": "2027-02-03",
       "start": "13:30",
@@ -1586,7 +1586,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "66c4331c-2d3e-44a9-b13c-d45942b2daae@66c4.org",
+      "uid": "f5c41702-767a-401e-935c-2bd827a896a7@f5c4.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-02-03",
       "start": "15:45",
@@ -1598,7 +1598,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "272f62e3-1eb1-445e-8ebe-73d9e6c75fa3@272f.org",
+      "uid": "f6c9406b-1e58-42be-9348-aa0c3a770e44@f6c9.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-02-08",
       "start": "08:30",
@@ -1610,7 +1610,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "8b5d956a-34fe-4004-bc7a-dc62959aea1f@8b5d.org",
+      "uid": "a2dc66d2-30c1-40ef-be0b-5756436d33ce@a2dc.org",
       "title": "CM: Corporate Finance",
       "date": "2027-02-08",
       "start": "13:30",
@@ -1622,7 +1622,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "22ace330-ebc6-4ef6-b830-3b399d63defe@22ac.org",
+      "uid": "ccd19ce9-21b1-48be-9cc2-5834cac91b49@ccd1.org",
       "title": "CM: ICT Management",
       "date": "2027-02-09",
       "start": "10:30",
@@ -1634,7 +1634,7 @@
       "teacher": ""
     },
     {
-      "uid": "e767ca88-be3d-4b1c-b800-d21cb33a838f@e767.org",
+      "uid": "32e24376-4c88-407f-834b-51bf26a4f9b0@32e2.org",
       "title": "CM: ICT Management",
       "date": "2027-02-09",
       "start": "13:30",
@@ -1646,7 +1646,7 @@
       "teacher": ""
     },
     {
-      "uid": "6477cda6-9e40-4d3a-9a63-f3985207efa7@6477.org",
+      "uid": "226a5a66-9a4f-4fd1-8dbd-e045b9f26ec0@226a.org",
       "title": "CM: Défis et enjeux environnementaux",
       "date": "2027-02-09",
       "start": "17:15",
@@ -1658,7 +1658,7 @@
       "teacher": "Frison Christine"
     },
     {
-      "uid": "6bf6ddf5-e402-4a48-af4b-fcc70342eb95@6bf6.org",
+      "uid": "7ce3b7f0-e5bb-42ba-ada5-958d5ebc3d67@7ce3.org",
       "title": "CM: Economie industrielle",
       "date": "2027-02-10",
       "start": "10:45",
@@ -1670,7 +1670,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "ea5cf4b3-6ead-4e1f-a54f-5da5d0275bf9@ea5c.org",
+      "uid": "a1c2d7b0-7c05-4209-818d-5cfdf02d1e4a@a1c2.org",
       "title": "CM: Economie industrielle",
       "date": "2027-02-10",
       "start": "13:30",
@@ -1682,7 +1682,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "2a562ee6-579b-4699-a298-47e586768bd3@2a56.org",
+      "uid": "bdcb5ba5-c3cc-487d-8b2e-b35ba5ebe8d3@bdcb.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-02-10",
       "start": "15:45",
@@ -1694,7 +1694,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "a9c70aa5-e9ee-4fc0-aeed-0a856bbd3c2d@a9c7.org",
+      "uid": "40c9a51b-d297-4637-bd42-972f375e99fa@40c9.org",
       "title": "CM: ICT Management",
       "date": "2027-02-12",
       "start": "10:30",
@@ -1706,7 +1706,7 @@
       "teacher": ""
     },
     {
-      "uid": "032217cd-14bd-45d0-9aa9-8255c4591d3f@0322.org",
+      "uid": "ab1a936d-8d69-4830-ac93-6900a77297bf@ab1a.org",
       "title": "CM: Corporate Finance",
       "date": "2027-02-12",
       "start": "10:45",
@@ -1718,7 +1718,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "73129a79-ae1a-495d-8a99-1a471eae7a2e@7312.org",
+      "uid": "3fb0fa84-da67-4e2f-ac22-f803d2f12181@3fb0.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-02-15",
       "start": "08:30",
@@ -1730,7 +1730,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "a2420d50-ed78-42ea-8bda-77c92d79b921@a242.org",
+      "uid": "5671229e-b563-4e55-9e44-1eea3641fe26@5671.org",
       "title": "CM: Corporate Finance",
       "date": "2027-02-15",
       "start": "13:30",
@@ -1742,7 +1742,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "5d1a073f-b73c-4388-be26-5fb4382d8bf8@5d1a.org",
+      "uid": "1c869a2e-b186-42f9-b52d-22904fb93964@1c86.org",
       "title": "CM: Défis et enjeux environnementaux",
       "date": "2027-02-16",
       "start": "17:15",
@@ -1754,7 +1754,7 @@
       "teacher": "Frison Christine"
     },
     {
-      "uid": "db4c6eb9-0140-4c4a-b32f-aa10ff0a71eb@db4c.org",
+      "uid": "8efb187f-c36c-407e-ab64-3e6aa826f878@8efb.org",
       "title": "CM: Economie industrielle",
       "date": "2027-02-17",
       "start": "10:45",
@@ -1766,7 +1766,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "3de9c5fb-e3e4-4c53-84a5-52dc879f3541@3de9.org",
+      "uid": "d33a0c7f-adc6-4534-b383-fac82b56a3ee@d33a.org",
       "title": "CM: Economie industrielle",
       "date": "2027-02-17",
       "start": "13:30",
@@ -1778,7 +1778,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "a9c03b5c-e3bc-453d-b754-01c6b240ef7d@a9c0.org",
+      "uid": "faf09e34-01f4-4399-8f2d-6b0552c2b0de@faf0.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-02-17",
       "start": "15:45",
@@ -1790,7 +1790,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "912a49b5-6fd9-4138-9bde-8e0ba4765a68@912a.org",
+      "uid": "be4b89ed-c3ca-42ca-a845-027b0055cc5c@be4b.org",
       "title": "CM: Corporate Finance",
       "date": "2027-02-19",
       "start": "10:45",
@@ -1802,7 +1802,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "d90dc666-a3c5-4422-8132-ca7b9b502897@d90d.org",
+      "uid": "1ac8e79e-7f74-4db2-abab-42158256746f@1ac8.org",
       "title": "CM: ICT Management",
       "date": "2027-02-19",
       "start": "13:30",
@@ -1814,7 +1814,7 @@
       "teacher": ""
     },
     {
-      "uid": "d0e7a6a8-6ffa-4280-a2d3-948b2c109376@d0e7.org",
+      "uid": "bc2054ce-ed33-4618-a783-4e93de09fcd8@bc20.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-02-22",
       "start": "08:30",
@@ -1826,7 +1826,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "37e7bc57-6d37-4588-b7b1-5f0c835de217@37e7.org",
+      "uid": "a35f6a0a-c930-445d-9656-73fdd9aa3cab@a35f.org",
       "title": "CM: Corporate Finance",
       "date": "2027-02-22",
       "start": "13:30",
@@ -1838,7 +1838,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "9a34a562-d475-45d8-afb6-ee7583ec9546@9a34.org",
+      "uid": "e02a39bf-7805-4aa4-a700-36a916221052@e02a.org",
       "title": "CM: ICT Management",
       "date": "2027-02-23",
       "start": "10:30",
@@ -1850,7 +1850,7 @@
       "teacher": ""
     },
     {
-      "uid": "427e4380-0c2c-4d05-910f-15f00fcc048a@427e.org",
+      "uid": "b3eb4fd9-d1b8-4bab-882f-d399b1030567@b3eb.org",
       "title": "CM: ICT Management",
       "date": "2027-02-23",
       "start": "13:30",
@@ -1862,7 +1862,7 @@
       "teacher": ""
     },
     {
-      "uid": "f619c844-6e28-42cd-9c0c-590eb47d31f1@f619.org",
+      "uid": "6f9bbc4b-6d4b-466d-b1bd-d90f442cafa5@6f9b.org",
       "title": "CM: Défis et enjeux environnementaux",
       "date": "2027-02-23",
       "start": "17:15",
@@ -1874,7 +1874,7 @@
       "teacher": "Frison Christine"
     },
     {
-      "uid": "1cecd64a-b02f-4af2-be29-6cf41856068b@1cec.org",
+      "uid": "2d660526-24ef-4ed7-9342-0fbc4ec18714@2d66.org",
       "title": "CM: Economie industrielle",
       "date": "2027-02-24",
       "start": "10:45",
@@ -1886,7 +1886,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "c6674cac-0fd2-4b69-b3f3-7269f8e98678@c667.org",
+      "uid": "e1289d5a-3e00-454c-9818-b16569932ae4@e128.org",
       "title": "CM: Economie industrielle",
       "date": "2027-02-24",
       "start": "13:30",
@@ -1898,7 +1898,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "39eb0669-193d-4536-afc2-4a6ee700cd5a@39eb.org",
+      "uid": "fb277747-ca48-4f2e-95f6-a42b49a55fdd@fb27.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-02-24",
       "start": "15:45",
@@ -1910,7 +1910,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "ad0f6fcb-1102-4ad9-af92-cfad938884ab@ad0f.org",
+      "uid": "388b6bce-d5bb-44c9-94dc-2298ebec9417@388b.org",
       "title": "CM: ICT Management",
       "date": "2027-02-26",
       "start": "10:30",
@@ -1922,7 +1922,7 @@
       "teacher": ""
     },
     {
-      "uid": "c7021e83-6a98-4f97-97f7-74772815cb98@c702.org",
+      "uid": "09127611-a13c-45f1-973f-2e0dcd44f6f8@0912.org",
       "title": "CM: Corporate Finance",
       "date": "2027-02-26",
       "start": "10:45",
@@ -1934,7 +1934,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "a3f85cb8-2176-4605-b836-1b997baa4875@a3f8.org",
+      "uid": "5e4737f7-f3f4-4365-aa1b-e95ca4eb9e60@5e47.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-03-01",
       "start": "08:30",
@@ -1946,7 +1946,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "b6d01f37-ceed-4160-8706-dd4baec8ee06@b6d0.org",
+      "uid": "70f440e1-dd82-48c7-b9ee-34e3f66b11de@70f4.org",
       "title": "CM: Corporate Finance",
       "date": "2027-03-01",
       "start": "13:30",
@@ -1958,7 +1958,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "0b754d7f-bdcd-4cd6-a084-57a1d5e7229c@0b75.org",
+      "uid": "445325cc-0066-4872-9b54-641b19d6e03c@4453.org",
       "title": "CM: Défis et enjeux environnementaux",
       "date": "2027-03-02",
       "start": "17:15",
@@ -1970,7 +1970,7 @@
       "teacher": "Frison Christine"
     },
     {
-      "uid": "7f89582e-cdae-4dfd-a0f2-cb171c34a85c@7f89.org",
+      "uid": "7878244d-fa0c-40be-b5b4-fb6bb0734b9d@7878.org",
       "title": "CM: Economie industrielle",
       "date": "2027-03-03",
       "start": "10:45",
@@ -1982,7 +1982,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "8bc013a1-c2ad-45bc-8ba2-de23cbd3ff74@8bc0.org",
+      "uid": "d2e493cc-061f-442c-92f2-ae0e90ecdb18@d2e4.org",
       "title": "CM: Economie industrielle",
       "date": "2027-03-03",
       "start": "13:30",
@@ -1994,7 +1994,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "d4cd4f8c-4c87-4178-baf0-28e841a25aeb@d4cd.org",
+      "uid": "8505a72d-020f-4cca-9959-a6f12a3d55c6@8505.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-03-03",
       "start": "15:45",
@@ -2006,7 +2006,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "d7555634-41c8-4776-b2bf-14cbdc1d7525@d755.org",
+      "uid": "9f80cff0-4fa2-4be0-85fe-a5cded00c20e@9f80.org",
       "title": "CM: Corporate Finance",
       "date": "2027-03-05",
       "start": "10:45",
@@ -2018,7 +2018,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "b2cd37cc-945a-4467-9f40-042acf4432df@b2cd.org",
+      "uid": "cc745aa2-10dc-4561-9e21-c50357487d3c@cc74.org",
       "title": "CM: ICT Management",
       "date": "2027-03-05",
       "start": "13:30",
@@ -2030,7 +2030,7 @@
       "teacher": ""
     },
     {
-      "uid": "3974bfc1-e197-43cf-8273-a8961ae32e3b@3974.org",
+      "uid": "daa595cc-b967-40bd-9e4d-b3ed9734969c@daa5.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-03-08",
       "start": "08:30",
@@ -2042,7 +2042,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "f8620913-d1ce-4592-9717-730042ee09ef@f862.org",
+      "uid": "ef212712-abd4-48bf-8220-7f8a84db3c9a@ef21.org",
       "title": "CM: Corporate Finance",
       "date": "2027-03-08",
       "start": "13:30",
@@ -2054,7 +2054,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "958ce397-8b6d-4177-903d-5bb082024d9e@958c.org",
+      "uid": "5f8c4dc0-4c37-4585-9206-9a5b4709369f@5f8c.org",
       "title": "CM: ICT Management",
       "date": "2027-03-09",
       "start": "10:30",
@@ -2066,7 +2066,7 @@
       "teacher": ""
     },
     {
-      "uid": "ac026050-9189-4d93-a5b3-6dc0f3d48e9c@ac02.org",
+      "uid": "781e72a9-4637-4651-a192-82f42e1b00a4@781e.org",
       "title": "CM: ICT Management",
       "date": "2027-03-09",
       "start": "13:30",
@@ -2078,7 +2078,7 @@
       "teacher": ""
     },
     {
-      "uid": "11101f11-0891-4279-a8e5-111a01274f17@1110.org",
+      "uid": "5a17ad25-3828-4efb-aea0-8529ff53fccd@5a17.org",
       "title": "CM: Défis et enjeux environnementaux",
       "date": "2027-03-09",
       "start": "17:15",
@@ -2090,7 +2090,7 @@
       "teacher": "Frison Christine"
     },
     {
-      "uid": "d15f652a-cb3d-4289-93d6-931d2b2c19ee@d15f.org",
+      "uid": "b130266f-e1ad-45e9-b305-05d342c7d220@b130.org",
       "title": "CM: Economie industrielle",
       "date": "2027-03-10",
       "start": "10:45",
@@ -2102,7 +2102,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "cd38ad62-55bd-4980-9a2d-a53a6300deff@cd38.org",
+      "uid": "3171d5a2-8346-4039-8835-21f8339ca65f@3171.org",
       "title": "CM: Economie industrielle",
       "date": "2027-03-10",
       "start": "13:30",
@@ -2114,7 +2114,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "e71cd36d-7ea7-4c22-b202-1b10010c478b@e71c.org",
+      "uid": "6c38a39e-f2a9-4155-a69d-509f9400b5e5@6c38.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-03-10",
       "start": "15:45",
@@ -2126,7 +2126,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "e737f965-eb84-4423-8621-7200b487c319@e737.org",
+      "uid": "22924589-e11d-4313-86c1-91eed06a5199@2292.org",
       "title": "CM: ICT Management",
       "date": "2027-03-12",
       "start": "10:30",
@@ -2138,7 +2138,7 @@
       "teacher": ""
     },
     {
-      "uid": "a1b2e58f-19e1-4cd0-92cd-0c415b156311@a1b2.org",
+      "uid": "01d789f0-1bae-4290-a8c6-62c99db4085b@01d7.org",
       "title": "CM: Corporate Finance",
       "date": "2027-03-12",
       "start": "10:45",
@@ -2150,7 +2150,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "49cc6323-4082-4829-9968-39a5eee308f7@49cc.org",
+      "uid": "bf2773c7-999a-446b-be3b-b2e9735cb53e@bf27.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-03-15",
       "start": "08:30",
@@ -2162,7 +2162,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "e056204e-4e9e-40d5-818c-dbcf4fbde617@e056.org",
+      "uid": "d45e17b1-267f-42ba-83fd-306157f9c396@d45e.org",
       "title": "CM: Corporate Finance",
       "date": "2027-03-15",
       "start": "13:30",
@@ -2174,7 +2174,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "1dc40bbf-9e00-4bc5-9ee1-85ab09500cb1@1dc4.org",
+      "uid": "e3b87447-7644-4d7c-a277-e708ce71239a@e3b8.org",
       "title": "CM: Défis et enjeux environnementaux",
       "date": "2027-03-16",
       "start": "17:15",
@@ -2186,7 +2186,7 @@
       "teacher": "Frison Christine"
     },
     {
-      "uid": "de0c1a6e-8540-452b-8c27-8eb252b30f43@de0c.org",
+      "uid": "f97058bc-5a9c-4d8f-8483-0e4e2e3416b8@f970.org",
       "title": "CM: Economie industrielle",
       "date": "2027-03-17",
       "start": "10:45",
@@ -2198,7 +2198,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "ede56beb-69b0-4371-9ed9-657bd05f248a@ede5.org",
+      "uid": "4f58de92-edc3-419d-a3eb-8f4b07acdd87@4f58.org",
       "title": "CM: Economie industrielle",
       "date": "2027-03-17",
       "start": "13:30",
@@ -2210,7 +2210,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "69112465-e3df-4898-a685-2097d44e3c21@6911.org",
+      "uid": "6bea6e34-0fa3-451d-b433-5bfd9f178c4c@6bea.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-03-17",
       "start": "15:45",
@@ -2222,7 +2222,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "a8fb7dd5-f3b0-4228-b4ca-cf824e2e60b8@a8fb.org",
+      "uid": "f9e869aa-01ad-4ad8-8db9-ced1bcd46c35@f9e8.org",
       "title": "CM: Corporate Finance",
       "date": "2027-03-19",
       "start": "10:45",
@@ -2234,7 +2234,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "818d42ba-20c7-47ef-904a-a0a08ec8d215@818d.org",
+      "uid": "6113ea11-90ea-41bf-94c3-1e4bbb270638@6113.org",
       "title": "CM: ICT Management",
       "date": "2027-03-19",
       "start": "13:30",
@@ -2246,7 +2246,7 @@
       "teacher": ""
     },
     {
-      "uid": "f1d23763-df0c-4694-8849-5aaa5744c607@f1d2.org",
+      "uid": "af731500-7558-4e7c-a959-0a447e01978f@af73.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-03-22",
       "start": "08:30",
@@ -2258,7 +2258,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "ba91abf9-bc96-48cd-8f3a-9f7ac9256ee1@ba91.org",
+      "uid": "8fe590dc-1500-4c79-80f6-8fdc2762ce1b@8fe5.org",
       "title": "CM: Corporate Finance",
       "date": "2027-03-22",
       "start": "13:30",
@@ -2270,7 +2270,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "6cd8c66a-8bd5-4f4c-a3e6-356bd708cb2f@6cd8.org",
+      "uid": "aa98d843-abe4-4174-8d03-3244ded1b8b0@aa98.org",
       "title": "CM: ICT Management",
       "date": "2027-03-23",
       "start": "10:30",
@@ -2282,7 +2282,7 @@
       "teacher": ""
     },
     {
-      "uid": "37621e14-7ff0-4001-b4b6-22357ed7bd86@3762.org",
+      "uid": "9a8a666e-f7a5-49b6-8e71-7d44bafb198d@9a8a.org",
       "title": "CM: ICT Management",
       "date": "2027-03-23",
       "start": "13:30",
@@ -2294,7 +2294,7 @@
       "teacher": ""
     },
     {
-      "uid": "66651e4e-76ba-4a2c-b0ff-ef88a7147dae@6665.org",
+      "uid": "1cea01d1-5bfa-45fa-85b0-2e150a111b4b@1cea.org",
       "title": "CM: Défis et enjeux environnementaux",
       "date": "2027-03-23",
       "start": "17:15",
@@ -2306,7 +2306,7 @@
       "teacher": "Frison Christine"
     },
     {
-      "uid": "e6731bf7-2d41-4764-81d4-6e82d41c357f@e673.org",
+      "uid": "d55fa3c7-3554-4437-9903-2fd35b29e66a@d55f.org",
       "title": "CM: Economie industrielle",
       "date": "2027-03-24",
       "start": "10:45",
@@ -2318,7 +2318,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "6f80b8eb-b257-4b58-87df-836115442f60@6f80.org",
+      "uid": "aba5ff84-3227-4aa3-a2f6-bdfcf3e5e387@aba5.org",
       "title": "CM: Economie industrielle",
       "date": "2027-03-24",
       "start": "13:30",
@@ -2330,7 +2330,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "d5d453bb-48e1-4e57-9e80-fecc6065d4af@d5d4.org",
+      "uid": "8b795553-2665-4059-a486-c11cb3f304e5@8b79.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-03-24",
       "start": "15:45",
@@ -2342,7 +2342,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "94d9805b-29b3-4b69-81e8-3853ce9bb8f8@94d9.org",
+      "uid": "5a7951a4-424c-43b7-9fad-a8c07bec1455@5a79.org",
       "title": "CM: ICT Management",
       "date": "2027-03-26",
       "start": "10:30",
@@ -2354,7 +2354,7 @@
       "teacher": ""
     },
     {
-      "uid": "33ccec7a-c0ec-4f4b-9623-9850cfe0383f@33cc.org",
+      "uid": "717dcf53-b121-4387-9dd7-8b7ffe8e4606@717d.org",
       "title": "CM: Corporate Finance",
       "date": "2027-03-26",
       "start": "10:45",
@@ -2366,7 +2366,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "b8dd582b-bded-43ed-a6af-7aef5e18cdff@b8dd.org",
+      "uid": "9b674ce3-da45-400f-b547-b8267cade2d9@9b67.org",
       "title": "CM: Défis et enjeux environnementaux",
       "date": "2027-03-30",
       "start": "17:15",
@@ -2378,7 +2378,7 @@
       "teacher": "Frison Christine"
     },
     {
-      "uid": "29995439-a73c-4bb8-bbc0-b5940d26ef5d@2999.org",
+      "uid": "2249d25a-3f5f-43f8-b524-7e5ea8031337@2249.org",
       "title": "CM: Economie industrielle",
       "date": "2027-03-31",
       "start": "10:45",
@@ -2390,7 +2390,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "b3e13527-66f9-4e8c-b61f-12218618c8e0@b3e1.org",
+      "uid": "58f59fc3-94ad-4794-8102-3f6f1b60478a@58f5.org",
       "title": "CM: Economie industrielle",
       "date": "2027-03-31",
       "start": "13:30",
@@ -2402,7 +2402,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "c0cf4898-56d3-480e-97e3-4146a129b4e9@c0cf.org",
+      "uid": "2d701801-b215-49a3-8e48-8a50dd632777@2d70.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-03-31",
       "start": "15:45",
@@ -2414,7 +2414,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "4817c2ae-6796-4ab9-b35d-656cae6d7d05@4817.org",
+      "uid": "8375c3dc-8f21-4e9a-8534-376e1a1da2e7@8375.org",
       "title": "CM: ICT Management",
       "date": "2027-04-02",
       "start": "13:30",
@@ -2426,7 +2426,7 @@
       "teacher": ""
     },
     {
-      "uid": "e63278e8-4e8e-4806-8352-4916a83ae9e2@e632.org",
+      "uid": "344c361e-ff5f-4523-8d98-96cd55393415@344c.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-04-05",
       "start": "08:30",
@@ -2438,7 +2438,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "239ad27a-41ae-4aa7-ae77-f010f6265681@239a.org",
+      "uid": "a4525406-555a-4111-9ab3-11b319bd7d42@a452.org",
       "title": "CM: ICT Management",
       "date": "2027-04-06",
       "start": "10:30",
@@ -2450,7 +2450,7 @@
       "teacher": ""
     },
     {
-      "uid": "9f91cd9c-0cf4-47a8-bcfa-c7355c12c288@9f91.org",
+      "uid": "574f917c-8716-4c28-a3c0-0cdfd049e380@574f.org",
       "title": "CM: ICT Management",
       "date": "2027-04-06",
       "start": "13:30",
@@ -2462,7 +2462,7 @@
       "teacher": ""
     },
     {
-      "uid": "5d871ba7-0d95-4a5e-ae17-aa115a16b6d8@5d87.org",
+      "uid": "4a48a59c-d39c-4912-bd2c-13f613557130@4a48.org",
       "title": "CM: Défis et enjeux environnementaux",
       "date": "2027-04-06",
       "start": "17:15",
@@ -2474,7 +2474,7 @@
       "teacher": "Frison Christine"
     },
     {
-      "uid": "90c88d0e-98c7-4134-988c-8963402e8a91@90c8.org",
+      "uid": "b8c45134-8457-40df-a745-5e988c31ac42@b8c4.org",
       "title": "CM: Economie industrielle",
       "date": "2027-04-07",
       "start": "10:45",
@@ -2486,7 +2486,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "da38803e-69f2-43ac-8f4c-196dd9a47c55@da38.org",
+      "uid": "719fdb42-ee6e-4458-8c48-9afae6e1b315@719f.org",
       "title": "CM: Economie industrielle",
       "date": "2027-04-07",
       "start": "13:30",
@@ -2498,7 +2498,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "3fbf948f-0f29-4a7e-998b-e9f580ba02a8@3fbf.org",
+      "uid": "ef414ddf-b944-4736-840a-0ce620fbc1c3@ef41.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-04-07",
       "start": "15:45",
@@ -2510,7 +2510,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "00f071ba-aabe-46e5-b06a-f18a4a57721d@00f0.org",
+      "uid": "8ce77b50-b835-476b-b4ae-f0aeb02d8f72@8ce7.org",
       "title": "CM: ICT Management",
       "date": "2027-04-09",
       "start": "10:30",
@@ -2522,7 +2522,7 @@
       "teacher": ""
     },
     {
-      "uid": "b7f8eaec-af1b-4324-87c9-7009cffaae84@b7f8.org",
+      "uid": "6bf07a3e-5fe3-49eb-aa36-f4b27120c00d@6bf0.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-04-12",
       "start": "08:30",
@@ -2534,7 +2534,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "4242899a-7243-4ca3-a782-249b48b4641b@4242.org",
+      "uid": "a451778d-9f9f-47ed-b197-c6377cea61d2@a451.org",
       "title": "CM: Corporate Finance",
       "date": "2027-04-12",
       "start": "13:30",
@@ -2546,7 +2546,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "f18e978f-1e48-4461-818e-b861e9c6db0b@f18e.org",
+      "uid": "6ca8607b-79cf-4531-92da-8ac3089cc858@6ca8.org",
       "title": "CM: Défis et enjeux environnementaux",
       "date": "2027-04-13",
       "start": "17:15",
@@ -2558,7 +2558,7 @@
       "teacher": "Frison Christine"
     },
     {
-      "uid": "cdc8cda8-c1ef-4159-9067-9cd6103719bb@cdc8.org",
+      "uid": "0dde802e-f8bd-473b-9774-fabc770011d6@0dde.org",
       "title": "CM: Economie industrielle",
       "date": "2027-04-14",
       "start": "10:45",
@@ -2570,7 +2570,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "624e5554-444a-41bc-aca3-d4e832cbb85c@624e.org",
+      "uid": "17eef417-9591-479f-b5e8-7f7d47d4d73c@17ee.org",
       "title": "CM: Economie industrielle",
       "date": "2027-04-14",
       "start": "13:30",
@@ -2582,7 +2582,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "5f9c8111-e336-4387-bfe1-595ff4474202@5f9c.org",
+      "uid": "80fc2699-0919-448b-966a-03ed2c6b9297@80fc.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-04-14",
       "start": "15:45",
@@ -2594,7 +2594,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "4f0603dd-293d-42ab-83f1-2e8f79777f15@4f06.org",
+      "uid": "34008d91-0f0a-4620-b0a3-854dee6d92d1@3400.org",
       "title": "CM: Corporate Finance",
       "date": "2027-04-16",
       "start": "10:45",
@@ -2606,7 +2606,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "47fdcdd3-d0e0-43cb-a652-d24f300a0063@47fd.org",
+      "uid": "40137f92-f75a-41c3-ab29-0e631e96e87f@4013.org",
       "title": "CM: ICT Management",
       "date": "2027-04-16",
       "start": "13:30",
@@ -2618,7 +2618,7 @@
       "teacher": ""
     },
     {
-      "uid": "8089b600-763e-4783-88fb-ec18a19b1f40@8089.org",
+      "uid": "c2324bac-a763-4e23-b123-9ef84b7a0f2d@c232.org",
       "title": "CM: ICT Management",
       "date": "2027-04-20",
       "start": "10:30",
@@ -2630,7 +2630,7 @@
       "teacher": ""
     },
     {
-      "uid": "bcdaa324-bcf8-4094-bfb8-cc02912a55ff@bcda.org",
+      "uid": "ac63e747-32b3-4b76-9d8c-ffc11a1aa4af@ac63.org",
       "title": "CM: ICT Management",
       "date": "2027-04-20",
       "start": "13:30",
@@ -2642,7 +2642,7 @@
       "teacher": ""
     },
     {
-      "uid": "e6ac94ac-6331-48cf-a1ac-de04acb1a114@e6ac.org",
+      "uid": "d811fe94-914b-44c8-850a-db590bec4b36@d811.org",
       "title": "CM: ICT Management",
       "date": "2027-04-23",
       "start": "10:30",
@@ -2654,7 +2654,7 @@
       "teacher": ""
     },
     {
-      "uid": "cf4de1fe-d60e-42d2-9292-5c1bf8c368ac@cf4d.org",
+      "uid": "c7bc4de5-5f7a-42fc-a3f5-74449e82a553@c7bc.org",
       "title": "CM: ICT Management",
       "date": "2027-04-30",
       "start": "13:30",
@@ -2666,7 +2666,7 @@
       "teacher": ""
     },
     {
-      "uid": "5d70a8a2-2756-4d2a-a4aa-cd44a08eb822@5d70.org",
+      "uid": "0a8496a1-c91c-4ff0-a430-923dcba636e2@0a84.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-05-03",
       "start": "08:30",
@@ -2678,7 +2678,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "d9a10ae3-2f04-415a-a81a-03b6a24c59a5@d9a1.org",
+      "uid": "85111e31-0bcf-40f0-8271-49839bfa0bf4@8511.org",
       "title": "CM: Corporate Finance",
       "date": "2027-05-03",
       "start": "13:30",
@@ -2690,7 +2690,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "53caed4d-f074-4b4c-b366-4c691b20c4c2@53ca.org",
+      "uid": "3fa07d3d-a10a-482a-b7a6-fefd33df9fdc@3fa0.org",
       "title": "CM: ICT Management",
       "date": "2027-05-04",
       "start": "10:30",
@@ -2702,7 +2702,7 @@
       "teacher": ""
     },
     {
-      "uid": "1b486d56-43fb-48bc-839a-751097f6fd94@1b48.org",
+      "uid": "9217b33e-1bc8-44d1-a08d-65ba3067982f@9217.org",
       "title": "CM: ICT Management",
       "date": "2027-05-04",
       "start": "13:30",
@@ -2714,7 +2714,7 @@
       "teacher": ""
     },
     {
-      "uid": "f1e03203-a0da-40b5-a080-0eb003e39d78@f1e0.org",
+      "uid": "c22674a0-72b1-46a6-9db3-dd03fbd9d39b@c226.org",
       "title": "CM: Défis et enjeux environnementaux",
       "date": "2027-05-04",
       "start": "17:15",
@@ -2726,7 +2726,7 @@
       "teacher": "Frison Christine"
     },
     {
-      "uid": "dad882ed-24b1-4204-8091-fd47b2b9573d@dad8.org",
+      "uid": "19dcf4f5-544a-44b0-b3c0-436fb9d9d141@19dc.org",
       "title": "CM: Economie industrielle",
       "date": "2027-05-05",
       "start": "10:45",
@@ -2738,7 +2738,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "f043fef8-1bf7-4592-a917-7fad2e799e30@f043.org",
+      "uid": "a647606a-3e58-4b94-8abf-d59671d1aa36@a647.org",
       "title": "CM: Economie industrielle",
       "date": "2027-05-05",
       "start": "13:30",
@@ -2750,7 +2750,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "1dddafb2-2a78-4847-b32d-7f6faf637251@1ddd.org",
+      "uid": "0b91bfe6-0bf0-49d2-a932-ca539a96b936@0b91.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-05-05",
       "start": "15:45",
@@ -2762,7 +2762,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "bf7fefad-5d90-422e-9106-c730dcf20af5@bf7f.org",
+      "uid": "4e859d25-1974-4e70-8bcc-ce3be51879f5@4e85.org",
       "title": "CM: ICT Management",
       "date": "2027-05-07",
       "start": "10:30",
@@ -2774,7 +2774,7 @@
       "teacher": ""
     },
     {
-      "uid": "4445ed5b-24ff-42a3-a4c3-48006e163f21@4445.org",
+      "uid": "1e83e220-6afc-4a86-b53b-5f359ee82da0@1e83.org",
       "title": "CM: Corporate Finance",
       "date": "2027-05-07",
       "start": "10:45",
@@ -2786,7 +2786,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "43c54ffd-53a3-4cdd-aa5b-f1d9238042ff@43c5.org",
+      "uid": "e3e1d328-3333-4483-834e-e079dbed84a9@e3e1.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-05-10",
       "start": "08:30",
@@ -2798,7 +2798,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "059f9dc1-63ce-4814-add0-b9eb3da95c88@059f.org",
+      "uid": "0b9d8fff-f223-401f-9dff-3f77190721aa@0b9d.org",
       "title": "CM: Corporate Finance",
       "date": "2027-05-10",
       "start": "13:30",
@@ -2810,7 +2810,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "c0d021c2-40c9-4d81-8da0-22240ba7bac1@c0d0.org",
+      "uid": "5978efad-a13b-4938-8701-832fb5f46282@5978.org",
       "title": "CM: Défis et enjeux environnementaux",
       "date": "2027-05-11",
       "start": "17:15",
@@ -2822,7 +2822,7 @@
       "teacher": "Frison Christine"
     },
     {
-      "uid": "389622a6-1cb8-4988-b435-377cb8bff836@3896.org",
+      "uid": "1b062795-d51c-43db-b5b5-49bbbe7b418d@1b06.org",
       "title": "CM: Economie industrielle",
       "date": "2027-05-12",
       "start": "10:45",
@@ -2834,7 +2834,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "ceb5e501-2c87-4e59-8b2c-03da65f4dee5@ceb5.org",
+      "uid": "e8d8fece-8efc-45a5-969b-7965a0b1279d@e8d8.org",
       "title": "CM: Economie industrielle",
       "date": "2027-05-12",
       "start": "13:30",
@@ -2846,7 +2846,7 @@
       "teacher": "Grandjean Gilles"
     },
     {
-      "uid": "82c12da7-be9b-428f-8804-074e2fafbdba@82c1.org",
+      "uid": "7584630c-7142-406d-9522-fda34932de98@7584.org",
       "title": "CM: Simulation de gestion - jeu d'entreprise",
       "date": "2027-05-12",
       "start": "15:45",
@@ -2858,7 +2858,7 @@
       "teacher": "Girard Alexandre"
     },
     {
-      "uid": "517b047a-ae23-41a9-a97e-cf6c251010dd@517b.org",
+      "uid": "3e3f66cc-8b17-420e-9473-ceceb599c9c4@3e3f.org",
       "title": "CM: Corporate Finance",
       "date": "2027-05-14",
       "start": "10:45",
@@ -2870,7 +2870,7 @@
       "teacher": "Claes Anouk"
     },
     {
-      "uid": "7e7f543b-5562-4fb6-8e40-281957deaacf@7e7f.org",
+      "uid": "d76a5eee-3295-40b9-b147-d3f0bf447cfa@d76a.org",
       "title": "CM: ICT Management",
       "date": "2027-05-14",
       "start": "13:30",
@@ -2882,7 +2882,7 @@
       "teacher": ""
     },
     {
-      "uid": "aecac968-1dbe-4ca2-ab1c-739e106a4f76@aeca.org",
+      "uid": "8f873270-98fd-4333-8f15-4d18e113ca97@8f87.org",
       "title": "CM: ICT Management",
       "date": "2027-05-18",
       "start": "10:30",
@@ -2894,7 +2894,7 @@
       "teacher": ""
     },
     {
-      "uid": "f2cbf65e-2645-45b8-94d0-1a19e6c9f665@f2cb.org",
+      "uid": "c6f55f5c-0830-48f5-ab4f-eed9d18ab923@c6f5.org",
       "title": "CM: ICT Management",
       "date": "2027-05-18",
       "start": "13:30",
@@ -2906,7 +2906,7 @@
       "teacher": ""
     },
     {
-      "uid": "70bed4c5-e793-4eac-9a2e-38c53a22f328@70be.org",
+      "uid": "f65739e6-bee6-4cfc-b9ac-374debfbfc2e@f657.org",
       "title": "CM: ICT Management",
       "date": "2027-05-21",
       "start": "10:30",
